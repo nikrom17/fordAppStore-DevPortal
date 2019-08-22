@@ -1,0 +1,45 @@
+.SideDrawer {
+    margin: 10px 0;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+}
+
+.SideDrawer a {
+    color: #333;
+    font-family: Arial;
+    text-decoration: none;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.SideDrawer a:hover,
+.SideDrawer a:active,
+.SideDrawer a.active {
+    color: #2A6BAC;
+}
+
+
+.NavigationItem {
+    margin: 0;
+    display: flex;
+    width: auto;
+    align-items: center;
+}
+
+.NavigationItem a {
+    color: white;
+    height: 100%;
+    padding: 16px 10px;
+    border-bottom: 4px solid transparent;
+    text-decoration: none;
+}
+
+.NavigationItem a:active,
+.NavigationItem a:hover,
+.NavigationItem a.active {
+    background-color: #777;
+    border-bottom: 4px solid #2A6BAC;
+    color: white;
+}
