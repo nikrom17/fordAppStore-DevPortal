@@ -5,6 +5,7 @@ import {
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import classes from './App.module.scss';
 import Layout from './hoc/Layout/Layout';
 import Logout from './containers/Auth/Logout/Logout';
 import AppList from './containers/AppList/AppList';
@@ -44,9 +45,10 @@ class App extends Component {
 
     return (
       <>
-        <Layout>
+        <Layout />
+        <main className={classes.content}>
           {routes}
-        </Layout>
+        </main>
       </>
     );
   }

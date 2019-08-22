@@ -2,16 +2,16 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import PropTypes from 'prop-types';
-import classes from './SideDrawer.module.scss';
+import Backdrop from '../../UI/Backdrop/Backdrop';
 import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
-import Backdrop from '../../UI/Backdrop/Backdrop';
+import classes from './SideDrawer.module.scss';
 
 const sideDrawer = (props) => {
   const { closed, open, isAuth } = props;
-  let attachedClasses = [classes.SideDrawer, classes.Close];
+  let attachedClasses = [classes.sideDrawer, classes.close];
   if (open) {
-    attachedClasses = [classes.SideDrawer, classes.Open];
+    attachedClasses = [classes.sideDrawer, classes.open];
   }
   return (
     <>
@@ -20,9 +20,8 @@ const sideDrawer = (props) => {
         className={attachedClasses.join(' ')}
         onClick={closed}
       >
-        <div className={classes.Logo}>
-          <Logo height="100%" />
-        </div>
+        <i className="fa fa-times" aria-hidden="true" />
+        <Logo />
         <nav>
           <NavigationItems
             isAuthenticated={isAuth}
@@ -36,7 +35,7 @@ const sideDrawer = (props) => {
 
 sideDrawer.propTypes = {
   closed: PropTypes.func.isRequired,
-  open: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
   isAuth: PropTypes.bool.isRequired,
 };
 

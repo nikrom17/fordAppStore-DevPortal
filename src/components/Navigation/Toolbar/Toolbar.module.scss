@@ -1,36 +1,18 @@
-.Toolbar {
-  height: 56px;
+.toolbar {
+  height: 56px; // TODO make this a sass variable
   width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
   background-color: #333;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  box-sizing: border-box;
-  z-index: 90;
 }
 
-.Toolbar nav {
-  height: 100%;
-}
-
-.Logo {
-  height: 80%;
-}
-
-.Title {
-  text-align: center;
-  text-decoration: none;
+.title {
   font-size: 25px;
-  margin-right: 10px;
   font-family: Arial;
   color: #c6c6c6;
+  margin: auto;
 }
 
-.Title span {
+.title span {
   margin: 0 5px;
 }
 
@@ -39,10 +21,4 @@
   text-decoration: none;
   font-size: 15px;
   display: block;
-}
-
-@media (max-width: 499px) {
-  .DesktopOnly {
-    display: none;
-  }
 }
