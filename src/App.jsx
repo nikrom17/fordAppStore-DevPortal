@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import classes from './App.module.scss';
-import Layout from './hoc/Layout/Layout';
+import Header from './hoc/Header/Header';
+import NavBar from './components/Navigation/NavBar/NavBar';
 import Logout from './containers/Auth/Logout/Logout';
 import AppList from './containers/AppList/AppList';
 import AccountSettings from './containers/AccountSettings/AccountSettings';
@@ -45,9 +46,12 @@ class App extends Component {
 
     return (
       <>
-        <Layout />
-        <main className={classes.content}>
-          {routes}
+        <Header />
+        <main className={classes.main}>
+          <NavBar />
+          <div>
+            {routes}
+          </div>
         </main>
       </>
     );
