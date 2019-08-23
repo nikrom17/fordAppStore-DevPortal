@@ -17,7 +17,7 @@ const AppTable = (props) => {
   const trash = <FontAwesomeIcon icon="trash" />;
   return (
     <div className={classes.appTable}>
-      <table>
+      <table className={classes.table}>
         <tbody>
           <tr>
             <th>App Name</th>

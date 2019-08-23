@@ -1,18 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import classes from './appRow.module.scss';
+import IconButton from '../IconButton/iconButton';
+
 const CreateApp = (props) => {
   const {
     clickAppDetails, clickDelete, title, activeInstalls, avgRating, lastUpdate, status, icon,
   } = props;
   return (
-    <tr>
-      <td><button type="button" onClick={clickAppDetails}>{title}</button></td>
-      <td><button type="button" onClick={clickAppDetails}>{activeInstalls}</button></td>
-      <td><button type="button" onClick={clickAppDetails}>{avgRating}</button></td>
-      <td><button type="button" onClick={clickAppDetails}>{lastUpdate}</button></td>
-      <td><button type="button" onClick={clickAppDetails}>{status}</button></td>
-      <td><button type="button" onClick={clickDelete}>{icon}</button></td>
+    <tr className={classes.row} onClick={clickAppDetails}>
+      <td>{title}</td>
+      <td>{activeInstalls}</td>
+      <td>{avgRating}</td>
+      <td>{lastUpdate}</td>
+      <td>{status}</td>
+      <td><IconButton iconComponent={icon} onClick={clickDelete} /></td>
     </tr>
   );
 };

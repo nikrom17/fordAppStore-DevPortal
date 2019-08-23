@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import AppTable from '../../components/AppTable/AppTable';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import Button from '../../components/UI/Button/Button';
-import classes from './AppList.css';
+import classes from './AppList.module.scss';
 import Modal from '../../components/UI/Modal/Modal';
 import * as actions from '../../store/actions/index';
 
@@ -55,9 +55,9 @@ class AppList extends Component {
       }
     }
     return (
-      <div style={{ maxWidth: '60%', margin: 'auto' }}>
+      <div className={classes.wrapper}>
         {forbiddenDelete}
-        <div className={classes.TopWrapper}>
+        <div>
           <Button
             clicked={() => history.push('/createApp')}
           >
@@ -82,7 +82,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onfetchApps: (token, userId) => dispatch(actions.fetchApps(token, userId)),
-  onDeleteApp: (token, userId, appId, apps) => dispatch(actions.deleteApp(token, userId, appId, apps)),
+  onDeleteApp: (token, userId, appId, apps) => dispatch(
+    actions.deleteApp(token, userId, appId, apps),
+  ),
   onResetNewApp: () => dispatch(actions.resetNewApp()),
 });
 

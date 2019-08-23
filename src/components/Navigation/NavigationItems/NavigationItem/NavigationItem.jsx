@@ -5,25 +5,27 @@ import PropTypes from 'prop-types';
 import classes from './NavigationItem.module.scss';
 
 const navigationItem = (props) => {
-  const { link, isSideDrawer, children } = props;
+  const {
+    children, link, tooltip,
+  } = props;
   return (
-    <li className={isSideDrawer ? classes.SideDrawer : classes.NavigationItem}>
+    <li className={classes.NavigationItem}>
       <NavLink
-        to={link}
-        exact
         activeClassName={classes.active}
+        exact
+        to={link}
+        tooltip={tooltip}
       >
         {children}
-
       </NavLink>
     </li>
   );
 };
 
 navigationItem.propTypes = {
-  link: PropTypes.string.isRequired,
-  isSideDrawer: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
+  link: PropTypes.string.isRequired,
+  tooltip: PropTypes.string.isRequired,
 };
 
 export default navigationItem;

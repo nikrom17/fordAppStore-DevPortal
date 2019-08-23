@@ -49,7 +49,7 @@ class App extends Component {
         <Header />
         <main className={classes.main}>
           <NavBar />
-          <div>
+          <div className={classes.contentWrapper}>
             {routes}
           </div>
         </main>
