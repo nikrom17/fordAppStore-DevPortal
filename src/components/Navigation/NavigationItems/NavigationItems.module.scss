@@ -1,11 +1,10 @@
 .NavigationItems {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  background: #333;
   display: flex;
   flex-flow: column;
-}
-
-.SideDrawer {
-  flex-flow: column;
+  height: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100px;
 }

@@ -1,5 +1,6 @@
 html,
-body {
+body,
+#root {
   background-color: #f8f8f8;
   font-family: sans-serif;
   height: 100%;

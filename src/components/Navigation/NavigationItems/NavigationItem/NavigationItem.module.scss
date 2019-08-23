@@ -1,22 +1,30 @@
 .NavigationItem {
-  margin: 0;
   display: flex;
-  width: auto;
-  align-items: center;
+  height: 50px;
+  position: relative;
+  border-left: 4px solid transparent;
+  width: calc(100px - 4px);
 }
 
 .NavigationItem a {
   color: white;
-  height: 100%;
-  padding: 16px 10px;
-  border-bottom: 4px solid transparent;
+  margin: 0;
+  padding: 0;
   text-decoration: none;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translateY(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateY(-50%);
+  transform: translateX(-50%);
 }
 
-.NavigationItem a:active,
-.NavigationItem a:hover,
-.NavigationItem a.active {
+.NavigationItem:hover,
+.NavigationItem:active {
   background-color: #777;
-  border-bottom: 4px solid #2a6bac;
+  border-left: 4px solid #2a6bac;
   color: white;
 }
