@@ -108,16 +108,16 @@ class Auth extends Component {
           <form onSubmit={this.submitHandler}>
             {sampleDataNote}
             {formNode}
-            <Button btnType="Success">{isSignup ? 'Create New Account' : 'Login'}</Button>
+            <Button
+              btnType="Success"
+              title={isSignup ? 'Create New Account' : 'Login'}
+            />
           </form>
           <Button
             clicked={this.switchAuthModeHandler}
-            btnType="Danger"
-          >
-            Switch to
-            {' '}
-            {isSignup ? 'Login' : 'Sign-Up' }
-          </Button>
+            title={`Switch to ${isSignup ? 'Login' : 'Sign-Up'}`}
+
+          />
         </div>
       );
     }

@@ -1,21 +1,25 @@
-.Button {
-    background-color: #133A7C;
-    display: inline-block;
-    cursor: pointer;
-    color: #FFFFFF;
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 14px;
-    padding: 8px 18px;
-    text-decoration: none;
-    margin: 10px 5px;
-    border-radius: 5px;
+.button {
+  background-color: #133a7c;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 14px;
+  padding: 8px 18px;
+  text-decoration: none;
+  margin: 10px 5px;
+  border-radius: 5px;
 }
 
-.Button:disabled {
-    color: #ccc;
-    cursor: not-allowed;
+.noMargin {
+  margin: 0;
+}
+
+.button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
 }
 
 button:hover {
-    background-color: #2A6BAC;
+  background-color: #2a6bac;
 }

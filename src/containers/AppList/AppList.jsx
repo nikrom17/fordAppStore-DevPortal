@@ -7,6 +7,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import Button from '../../components/UI/Button/Button';
 import classes from './AppList.module.scss';
 import Modal from '../../components/UI/Modal/Modal';
+import NoApps from '../../components/noAppsMessage/noAppsMessage';
 import * as actions from '../../store/actions/index';
 
 class AppList extends Component {
@@ -22,7 +23,6 @@ class AppList extends Component {
     const {
       apps, forbiddenModal, onDeleteApp, token, userId, loading, history,
     } = this.props;
-    let appList = <Spinner />;
     const modalText = (
       <Modal
         show={forbiddenModal}
@@ -32,31 +32,25 @@ class AppList extends Component {
       </Modal>
     );
     const forbiddenDelete = forbiddenModal ? modalText : null;
-    if (!loading) {
-      if (apps.length > 0) {
-        appList = (
-          <AppTable
-            apps={apps}
-            token={token}
-            userId={userId}
-            deleteApp={onDeleteApp}
-            history={history}
-          />
-        );
-      }
-    }
+    const appList = apps.length ? (
+      <AppTable
+        apps={apps}
+        token={token}
+        userId={userId}
+        deleteApp={onDeleteApp}
+        history={history}
+      />
+    ) : <NoApps />;
     return (
       <div className={classes.wrapper}>
         {forbiddenDelete}
-        <div>
-          <Button
-            clicked={() => history.push('/createApp')}
-            type="button"
-          >
-            Create Application
-          </Button>
-        </div>
-        {appList}
+        <Button
+          clicked={() => history.push('/createApp')}
+          title="Create Application"
+          type="button"
+          noMargin
+        />
+        {loading ? <Spinner /> : appList}
       </div>
     );
   }

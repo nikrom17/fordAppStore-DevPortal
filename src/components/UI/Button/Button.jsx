@@ -5,28 +5,29 @@ import PropTypes from 'prop-types';
 import classes from './Button.module.scss';
 
 const button = ({
-  disabled, clicked, children, type,
+  disabled, clicked, noMargin, title, type,
 }) => (
   <button
-    className={[classes.Button]}
+    className={noMargin ? [classes.button, classes.noMargin].join(' ') : classes.button}
     disabled={disabled}
     onClick={clicked}
     type={type}
   >
-    {children}
-
+    {title}
   </button>
 );
 
 button.propTypes = {
-  disabled: PropTypes.bool,
   clicked: PropTypes.func.isRequired,
-  children: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
+  noMargin: PropTypes.bool,
+  title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 };
 
 button.defaultProps = {
   disabled: false,
+  noMargin: false,
 };
 
 export default button;
