@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Form from '../../components/UI/Form/Form';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import Aux from '../../hoc/Aux/Aux';
 import { updateObject, checkValidity, parseQueryString } from '../../shared/utility';
 import { publishAppForm, editAppDetailsForm } from './formConfig';
 import * as actions from '../../store/actions/index';
@@ -128,9 +128,10 @@ class AppDetails extends Component {
   }
 
   render() {
+    const { formName } = this.state;
     let form = <Spinner />;
     let buttons;
-    if (this.state.formName === 'publishAppForm') {
+    if (formName === 'publishAppForm') {
       buttons = (
         <Aux>
           <Button clicked={this.switchForms} btnType="Success">Edit App Details</Button>
@@ -184,6 +185,24 @@ class AppDetails extends Component {
   }
 }
 
+AppDetails.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  token: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
+  apps: PropTypes.array.isRequired,
+  bannerDownloadUrl: PropTypes.string.isRequired,
+  iconDownloadUrl: PropTypes.string.isRequired,
+  sourceFileName: PropTypes.string.isRequired,
+  appName: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  appBannerFile: PropTypes.string.isRequired,
+  appIconFile: PropTypes.string.isRequired,
+  appSourceFile: PropTypes.string.isRequired,
+  appDetails: PropTypes.string.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.token !== null,
   token: state.auth.token,
@@ -203,11 +222,17 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onInputChangedHandlerAD: (event, inputIdentifier) => dispatch(actions.inputChangedHandlerAD(event, inputIdentifier)),
-  onFileInputChangedHandlerAD: (event, inputIdentifier) => dispatch(actions.fileInputChangedHandlerAD(event, inputIdentifier)),
+  onInputChangedHandlerAD: (event, inputIdentifier) => dispatch(
+    actions.inputChangedHandlerAD(event, inputIdentifier),
+  ),
+  onFileInputChangedHandlerAD: (event, inputIdentifier) => dispatch(
+    actions.fileInputChangedHandlerAD(event, inputIdentifier),
+  ),
   onLoadAppDetails: (appDetails) => dispatch(actions.loadAppDetails(appDetails)),
   onUpdateDownloadUrls: (urls) => dispatch(actions.updateDownloadUrls(urls)),
-  onUpdateFile: (files, userId, appId, path) => dispatch(actions.updateFile(files, userId, appId, path)),
+  onUpdateFile: (files, userId, appId, path) => dispatch(
+    actions.updateFile(files, userId, appId, path),
+  ),
   onResetAppDetails: () => dispatch(actions.resetAppDetails()),
 });
 
