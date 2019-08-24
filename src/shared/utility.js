@@ -42,3 +42,8 @@ export const parseQueryString = (query) => {
   }
   return queryObj;
 };
+
+export const getDate = () => {
+  const today = new Date();
+  return `${today.getDate()}/${today.getMonth()}/${today.getFullYear()}`;
+};

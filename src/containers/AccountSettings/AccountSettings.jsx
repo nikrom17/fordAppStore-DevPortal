@@ -40,7 +40,7 @@ class AccountSettings extends Component {
   render() {
     const { settingsForm, formIsValid } = this.state;
     const key = Object.keys(settingsForm);
-    const formElementsArray = key.map(() => ({ id: key, config: settingsForm[key] }));
+    const formElementsArray = key.map((id) => ({ id, config: settingsForm[id] }));
     const form = (
       <Form onSubmit={this.orderHandler}>
         {formElementsArray.map((formElement) => (
@@ -57,7 +57,10 @@ class AccountSettings extends Component {
             changed={(event) => this.inputChangedHandler(event, formElement.id)}
           />
         ))}
-        <Button btnType="Success" disabled={formIsValid}>Update Account Settings</Button>
+        <Button
+          disabled={formIsValid}
+          title="Update Account Settings"
+        />
       </Form>
     );
     return (
