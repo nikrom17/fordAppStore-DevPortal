@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -36,6 +37,9 @@ class AppDetails extends Component {
   }
 
   handleSubmit = async (event) => {
+    const {
+      title, category, description, devName, appIconFile, appBannerFile, userId, onCreateApp, token, history,
+    } = this.props;
     event.preventDefault();
     this.setState({ isLoading: true });
 
@@ -46,42 +50,47 @@ class AppDetails extends Component {
     today = `${mm}/${dd}/${yyyy}`;
 
     const appInfo = {
-      appName: this.props.title,
-      category: this.props.category,
-      description: this.props.description,
+      appName: title,
+      category,
+      description,
       status: 'live',
       lastUpdate: today,
       avgRating: '-',
       activeInstalls: '0',
-      devName: this.props.devName,
-      iconKey: this.props.appIconFile,
-      bannerKey: this.props.appBannerFile,
-      userId: this.props.userId,
+      devName,
+      iconKey: appIconFile,
+      bannerKey: appBannerFile,
+      userId,
     };
-    this.props.onCreateApp(appInfo, this.props.token, this.props.history);
+    onCreateApp(appInfo, token, history);
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
+    const { onFileInputChangedHandlerAD, onInputChangedHandlerAD } = this.props;
+    const { formName } = this.state;
+    // eslint-disable-next-line no-unused-expressions
     event.target.files
-      ? this.props.onFileInputChangedHandlerAD(event, inputIdentifier)
-      : this.props.onInputChangedHandlerAD(event, inputIdentifier);
-    const updatedFormElement = updateObject(this.state[this.state.formName][inputIdentifier], {
-      valid: checkValidity(event.target.value, this.state[this.state.formName][inputIdentifier].validation),
+      ? onFileInputChangedHandlerAD(event, inputIdentifier)
+      : onInputChangedHandlerAD(event, inputIdentifier);
+    const updatedFormElement = updateObject([formName][inputIdentifier], {
+      valid: checkValidity(event.target.value, [formName][inputIdentifier].validation),
       touched: true,
     });
-    const updatedOrderForm = updateObject(this.state[this.state.formName], {
+    const updatedOrderForm = updateObject([formName], {
       [inputIdentifier]: updatedFormElement,
     });
 
     let formIsValid = true;
-    for (const inputIdentifier in updatedOrderForm) {
+    // eslint-disable-next-line guard-for-in
+    for (const inputIdentifier in updatedOrderForm) { // TODO use Object.Keys()
       formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
     }
-    this.setState({ [this.state.formName]: updatedOrderForm, formIsValid });
+    this.setState({ [formName]: updatedOrderForm, formIsValid });
   }
 
   switchForms = () => {
-    if (this.state.formName === 'publishAppForm') {
+    const { formName } = this.state;
+    if (formName === 'publishAppForm') {
       this.setState({ formName: 'editAppDetailsForm' });
     } else {
       this.setState({ formName: 'publishAppForm' });
@@ -89,31 +98,35 @@ class AppDetails extends Component {
   }
 
   updateAppDetails = () => {
+    const {
+      appBannerFile, appIconFile, appSourceFile, apps, onUpdateFile, userId, token,
+    } = this.props;
+    const { appIndex } = this.state;
     let files;
     let path;
-    if (this.props.appBannerFile.fileObject !== null) {
+    if (appBannerFile.fileObject !== null) {
       files = {
-        oldFile: this.props.apps[this.state.appIndex].bannerFileName,
-        newFile: this.props.appBannerFile.fileObject,
+        oldFile: apps[appIndex].bannerFileName,
+        newFile: appBannerFile.fileObject,
       };
       path = 'images/banner';
-      this.props.onUpdateFile(files, { userId: this.props.userId, token: this.props.token }, this.props.apps[this.state.appIndex].id, path);
+      onUpdateFile(files, { userId, token }, apps[appIndex].id, path);
     }
-    if (this.props.appIconFile.fileObject !== null) {
+    if (appIconFile.fileObject !== null) {
       files = {
-        oldFile: this.props.apps[this.state.appIndex].iconFileName,
-        newFile: this.props.appIconFile.fileObject,
+        oldFile: apps[appIndex].iconFileName,
+        newFile: appIconFile.fileObject,
       };
       path = 'images/icon';
-      this.props.onUpdateFile(files, { userId: this.props.userId, token: this.props.token }, this.props.apps[this.state.appIndex].id, path);
+      onUpdateFile(files, { userId, token }, apps[appIndex].id, path);
     }
-    if (this.props.appSourceFile.fileObject !== null) {
+    if (appSourceFile.fileObject !== null) {
       files = {
-        oldFile: this.props.apps[this.state.appIndex].sourceFileName,
-        newFile: this.props.appSourceFile.fileObject,
+        oldFile: apps[appIndex].sourceFileName,
+        newFile: appSourceFile.fileObject,
       };
       path = 'source';
-      this.props.onUpdateFile(files, { userId: this.props.userId, token: this.props.token }, this.props.apps[this.state.appIndex].id, path);
+      onUpdateFile(files, { userId, token }, apps[appIndex].id, path);
     }
     this.switchForms();
   }
@@ -128,25 +141,26 @@ class AppDetails extends Component {
   }
 
   render() {
-    const { formName } = this.state;
+    const { formName, formIsValid } = this.state;
+    const { loading } = this.props;
     let form = <Spinner />;
     let buttons;
     if (formName === 'publishAppForm') {
       buttons = (
-        <Aux>
+        <>
           <Button clicked={this.switchForms} btnType="Success">Edit App Details</Button>
-          <Button clicked={this.handleSubmit} btnType="Success" disabled={!this.state.formIsValid}>Publish App</Button>
-        </Aux>
+          <Button clicked={this.handleSubmit} btnType="Success" disabled={!formIsValid}>Publish App</Button>
+        </>
       );
     } else {
       buttons = (
-        <Aux>
+        <>
           <Button clicked={this.switchForms} btnType="Success">Cancel Edits</Button>
           <Button clicked={this.updateAppDetails} btnType="Success">Save Changes</Button>
-        </Aux>
+        </>
       );
     }
-    if (!this.props.loading) {
+    if (!loading) {
       const formElementsArray = [];
       for (const key in this.state[this.state.formName]) {
         formElementsArray.push({
@@ -201,6 +215,12 @@ AppDetails.propTypes = {
   appIconFile: PropTypes.string.isRequired,
   appSourceFile: PropTypes.string.isRequired,
   appDetails: PropTypes.string.isRequired,
+  onInputChangedHandlerAD: PropTypes.func.isRequired,
+  onFileInputChangedHandlerAD: PropTypes.func.isRequired,
+  onLoadAppDetails: PropTypes.func.isRequired,
+  onUpdateDownloadUrls: PropTypes.func.isRequired,
+  onUpdateFile: PropTypes.func.isRequired,
+  onResetAppDetails: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
