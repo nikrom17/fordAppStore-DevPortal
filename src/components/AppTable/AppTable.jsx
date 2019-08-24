@@ -31,11 +31,7 @@ const AppTable = (props) => {
             <AppRow
               clickAppDetails={() => history.push(`/appDetails/?appId=${index}`)}
               clickDelete={() => deleteApp(token, userId, app.id, app)}
-              title={app.appName}
-              active_installs={app.activeInstalls}
-              avg_rating={app.avgRating}
-              last_update={app.lastUpdate}
-              status={app.status}
+              appDetails={app}
               icon={trash}
               key={app.id}
             />
@@ -48,7 +44,7 @@ const AppTable = (props) => {
 
 AppTable.propTypes = {
   apps: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])).isRequired,
-  history: PropTypes.arrayOf(PropTypes.string).isRequired,
+  history: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
   deleteApp: PropTypes.func.isRequired,
   token: PropTypes.string.isRequired,
   userId: PropTypes.string.isRequired,

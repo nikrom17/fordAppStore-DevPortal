@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import classes from './Button.module.scss';
 
 const button = ({
-  disabled, clicked, btnType, children, type,
+  disabled, clicked, children, type,
 }) => (
   <button
-    className={[classes.Button, classes[btnType]].join(' ')}
+    className={[classes.Button]}
     disabled={disabled}
     onClick={clicked}
     type={type}
@@ -19,11 +19,14 @@ const button = ({
 );
 
 button.propTypes = {
-  btnType: PropTypes.string.isRequired,
-  disabled: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
   clicked: PropTypes.func.isRequired,
   children: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+};
+
+button.defaultProps = {
+  disabled: false,
 };
 
 export default button;

@@ -23,7 +23,7 @@ class AppDetails extends Component {
     };
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     const { location, apps, onLoadAppDetails } = this.props;
     const queryParams = parseQueryString(location.search);
     await onLoadAppDetails(apps[queryParams.appId]);
@@ -143,58 +143,55 @@ class AppDetails extends Component {
   render() {
     const { formName, formIsValid } = this.state;
     const { loading } = this.props;
-    let form = <Spinner />;
-    let buttons;
-    if (formName === 'publishAppForm') {
-      buttons = (
-        <>
-          <Button clicked={this.switchForms} btnType="Success">Edit App Details</Button>
-          <Button clicked={this.handleSubmit} btnType="Success" disabled={!formIsValid}>Publish App</Button>
-        </>
-      );
-    } else {
-      buttons = (
-        <>
-          <Button clicked={this.switchForms} btnType="Success">Cancel Edits</Button>
-          <Button clicked={this.updateAppDetails} btnType="Success">Save Changes</Button>
-        </>
-      );
+    const editState = formName === 'publishAppForm';
+    const buttons = (
+      <>
+        <Button
+          clicked={this.switchForms}
+          btnType="Success"
+        >
+          {editState ? 'Edit App Details' : 'Cancel Edits'}
+        </Button>
+        <Button
+          clicked={editState ? this.handleSubmit : this.updateAppDetails}
+          btnType="Success"
+          disabled={!formIsValid}
+        >
+          {editState ? 'Publish App' : 'Save Changes'}
+        </Button>
+      </>
+    );
+    const formElementsArray = [];
+    for (const key in this.state[this.state.formName]) {
+      formElementsArray.push({
+        id: key,
+        config: this.state[this.state.formName][key],
+      });
     }
-    if (!loading) {
-      const formElementsArray = [];
-      for (const key in this.state[this.state.formName]) {
-        formElementsArray.push({
-          id: key,
-          config: this.state[this.state.formName][key],
-        });
-      }
-      form = (
-        <Form>
-          {formElementsArray.map((formElement) => (
-            <Input
-              key={formElement.id}
-              header={formElement.config.elementConfig.header}
-              elementType={formElement.config.elementType}
-              elementConfig={formElement.config.elementConfig}
-              value={this.props[formElement.id]}
-              src={this.props[formElement.id]}
-              invalid={!formElement.config.valid}
-              shouldValidate={formElement.config.validation}
-              touched={formElement.config.touched}
-              readOnly={this.state.formName !== 'editAppDetailsForm'}
-              changed={(event) => this.inputChangedHandler(event, formElement.id)}
-            />
-          ))}
-          <div style={{ textAlign: 'right' }}>
-            {buttons}
-          </div>
-        </Form>
-      );
-    }
+    const form = loading ? <Spinner /> : (
+      <Form>
+        {formElementsArray.map((formElement) => (
+          <Input
+            key={formElement.id}
+            header={formElement.config.elementConfig.header}
+            elementType={formElement.config.elementType}
+            elementConfig={formElement.config.elementConfig}
+            value={[formElement.id]}
+            src={[formElement.id]}
+            invalid={!formElement.config.valid}
+            shouldValidate={formElement.config.validation}
+            touched={formElement.config.touched}
+            readOnly={formName !== 'editAppDetailsForm'}
+            changed={(event) => this.inputChangedHandler(event, formElement.id)}
+          />
+        ))}
+        <div>
+          {buttons}
+        </div>
+      </Form>
+    );
     return (
-      <div>
-        {form}
-      </div>
+      { form }
     );
   }
 }

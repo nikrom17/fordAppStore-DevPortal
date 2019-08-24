@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import AppTable from '../../components/AppTable/AppTable';
 import Spinner from '../../components/UI/Spinner/Spinner';
@@ -9,7 +10,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import * as actions from '../../store/actions/index';
 
 class AppList extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const {
       onfetchApps, onResetNewApp, token, userId,
     } = this.props;
@@ -32,16 +33,6 @@ class AppList extends Component {
     );
     const forbiddenDelete = forbiddenModal ? modalText : null;
     if (!loading) {
-      appList = (
-        <div className={classes.NoApps}>
-          <p>
-            You do not have any applications yet
-            <br />
-            <br />
-            Add your first application
-          </p>
-        </div>
-      );
       if (apps.length > 0) {
         appList = (
           <AppTable
@@ -60,6 +51,7 @@ class AppList extends Component {
         <div>
           <Button
             clicked={() => history.push('/createApp')}
+            type="button"
           >
             Create Application
           </Button>
@@ -69,6 +61,18 @@ class AppList extends Component {
     );
   }
 }
+
+AppList.propTypes = {
+  onfetchApps: PropTypes.func.isRequired,
+  onResetNewApp: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
+  apps: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
+  forbiddenModal: PropTypes.node.isRequired,
+  onDeleteApp: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  history: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
+};
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.token !== null,
