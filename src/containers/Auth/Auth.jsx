@@ -41,65 +41,64 @@ class Auth extends Component {
 
   submitHandler = (event) => {
     const {
-      devName, email, website, phone, onAuth, password, isSignup,
+      devName, email, website, phone, onAuth, password,
     } = this.props;
+    const { isSignup } = this.state;
     event.preventDefault();
-    const userInfo = {
-      devName,
-      email,
-      website,
-      phone,
-    };
-    onAuth(userInfo, password, isSignup);
+    onAuth({
+      devName, email, website, phone,
+    }, password, isSignup);
   }
 
-    switchAuthModeHandler = () => {
-      this.setState((prevState) => ({ isSignup: !prevState.isSignup }));
-    }
+  switchAuthModeHandler = () => {
+    this.setState((prevState) => ({ isSignup: !prevState.isSignup }));
+  }
 
-    render() {
-      const {
-        error, isSignup, loading, isAuthenticated, authRedirectPath,
-      } = this.props;
-      const { form } = this.state;
-      const formType = isSignup ? signupForm : loginForm;
-      const keyArray = Object.keys(formType);
-      const formElementsArray = keyArray.map((id) => ({ id, config: formType[id] }));
+  render() {
+    const {
+      error, loading, isAuthenticated, authRedirectPath,
+    } = this.props;
+    const { isSignup } = this.state;
+    const formType = isSignup ? signupForm : loginForm;
+    const keyArray = Object.keys(formType);
+    const formElementsArray = keyArray.map((id) => ({ id, config: formType[id] }));
 
-      const formNode = formElementsArray.map((formElement) => (
-        <Input
-          key={formElement.id}
-          elementType={formElement.config.elementType}
-          elementConfig={formElement.config.elementConfig}
-          // eslint-disable-next-line react/destructuring-assignment
-          value={this.props[formElement]}
-          invalid={!formElement.config.valid}
-          shouldValidate={formElement.config.validation}
-          touched={formElement.config.touched}
-          changed={(event) => this.inputChangedHandler(event, formElement.id)}
+    const formNode = formElementsArray.map((formElement) => (
+      <Input
+        key={formElement.id}
+        elementType={formElement.config.elementType}
+        elementConfig={formElement.config.elementConfig}
+        // eslint-disable-next-line react/destructuring-assignment
+        value={this.props[formElement]}
+        invalid={!formElement.config.valid}
+        shouldValidate={formElement.config.validation}
+        touched={formElement.config.touched}
+        changed={(event) => this.inputChangedHandler(event, formElement.id)}
+      />
+    ));
+    return (
+      <div className={classes.Auth}>
+        {isAuthenticated ? <Redirect to={authRedirectPath} /> : null}
+        {error ? <p>{error.message}</p> : null}
+        {loading ? <Spinner /> : (
+          <form>
+            {isSignup ? null : <SampleDataMessage />}
+            {formNode}
+            <Button
+              clicked={this.submitHandler}
+              title={isSignup ? 'Create New Account' : 'Login'}
+              type="submit"
+            />
+          </form>
+        )}
+        <Button
+          clicked={this.switchAuthModeHandler}
+          title={`Switch to ${isSignup ? 'Login' : 'Sign-Up'}`}
+          type="button"
         />
-      ));
-      return (
-        <div className={classes.Auth}>
-          {isAuthenticated ? <Redirect to={authRedirectPath} /> : null}
-          {error ? <p>{error.message}</p> : null}
-          {loading ? <Spinner /> : (
-            <form onSubmit={this.submitHandler}>
-              {isSignup ? null : <SampleDataMessage />}
-              {formNode}
-              <Button
-                title={isSignup ? 'Create New Account' : 'Login'}
-              />
-            </form>
-          )}
-          <Button
-            clicked={this.switchAuthModeHandler}
-            title={`Switch to ${isSignup ? 'Login' : 'Sign-Up'}`}
-
-          />
-        </div>
-      );
-    }
+      </div>
+    );
+  }
 }
 
 Auth.propTypes = {
@@ -110,11 +109,14 @@ Auth.propTypes = {
   phone: PropTypes.string.isRequired,
   onAuth: PropTypes.func.isRequired,
   password: PropTypes.string.isRequired,
-  isSignup: PropTypes.string.isRequired,
-  error: PropTypes.objectOf(PropTypes.string).isRequired,
+  error: PropTypes.objectOf(PropTypes.string),
   loading: PropTypes.bool.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   authRedirectPath: PropTypes.string.isRequired,
+};
+
+Auth.defaultProps = {
+  error: null,
 };
 
 const mapStateToProps = (state) => ({
