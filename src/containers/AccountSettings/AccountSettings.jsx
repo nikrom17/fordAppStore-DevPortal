@@ -39,30 +39,6 @@ class AccountSettings extends Component {
 
   render() {
     const { settingsForm, formIsValid } = this.state;
-    const key = Object.keys(settingsForm);
-    const formElementsArray = key.map((id) => ({ id, config: settingsForm[id] }));
-    const form = (
-      <Form onSubmit={this.orderHandler}>
-        {formElementsArray.map((formElement) => (
-          <Input
-            key={formElement.id}
-            header={formElement.config.elementConfig.header}
-            elementType={formElement.config.elementType}
-            elementConfig={formElement.config.elementConfig}
-            // eslint-disable-next-line react/destructuring-assignment
-            value={this.props[formElement.id]}
-            invalid={!formElement.config.valid}
-            shouldValidate={formElement.config.validation}
-            touched={formElement.config.touched}
-            changed={(event) => this.inputChangedHandler(event, formElement.id)}
-          />
-        ))}
-        <Button
-          disabled={formIsValid}
-          title="Update Account Settings"
-        />
-      </Form>
-    );
     return (
       <div>
         {form}

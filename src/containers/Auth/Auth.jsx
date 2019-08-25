@@ -77,7 +77,7 @@ class Auth extends Component {
       />
     ));
     return (
-      <div className={classes.Auth}>
+      <div className={classes.auth}>
         {isAuthenticated ? <Redirect to={authRedirectPath} /> : null}
         {error ? <p>{error.message}</p> : null}
         {loading ? <Spinner /> : (

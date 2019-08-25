@@ -1,7 +1,7 @@
 const accountSettingsForm = {
   developerName: {
-    elementType: 'input',
-    elementConfig: {
+    type: 'input',
+    config: {
       type: 'text',
       header: 'Developer Name',
       placeholder: 'Developer Name',
@@ -14,8 +14,8 @@ const accountSettingsForm = {
     touched: false,
   },
   email: {
-    elementType: 'input',
-    elementConfig: {
+    type: 'input',
+    config: {
       type: 'text',
       header: 'Email Address',
       placeholder: 'Email Address',
@@ -29,8 +29,8 @@ const accountSettingsForm = {
     touched: false,
   },
   website: {
-    elementType: 'input',
-    elementConfig: {
+    type: 'input',
+    config: {
       type: 'url',
       header: 'Website',
       placeholder: 'Website',
@@ -43,8 +43,8 @@ const accountSettingsForm = {
     touched: false,
   },
   phone: {
-    elementType: 'input',
-    elementConfig: {
+    type: 'input',
+    config: {
       type: 'tel',
       header: 'Phone Number',
       placeholder: 'Phone Number',

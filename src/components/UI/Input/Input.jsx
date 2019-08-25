@@ -2,19 +2,15 @@ import React from 'react';
 import classes from './Input.module.scss';
 
 const input = ({
-  elementType, invalid, shouldValidate, touched,
-  headerText, readOnly, changed, value, elementConfig,
-  src, alt, label,
+  onChange, config, invalid, key, touched, type, value,
 }) => {
   let inputElement = null;
-  let header = null;
+  const header = config.header ? <p className={classes.header}>{header}</p> : null;
   const inputClasses = [classes.InputElement];
-  if (invalid && shouldValidate && touched) {
+  if (invalid && shouldValidate && touched) 
     inputClasses.push(classes.Invalid);
   }
-  if (headerText) {
-    header = <p className={classes.Header}>{headerText}</p>;
-  }
+  // Move this to img component
   if (elementType === 'img') {
     inputClasses.push(classes.Image);
   } else if (elementType === 'textarea') {
@@ -94,11 +90,8 @@ const input = ({
 
   return (
     <div className={classes.Input}>
-      <label className={classes.Label}>{label}</label>
-      <div>
-        {header}
-        {inputElement}
-      </div>
+      {header}
+      {input}
     </div>
   );
 };
