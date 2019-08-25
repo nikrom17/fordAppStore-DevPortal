@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Form from '../../components/UI/Form/Form';
-import Input from '../../components/UI/Input/Input';
+import RenderForm from '../../components/renderForm/renderForm';
 import Button from '../../components/UI/Button/Button';
 import { updateObject, checkValidity } from '../../shared/utility';
 import * as actions from '../../store/actions/index';
@@ -41,7 +40,9 @@ class AccountSettings extends Component {
     const { settingsForm, formIsValid } = this.state;
     return (
       <div>
-        {form}
+        <RenderForm
+          inputConfig={settingsForm}
+        />
       </div>
     );
   }

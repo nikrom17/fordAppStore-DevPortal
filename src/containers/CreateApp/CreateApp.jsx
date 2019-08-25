@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Form from '../../components/UI/Form/Form';
-import Input from '../../components/UI/Input/Input';
+import Input from '../../components/UI/inputRender/inputRender';
 import Button from '../../components/UI/Button/Button';
 import { updateObject, checkValidity, getDate } from '../../shared/utility';
 import { createAppForm } from './formConfig';

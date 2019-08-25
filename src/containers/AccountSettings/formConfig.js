@@ -3,7 +3,7 @@ const accountSettingsForm = {
     type: 'input',
     config: {
       type: 'text',
-      header: 'Developer Name',
+      headerText: 'Developer Name',
       placeholder: 'Developer Name',
     },
     validation: {
@@ -17,7 +17,7 @@ const accountSettingsForm = {
     type: 'input',
     config: {
       type: 'text',
-      header: 'Email Address',
+      headerText: 'Email Address',
       placeholder: 'Email Address',
       minLength: 6,
     },
@@ -32,7 +32,7 @@ const accountSettingsForm = {
     type: 'input',
     config: {
       type: 'url',
-      header: 'Website',
+      headerText: 'Website',
       placeholder: 'Website',
     },
     validation: {
@@ -46,7 +46,7 @@ const accountSettingsForm = {
     type: 'input',
     config: {
       type: 'tel',
-      header: 'Phone Number',
+      headerText: 'Phone Number',
       placeholder: 'Phone Number',
     },
     validation: {

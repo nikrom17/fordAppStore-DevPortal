@@ -1,30 +1,35 @@
 import React from 'react';
-import classes from './Input.module.scss';
+
+import TextInputRender from './inputs/textInputs/textInputRender';
+import classes from './inputRender.module.scss';
 
 const input = ({
-  onChange, config, invalid, key, touched, type, value,
+  onChange, config, invalid, key, touched, element, value, readOnly,
 }) => {
+  const {
+    headerText, shouldValidate, options, alt, src,
+  } = config;
   let inputElement = null;
-  const header = config.header ? <p className={classes.header}>{header}</p> : null;
+  const header = headerText ? <p className={classes.header}>{headerText}</p> : null;
   const inputClasses = [classes.InputElement];
-  if (invalid && shouldValidate && touched) 
+  if (invalid && shouldValidate && touched) {
     inputClasses.push(classes.Invalid);
   }
   // Move this to img component
-  if (elementType === 'img') {
+  if (element === 'img') {
     inputClasses.push(classes.Image);
-  } else if (elementType === 'textarea') {
+  } else if (element === 'textarea') {
     inputClasses.push(classes.Textarea);
   }
 
-  switch (elementType) {
+  switch (element) {
     case ('input'):
       inputElement = (
-        <input
+        <TextInputRender
+          config={config}
           readOnly={readOnly}
           className={inputClasses.join(' ')}
-          onChange={changed}
-          {...elementConfig}
+          onChange={onChange}
           value={value}
         />
       );
@@ -34,8 +39,7 @@ const input = ({
         <input
           readOnly={readOnly}
           className={inputClasses.join(' ')}
-          onChange={changed}
-          {...elementConfig}
+          onChange={onChange}
           value={value.value}
         />
       );
@@ -45,8 +49,7 @@ const input = ({
         <textarea
           className={inputClasses.join(' ')}
           readOnly={readOnly}
-          onChange={changed}
-          {...elementConfig}
+          onChange={onChange}
           value={value}
         />
       );
@@ -55,11 +58,11 @@ const input = ({
       inputElement = (
         <select
           className={inputClasses.join(' ')}
-          onChange={changed}
+          onChange={onChange}
           readOnly={readOnly}
           value={value}
         >
-          {elementConfig.options.map((option) => (
+          {options.map((option) => (
             <option value={option.value} key={option.value}>
               {option.displayValue}
             </option>
@@ -81,8 +84,7 @@ const input = ({
         <input
           className={inputClasses.join(' ')}
           readOnly={readOnly}
-          onChange={changed}
-          {...elementConfig}
+          onChange={onChange}
           value={value}
         />
       );
@@ -91,7 +93,7 @@ const input = ({
   return (
     <div className={classes.Input}>
       {header}
-      {input}
+      {inputElement}
     </div>
   );
 };

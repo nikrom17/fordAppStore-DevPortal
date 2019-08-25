@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Input from '../../components/UI/Input/Input';
+import Input from '../../components/UI/inputRender/inputRender';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import SampleDataMessage from '../../components/sampleDataMessage/sampleDataMessage';

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Form from '../../components/UI/Form/Form';
-import Input from '../../components/UI/Input/Input';
+import Input from '../../components/UI/inputRender/inputRender';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import { updateObject, checkValidity, parseQueryString } from '../../shared/utility';
@@ -38,7 +38,8 @@ class AppDetails extends Component {
 
   handleSubmit = async (event) => {
     const {
-      title, category, description, devName, appIconFile, appBannerFile, userId, onCreateApp, token, history,
+      title, category, description, devName, appIconFile,
+      appBannerFile, userId, onCreateApp, token, history,
     } = this.props;
     event.preventDefault();
     this.setState({ isLoading: true });

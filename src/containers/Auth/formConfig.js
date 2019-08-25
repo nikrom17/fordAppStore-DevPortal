@@ -1,7 +1,7 @@
 export const loginForm = {
   email: {
-    elementType: 'input',
-    elementConfig: {
+    type: 'input',
+    config: {
       type: 'email',
       placeholder: 'E-Mail Address',
     },
@@ -14,8 +14,8 @@ export const loginForm = {
     touched: false,
   },
   password: {
-    elementType: 'input',
-    elementConfig: {
+    type: 'input',
+    config: {
       type: 'password',
       placeholder: 'Password',
       minLength: 6,
@@ -32,8 +32,8 @@ export const loginForm = {
 
 export const signupForm = {
   developerName: {
-    elementType: 'input',
-    elementConfig: {
+    type: 'input',
+    config: {
       type: 'text',
       placeholder: 'Developer Name',
     },
@@ -46,8 +46,8 @@ export const signupForm = {
     touched: false,
   },
   website: {
-    elementType: 'input',
-    elementConfig: {
+    type: 'input',
+    config: {
       type: 'url',
       placeholder: 'website',
     },
@@ -60,8 +60,8 @@ export const signupForm = {
     touched: false,
   },
   phone: {
-    elementType: 'input',
-    elementConfig: {
+    type: 'input',
+    config: {
       type: 'phone',
       placeholder: 'Phone Number',
     },
@@ -74,8 +74,8 @@ export const signupForm = {
     touched: false,
   },
   email: {
-    elementType: 'input',
-    elementConfig: {
+    type: 'input',
+    config: {
       type: 'email',
       placeholder: 'E-Mail Address',
     },
@@ -88,8 +88,8 @@ export const signupForm = {
     touched: false,
   },
   password: {
-    elementType: 'input',
-    elementConfig: {
+    type: 'input',
+    config: {
       type: 'password',
       placeholder: 'Password',
       minLength: 6,
@@ -103,8 +103,8 @@ export const signupForm = {
     touched: false,
   },
   confirmPassword: {
-    elementType: 'input',
-    elementConfig: {
+    type: 'input',
+    config: {
       type: 'password',
       placeholder: 'Password',
       minLength: 6,

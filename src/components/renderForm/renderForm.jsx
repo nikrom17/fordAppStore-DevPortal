@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Form from '../UI/Form/Form';
-import Input from '../UI/Input/Input';
+import Input from '../UI/inputRender/inputRender';
 
 const renderForm = ({ inputConfig }) => {
   const keys = Object.keys(inputConfig);
@@ -15,7 +15,7 @@ const renderForm = ({ inputConfig }) => {
         invalid={!input.config.valid}
         key
         touched={input.config.touched}
-        type={input.type}
+        element={input.type}
         value={inputConfig[input.id]}
       />
     );
