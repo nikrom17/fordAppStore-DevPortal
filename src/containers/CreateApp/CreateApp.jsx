@@ -79,15 +79,16 @@ class CreateApp extends Component {
   }
 
   render() {
-    const { createAppForm } = this.state;
+    const { createAppForm, formIsValid } = this.state;
     const formElementsArray = [];
     const formKeys = Object.keys(createAppForm);
-    for (const key in this.state.createAppForm) {
+
+    formKeys.map((key) => (
       formElementsArray.push({
         id: key,
-        config: this.state.createAppForm[key],
-      });
-    }
+        config: createAppForm[key],
+      })
+    ));
     const form = (
       <Form>
         {formElementsArray.map((formElement) => {
@@ -110,8 +111,9 @@ class CreateApp extends Component {
         })}
         <Button
           clicked={this.handleSubmit}
-          disabled={!this.state.formIsValid}
+          disabled={!formIsValid}
           title="Create App"
+          type="submit"
         />
       </Form>
     );

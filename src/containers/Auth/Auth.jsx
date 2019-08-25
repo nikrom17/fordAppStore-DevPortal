@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import SampleDataMessage from '../../components/sampleDataMessage/sampleDataMessage';
 import classes from './Auth.module.scss';
-import Aux from '../../hoc/Aux/Aux';
 import * as actions from '../../store/actions/index';
 import { updateObject, checkValidity } from '../../shared/utility';
 import { loginForm, signupForm } from './formConfig';
@@ -62,20 +62,11 @@ class Auth extends Component {
         error, isSignup, loading, isAuthenticated, authRedirectPath,
       } = this.props;
       const { form } = this.state;
-
-      const sampleDataHTML = (
-        <Aux>
-          <p>To view a project with sample data, use the following credentials to login</p>
-          <p>E-Mail: test@test.com</p>
-          <p>Password: testing123</p>
-        </Aux>
-      );
-      const sampleDataNote = isSignup ? null : sampleDataHTML;
       const formType = isSignup ? signupForm : loginForm;
       const keyArray = Object.keys(formType);
       const formElementsArray = keyArray.map((id) => ({ id, config: formType[id] }));
 
-      let formNode = formElementsArray.map((formElement) => (
+      const formNode = formElementsArray.map((formElement) => (
         <Input
           key={formElement.id}
           elementType={formElement.config.elementType}
@@ -88,31 +79,19 @@ class Auth extends Component {
           changed={(event) => this.inputChangedHandler(event, formElement.id)}
         />
       ));
-
-      if (loading) {
-        formNode = <Spinner />;
-      }
-      let errorMessage = null;
-      if (error) {
-        errorMessage = <p>{error.message}</p>;
-      }
-
-      let authRedirect = null;
-      if (isAuthenticated) {
-        authRedirect = <Redirect to={authRedirectPath} />;
-      }
       return (
         <div className={classes.Auth}>
-          {authRedirect}
-          {errorMessage}
-          <form onSubmit={this.submitHandler}>
-            {sampleDataNote}
-            {formNode}
-            <Button
-              btnType="Success"
-              title={isSignup ? 'Create New Account' : 'Login'}
-            />
-          </form>
+          {isAuthenticated ? <Redirect to={authRedirectPath} /> : null}
+          {error ? <p>{error.message}</p> : null}
+          {loading ? <Spinner /> : (
+            <form onSubmit={this.submitHandler}>
+              {isSignup ? null : <SampleDataMessage />}
+              {formNode}
+              <Button
+                title={isSignup ? 'Create New Account' : 'Login'}
+              />
+            </form>
+          )}
           <Button
             clicked={this.switchAuthModeHandler}
             title={`Switch to ${isSignup ? 'Login' : 'Sign-Up'}`}
@@ -129,7 +108,7 @@ Auth.propTypes = {
   email: PropTypes.string.isRequired,
   website: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
-  onAuth: PropTypes.string.isRequired,
+  onAuth: PropTypes.func.isRequired,
   password: PropTypes.string.isRequired,
   isSignup: PropTypes.string.isRequired,
   error: PropTypes.objectOf(PropTypes.string).isRequired,
