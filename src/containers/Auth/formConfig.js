@@ -1,38 +1,55 @@
 export const loginForm = {
-  email: {
-    config: {
-      type: 'email',
-      placeholder: 'E-Mail Address',
+  config: {
+    byId: {
+      email: {
+        type: 'email',
+        placeholder: 'E-Mail Address',
+      },
+      password: {
+        type: 'password',
+        placeholder: 'Password',
+      },
     },
-    controls: {
-      touched: false,
-      valid: false,
-      value: '',
-    },
-    type: 'input',
-    validation: {
-      required: true,
-      isEmail: true,
-    },
+    allIds: ['email', 'password'],
   },
-  password: {
-    type: 'input',
-    config: {
-      type: 'password',
-      placeholder: 'Password',
+  controls: {
+    byId: {
+      email: {
+        touched: false,
+        valid: false,
+        value: '',
+      },
+      password: {
+        touched: false,
+        valid: false,
+        value: '',
+      },
     },
-    controls: {
-      value: '',
-      valid: false,
-      touched: false,
+    allIds: ['email, password'],
+  },
+  validation: {
+    byId: {
+      email: {
+        required: true,
+        isEmail: true,
+      },
+      password: {
+        required: true,
+        isEmail: true,
+        minLength: 6,
+      },
     },
-    validation: {
-      required: true,
-      isEmail: true,
-      minLength: 6,
+    allIds: ['email', 'password'],
+  },
+  type: {
+    byId: {
+      email: 'input',
+      password: 'input',
     },
+    allIds: ['email', 'password'],
   },
 };
+
 
 export const signupForm = {
   developerName: {
