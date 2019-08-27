@@ -1,9 +1,11 @@
 import React from 'react';
 
 const textInputRender = ({
-  config, className, inputId, onChange,
+  config, controls, className, inputId, onChange,
 }) => {
   const { type, placeholder } = config;
+  const { value } = controls;
+  console.log(value);
   let input;
   switch (type) {
     case ('password'):
@@ -14,6 +16,7 @@ const textInputRender = ({
           placeholder={placeholder}
           type={type}
           onChange={(event) => onChange(event, inputId)}
+          value={value}
         />
       );
       break;

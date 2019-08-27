@@ -15,35 +15,38 @@ class Auth extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      form: {
-        loginForm,
-        signupForm,
-      },
+      login: loginForm,
+      signup: signupForm,
       isSignup: false,
     };
   }
 
   inputChangedHandler = (event, inputId) => {
-    const { isSignup, form } = this.state;
-    const renderedForm = isSignup ? form.signupForm : form.loginForm;
-    const previousControls = renderedForm[inputId].controls;
-    const updatedControls = updateObject(previousControls, {
-      value: event.target.value,
-      valid: checkValidity(event.target.value, renderedForm[inputId].validation),
-      touched: true,
-    });
-    this.setState({ [previousControls]: updatedControls });
+    const { isSignup, login, signup } = this.state;
+    const renderedForm = isSignup ? signup : login;
+    const updatedForm = {
+      ...renderedForm,
+      [inputId]: {
+        ...renderedForm[inputId],
+        controls: {
+          value: event.target.value,
+          valid: checkValidity(event.target.value, renderedForm[inputId].validation),
+          touched: true,
+        },
+      },
+    };
+    console.log(updatedForm);
+    this.setState({ login: updatedForm });
   }
 
   submitHandler = (event) => {
-    const {
-      devName, email, website, phone, onAuth, password,
-    } = this.props;
+    const { devName, onAuth } = this.props;
+    const { login, signup } = this.state;
     const { isSignup } = this.state;
+    const email = login.email.controls.value;
+    const password = login.password.controls.value;
     event.preventDefault();
-    onAuth({
-      devName, email, website, phone,
-    }, password, isSignup);
+    onAuth({ email }, password, isSignup);
   }
 
   switchAuthModeHandler = () => {
@@ -80,7 +83,7 @@ class Auth extends Component {
         {loading ? <Spinner /> : (
           <RenderForm
             buttons={buttonArray}
-            inputConfig={isSignup ? signupForm : loginForm}
+            inputConfig={isSignup ? this.state.signup : this.state.login}
             onChange={this.inputChangedHandler}
             preFormMessage={isSignup ? null : <SampleDataMessage />}
           />
