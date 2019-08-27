@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import Input from '../../components/UI/inputRender/inputRender';
+import RenderForm from '../../components/renderForm/renderForm';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import SampleDataMessage from '../../components/sampleDataMessage/sampleDataMessage';
@@ -59,43 +59,33 @@ class Auth extends Component {
       error, loading, isAuthenticated, authRedirectPath,
     } = this.props;
     const { isSignup } = this.state;
-    const formType = isSignup ? signupForm : loginForm;
-    const keyArray = Object.keys(formType);
-    const formElementsArray = keyArray.map((id) => ({ id, config: formType[id] }));
-
-    const formNode = formElementsArray.map((formElement) => (
-      <Input
-        key={formElement.id}
-        elementType={formElement.config.elementType}
-        elementConfig={formElement.config.elementConfig}
-        // eslint-disable-next-line react/destructuring-assignment
-        value={this.props[formElement]}
-        invalid={!formElement.config.valid}
-        shouldValidate={formElement.config.validation}
-        touched={formElement.config.touched}
-        changed={(event) => this.inputChangedHandler(event, formElement.id)}
-      />
-    ));
-    return (
-      <div className={classes.auth}>
-        {isAuthenticated ? <Redirect to={authRedirectPath} /> : null}
-        {error ? <p>{error.message}</p> : null}
-        {loading ? <Spinner /> : (
-          <form>
-            {isSignup ? null : <SampleDataMessage />}
-            {formNode}
-            <Button
-              clicked={this.submitHandler}
-              title={isSignup ? 'Create New Account' : 'Login'}
-              type="submit"
-            />
-          </form>
-        )}
+    const buttonArray = [
+      (
         <Button
           clicked={this.switchAuthModeHandler}
           title={`Switch to ${isSignup ? 'Login' : 'Sign-Up'}`}
           type="button"
         />
+      ),
+      (
+        <Button
+          clicked={this.submitHandler}
+          title={isSignup ? 'Create New Account' : 'Login'}
+          type="submit"
+        />
+      ),
+    ];
+    return (
+      <div>
+        {isAuthenticated ? <Redirect to={authRedirectPath} /> : null}
+        {error ? <p>{error.message}</p> : null}
+        {loading ? <Spinner /> : (
+          <RenderForm
+            buttons={buttonArray}
+            inputConfig={isSignup ? signupForm : loginForm}
+            preFormMessage={isSignup ? null : <SampleDataMessage />}
+          />
+        )}
       </div>
     );
   }

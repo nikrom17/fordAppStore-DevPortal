@@ -6,6 +6,7 @@ import classes from './inputRender.module.scss';
 const input = ({
   onChange, config, invalid, key, touched, element, value, readOnly,
 }) => {
+  console.log(element);
   const {
     headerText, shouldValidate, options, alt, src,
   } = config;
@@ -27,10 +28,8 @@ const input = ({
       inputElement = (
         <TextInputRender
           config={config}
-          readOnly={readOnly}
           className={inputClasses.join(' ')}
           onChange={onChange}
-          value={value}
         />
       );
       break;
