@@ -5,21 +5,19 @@ import Form from '../UI/Form/Form';
 import Input from '../UI/inputRender/inputRender';
 
 const renderForm = ({
-  inputConfig, buttons, preFormMessage, postFormMessage,
+  inputConfig, buttons, onChange, preFormMessage, postFormMessage,
 }) => {
   const keys = Object.keys(inputConfig);
   const inputs = keys.map((key) => {
     const input = inputConfig[key];
-    console.log(input);
     return (
       <Input
-        onChange={(event) => this.inputChangedHandler(event, input.id)}
-        config={input.config}
-        invalid={!input.config.valid}
         key={key}
-        touched={input.config.touched}
+        config={input.config}
+        controls={input.controls}
         element={input.type}
-        value={inputConfig[input.id]}
+        inputId={key}
+        onChange={onChange}
       />
     );
   });
@@ -35,9 +33,17 @@ const renderForm = ({
 
 renderForm.propTypes = {
   buttons: PropTypes.arrayOf(PropTypes.node).isRequired,
-  inputConfig: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  inputConfig: PropTypes.objectOf( // one form in the formconfig
+    PropTypes.objectOf( // one form
+      PropTypes.oneOf([
+        PropTypes.objectOf( // config, controls, validation
+          PropTypes.oneOf([PropTypes.string, PropTypes.bool]),
+        ),
+        PropTypes.string, // type
+      ]),
+    ),
   ).isRequired,
+  onChange: PropTypes.func.isRequired,
   preFormMessage: PropTypes.node,
   postFormMessage: PropTypes.node,
 };

@@ -1,32 +1,36 @@
 export const loginForm = {
   email: {
-    type: 'input',
     config: {
       type: 'email',
       placeholder: 'E-Mail Address',
     },
-    value: '',
+    controls: {
+      touched: false,
+      valid: false,
+      value: '',
+    },
+    type: 'input',
     validation: {
       required: true,
       isEmail: true,
     },
-    valid: false,
-    touched: false,
   },
   password: {
     type: 'input',
     config: {
       type: 'password',
       placeholder: 'Password',
-      minLength: 6,
     },
-    value: '',
+    controls: {
+      value: '',
+      valid: false,
+      touched: false,
+    },
     validation: {
       required: true,
       isEmail: true,
+      minLength: 6,
     },
-    valid: false,
-    touched: false,
   },
 };
 

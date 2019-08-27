@@ -1,4 +1,4 @@
-export const createAppForm = {
+const createAppForm = {
   title: {
     type: 'input',
     config: {
@@ -96,3 +96,5 @@ export const createAppForm = {
     touched: false,
   },
 };
+
+export default createAppForm;

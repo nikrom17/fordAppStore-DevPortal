@@ -6,7 +6,7 @@ import Form from '../../components/UI/Form/Form';
 import Input from '../../components/UI/inputRender/inputRender';
 import Button from '../../components/UI/Button/Button';
 import { updateObject, checkValidity, getDate } from '../../shared/utility';
-import { createAppForm } from './formConfig';
+import createAppForm from './formConfig';
 import * as actions from '../../store/actions/index';
 
 class CreateApp extends Component {

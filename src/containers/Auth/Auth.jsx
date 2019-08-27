@@ -7,14 +7,13 @@ import RenderForm from '../../components/renderForm/renderForm';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import SampleDataMessage from '../../components/sampleDataMessage/sampleDataMessage';
-import classes from './Auth.module.scss';
 import * as actions from '../../store/actions/index';
 import { updateObject, checkValidity } from '../../shared/utility';
 import { loginForm, signupForm } from './formConfig';
 
 class Auth extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       form: {
         loginForm,
@@ -24,19 +23,16 @@ class Auth extends Component {
     };
   }
 
-  inputChangedHandler = (event, inputIdentifier) => {
-    const { onInputChangedHandler } = this.props;
-    const { isSignup, controls, form } = this.state;
-    onInputChangedHandler(event, inputIdentifier);
-    const formName = isSignup ? 'signupForm' : 'loginForm';
-    const updatedControls = updateObject(controls, {
-      [inputIdentifier]: updateObject(form[formName][inputIdentifier], {
-        value: event.target.value,
-        valid: checkValidity(event.target.value, form[formName][inputIdentifier].validation),
-        touched: true,
-      }),
+  inputChangedHandler = (event, inputId) => {
+    const { isSignup, form } = this.state;
+    const renderedForm = isSignup ? form.signupForm : form.loginForm;
+    const previousControls = renderedForm[inputId].controls;
+    const updatedControls = updateObject(previousControls, {
+      value: event.target.value,
+      valid: checkValidity(event.target.value, renderedForm[inputId].validation),
+      touched: true,
     });
-    this.setState({ controls: updatedControls });
+    this.setState({ [previousControls]: updatedControls });
   }
 
   submitHandler = (event) => {
@@ -63,6 +59,7 @@ class Auth extends Component {
       (
         <Button
           clicked={this.switchAuthModeHandler}
+          key="switchForms"
           title={`Switch to ${isSignup ? 'Login' : 'Sign-Up'}`}
           type="button"
         />
@@ -70,6 +67,7 @@ class Auth extends Component {
       (
         <Button
           clicked={this.submitHandler}
+          key="submit"
           title={isSignup ? 'Create New Account' : 'Login'}
           type="submit"
         />
@@ -83,6 +81,7 @@ class Auth extends Component {
           <RenderForm
             buttons={buttonArray}
             inputConfig={isSignup ? signupForm : loginForm}
+            onChange={this.inputChangedHandler}
             preFormMessage={isSignup ? null : <SampleDataMessage />}
           />
         )}
@@ -92,7 +91,6 @@ class Auth extends Component {
 }
 
 Auth.propTypes = {
-  onInputChangedHandler: PropTypes.func.isRequired,
   devName: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   website: PropTypes.string.isRequired,
@@ -125,9 +123,22 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onAuth: (userInfo, password, isSignup) => dispatch(actions.auth(userInfo, password, isSignup)),
   onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/')),
-  onInputChangedHandler: (event, inputIdentifier) => dispatch(
-    actions.inputChangedHandlerSettings(event, inputIdentifier),
-  ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+
+
+// inputChangedHandler = (event, inputIdentifier) => {
+//   const { onInputChangedHandler } = this.props;
+//   const { isSignup, controls, form } = this.state;
+//   onInputChangedHandler(event, inputIdentifier);
+//   const formName = isSignup ? 'signupForm' : 'loginForm';
+//   const updatedControls = updateObject(controls, {
+//     [inputIdentifier]: updateObject(form[formName][inputIdentifier], {
+//       value: event.target.value,
+//       valid: checkValidity(event.target.value, form[formName][inputIdentifier].validation),
+//       touched: true,
+//     }),
+//   });
+//   this.setState({ controls: updatedControls });
+// }

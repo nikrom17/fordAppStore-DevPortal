@@ -4,18 +4,18 @@ import TextInputRender from './inputs/textInputs/textInputRender';
 import classes from './inputRender.module.scss';
 
 const input = ({
-  onChange, config, invalid, key, touched, element, value, readOnly,
+  config, controls, element, inputId, onChange, readOnly,
 }) => {
-  console.log(element);
   const {
     headerText, shouldValidate, options, alt, src,
   } = config;
+  const { touched, valid, value } = controls;
   let inputElement = null;
   const header = headerText ? <p className={classes.header}>{headerText}</p> : null;
   const inputClasses = [classes.InputElement];
-  if (invalid && shouldValidate && touched) {
-    inputClasses.push(classes.Invalid);
-  }
+  // if (!valid && shouldValidate && touched) {
+  //   inputClasses.push(classes.valid);
+  // }
   // Move this to img component
   if (element === 'img') {
     inputClasses.push(classes.Image);
@@ -27,8 +27,10 @@ const input = ({
     case ('input'):
       inputElement = (
         <TextInputRender
-          config={config}
           className={inputClasses.join(' ')}
+          config={config}
+          controls={controls}
+          inputId={inputId}
           onChange={onChange}
         />
       );

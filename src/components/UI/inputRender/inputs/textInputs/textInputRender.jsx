@@ -1,6 +1,8 @@
 import React from 'react';
 
-const textInputRender = ({ config, className, onChange }) => {
+const textInputRender = ({
+  config, className, inputId, onChange,
+}) => {
   const { type, placeholder } = config;
   let input;
   switch (type) {
@@ -11,7 +13,7 @@ const textInputRender = ({ config, className, onChange }) => {
           className={className}
           placeholder={placeholder}
           type={type}
-          onChange={onChange}
+          onChange={(event) => onChange(event, inputId)}
         />
       );
       break;
