@@ -1,4 +1,4 @@
-export const loginForm = {
+export const login = {
   config: {
     byId: {
       email: {
@@ -10,7 +10,6 @@ export const loginForm = {
         placeholder: 'Password',
       },
     },
-    allIds: ['email', 'password'],
   },
   controls: {
     byId: {
@@ -25,7 +24,6 @@ export const loginForm = {
         value: '',
       },
     },
-    allIds: ['email, password'],
   },
   validation: {
     byId: {
@@ -35,107 +33,121 @@ export const loginForm = {
       },
       password: {
         required: true,
-        isEmail: true,
         minLength: 6,
       },
     },
-    allIds: ['email', 'password'],
   },
   type: {
     byId: {
       email: 'input',
       password: 'input',
     },
-    allIds: ['email', 'password'],
   },
+  allIds: ['email', 'password'],
 };
 
-
-export const signupForm = {
-  developerName: {
-    type: 'input',
-    config: {
-      type: 'text',
-      placeholder: 'Developer Name',
+export const signup = {
+  config: {
+    byId: {
+      developerName: {
+        type: 'text',
+        placeholder: 'Developer name',
+      },
+      email: {
+        type: 'email',
+        placeholder: 'E-Mail address',
+      },
+      phone: {
+        type: 'phone',
+        placeholder: 'Phone number',
+      },
+      website: {
+        type: 'url',
+        placeholder: 'Website',
+      },
+      password: {
+        type: 'password',
+        placeholder: 'Password',
+      },
+      confirmPassword: {
+        type: 'password',
+        placeholder: 'Confirm password',
+      },
     },
-    value: '',
-    validation: {
-      required: true,
-      isEmail: false,
-    },
-    valid: false,
-    touched: false,
   },
-  website: {
-    type: 'input',
-    config: {
-      type: 'url',
-      placeholder: 'website',
+  controls: {
+    byId: {
+      developerName: {
+        touched: false,
+        valid: false,
+        value: '',
+      },
+      email: {
+        touched: false,
+        valid: false,
+        value: '',
+      },
+      phone: {
+        touched: false,
+        valid: false,
+        value: '',
+      },
+      website: {
+        touched: false,
+        valid: false,
+        value: '',
+      },
+      password: {
+        touched: false,
+        valid: false,
+        value: '',
+      },
+      confirmPassword: {
+        touched: false,
+        valid: false,
+        value: '',
+      },
     },
-    value: '',
-    validation: {
-      required: true,
-      isEmail: false,
-    },
-    valid: false,
-    touched: false,
   },
-  phone: {
-    type: 'input',
-    config: {
-      type: 'phone',
-      placeholder: 'Phone Number',
+  validation: {
+    byId: {
+      developerName: {
+        required: true,
+        isEmail: false,
+      },
+      email: {
+        required: true,
+        isEmail: true,
+      },
+      phone: {
+        required: true,
+        isEmail: false,
+      },
+      website: {
+        required: true,
+        isEmail: false,
+      },
+      password: {
+        required: true,
+        isEmail: false,
+        minLength: 6,
+      },
+      confirmPassword: {
+        required: true,
+        isEmail: false,
+        minLength: 6,
+      },
     },
-    value: '',
-    validation: {
-      required: true,
-      isEmail: false,
-    },
-    valid: false,
-    touched: false,
   },
-  email: {
-    type: 'input',
-    config: {
-      type: 'email',
-      placeholder: 'E-Mail Address',
+  type: {
+    byId: {
+      developerName: 'input',
+      email: 'input',
+      phone: 'input',
+      website: 'input',
+      password: 'input',
+      confirmPassword: 'input',
     },
-    value: '',
-    validation: {
-      required: true,
-      isEmail: true,
-    },
-    valid: false,
-    touched: false,
   },
-  password: {
-    type: 'input',
-    config: {
-      type: 'password',
-      placeholder: 'Password',
-      minLength: 6,
-    },
-    value: '',
-    validation: {
-      required: true,
-      isEmail: true,
-    },
-    valid: false,
-    touched: false,
-  },
-  confirmPassword: {
-    type: 'input',
-    config: {
-      type: 'password',
-      placeholder: 'Password',
-      minLength: 6,
-    },
-    value: '',
-    validation: {
-      required: true,
-      isEmail: true,
-    },
-    valid: false,
-    touched: false,
-  },
+  allIds: ['developerName', 'email', 'phone', 'website', 'password', 'confirmPassword'],
 };

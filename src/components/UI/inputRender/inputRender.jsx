@@ -4,26 +4,22 @@ import TextInputRender from './inputs/textInputs/textInputRender';
 import classes from './inputRender.module.scss';
 
 const input = ({
-  config, controls, element, inputId, onChange, readOnly,
+  config, controls, inputId, onChange, type,
 }) => {
   const {
-    headerText, shouldValidate, options, alt, src,
+    headerText, options, alt, src,
   } = config;
-  const { touched, valid, value } = controls;
+  const { value } = controls;
   let inputElement = null;
   const header = headerText ? <p className={classes.header}>{headerText}</p> : null;
   const inputClasses = [classes.InputElement];
-  // if (!valid && shouldValidate && touched) {
-  //   inputClasses.push(classes.valid);
-  // }
-  // Move this to img component
-  if (element === 'img') {
+  if (inputId === 'img') {
     inputClasses.push(classes.Image);
-  } else if (element === 'textarea') {
+  } else if (inputId === 'textarea') {
     inputClasses.push(classes.Textarea);
   }
 
-  switch (element) {
+  switch (type) {
     case ('input'):
       inputElement = (
         <TextInputRender
@@ -38,7 +34,6 @@ const input = ({
     case ('file'):
       inputElement = (
         <input
-          readOnly={readOnly}
           className={inputClasses.join(' ')}
           onChange={onChange}
           value={value.value}
@@ -49,7 +44,6 @@ const input = ({
       inputElement = (
         <textarea
           className={inputClasses.join(' ')}
-          readOnly={readOnly}
           onChange={onChange}
           value={value}
         />
@@ -60,7 +54,6 @@ const input = ({
         <select
           className={inputClasses.join(' ')}
           onChange={onChange}
-          readOnly={readOnly}
           value={value}
         >
           {options.map((option) => (
@@ -84,7 +77,6 @@ const input = ({
       inputElement = (
         <input
           className={inputClasses.join(' ')}
-          readOnly={readOnly}
           onChange={onChange}
           value={value}
         />

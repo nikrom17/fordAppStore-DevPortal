@@ -9,42 +9,41 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import SampleDataMessage from '../../components/sampleDataMessage/sampleDataMessage';
 import * as actions from '../../store/actions/index';
 import { checkValidity } from '../../shared/utility';
-import { loginForm, signupForm } from './formConfig';
+import { login, signup } from './formConfig';
 
 class Auth extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      login: loginForm,
-      signup: signupForm,
+      config: login.config,
+      controls: login.controls,
+      inputIds: login.allIds,
+      type: login.type,
+      validation: login.validation,
       isSignup: false,
     };
   }
 
   inputChangedHandler = (event, inputId) => {
-    const { isSignup, login, signup } = this.state;
-    const renderedForm = isSignup ? signup : login;
-    const updatedForm = {
-      ...renderedForm,
-      [inputId]: {
-        ...renderedForm[inputId],
-        controls: {
+    const { controls, validation } = this.state;
+    const updatedControls = {
+      byId: {
+        ...controls.byId,
+        [inputId]: {
           value: event.target.value,
-          valid: checkValidity(event.target.value, renderedForm[inputId].validation),
+          valid: checkValidity(event.target.value, validation.byId[inputId]),
           touched: true,
         },
       },
     };
-    console.log(updatedForm);
-    this.setState({ login: updatedForm });
+    this.setState({ controls: updatedControls });
   }
 
   submitHandler = (event) => {
     const { devName, onAuth } = this.props;
-    const { login, signup } = this.state;
-    const { isSignup } = this.state;
-    const email = login.email.controls.value;
-    const password = login.password.controls.value;
+    const { controls, isSignup } = this.state;
+    const email = controls.byId.email.value;
+    const password = controls.byId.password.value;
     event.preventDefault();
     onAuth({ email }, password, isSignup);
   }
@@ -58,6 +57,11 @@ class Auth extends Component {
       error, loading, isAuthenticated, authRedirectPath,
     } = this.props;
     const { isSignup } = this.state;
+    const config = isSignup ? signup.config : login.config;
+    const controls = isSignup ? signup.controls : login.controls;
+    const type = isSignup ? signup.type : login.type;
+    const validation = isSignup ? signup.validation : login.validation;
+    const inputIds = isSignup ? signup.allIds : login.allIds;
     const buttonArray = [
       (
         <Button
@@ -83,7 +87,11 @@ class Auth extends Component {
         {loading ? <Spinner /> : (
           <RenderForm
             buttons={buttonArray}
-            inputConfig={isSignup ? this.state.signup : this.state.login}
+            config={config}
+            controls={controls}
+            inputIds={inputIds}
+            type={type}
+            validation={validation}
             onChange={this.inputChangedHandler}
             preFormMessage={isSignup ? null : <SampleDataMessage />}
           />

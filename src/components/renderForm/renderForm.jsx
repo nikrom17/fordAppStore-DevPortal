@@ -5,22 +5,19 @@ import Form from '../UI/Form/Form';
 import Input from '../UI/inputRender/inputRender';
 
 const renderForm = ({
-  inputConfig, buttons, onChange, preFormMessage, postFormMessage,
+  buttons, onChange, preFormMessage, postFormMessage, config, controls, inputIds, type, validation,
 }) => {
-  const keys = Object.keys(inputConfig);
-  const inputs = keys.map((key) => {
-    const input = inputConfig[key];
-    return (
-      <Input
-        key={key}
-        config={input.config}
-        controls={input.controls}
-        element={input.type}
-        inputId={key}
-        onChange={onChange}
-      />
-    );
-  });
+  const inputs = inputIds.map((inputId) => (
+    <Input
+      config={config.byId[inputId]}
+      controls={controls.byId[inputId]}
+      key={inputId}
+      inputId={inputId}
+      onChange={onChange}
+      type={type.byId[inputId]}
+      validation={validation.byId[inputId]}
+    />
+  ));
   return (
     <Form
       buttons={buttons}
@@ -33,16 +30,11 @@ const renderForm = ({
 
 renderForm.propTypes = {
   buttons: PropTypes.arrayOf(PropTypes.node).isRequired,
-  inputConfig: PropTypes.objectOf( // one form in the formconfig
-    PropTypes.objectOf( // one form
-      PropTypes.oneOf([
-        PropTypes.objectOf( // config, controls, validation
-          PropTypes.oneOf([PropTypes.string, PropTypes.bool]),
-        ),
-        PropTypes.string, // type
-      ]),
-    ),
-  ).isRequired,
+  config: PropTypes.objectOf(PropTypes.object).isRequired,
+  controls: PropTypes.objectOf(PropTypes.object).isRequired,
+  type: PropTypes.objectOf(PropTypes.object).isRequired,
+  validation: PropTypes.objectOf(PropTypes.object).isRequired,
+  inputIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChange: PropTypes.func.isRequired,
   preFormMessage: PropTypes.node,
   postFormMessage: PropTypes.node,

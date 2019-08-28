@@ -5,11 +5,14 @@ const textInputRender = ({
 }) => {
   const { type, placeholder } = config;
   const { value } = controls;
-  console.log(value);
   let input;
+  console.log(value);
   switch (type) {
     case ('password'):
     case ('email'):
+    case ('phone'):
+    case ('url'):
+    case ('text'):
       input = (
         <input
           className={className}
