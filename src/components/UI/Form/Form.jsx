@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import classes from './Form.module.scss';
 
-const form = ({
-  buttons, inputs, preFormMessage, postFormMessage,
+const Form = ({
+  buttons, inputs, preFormMessage, postFormMessage, onSubmit,
 }) => (
   <div className={classes.Form}>
     {preFormMessage}
-    <form>
+    <form onSubmit={onSubmit}>
       {inputs}
       {buttons}
     </form>
@@ -16,16 +16,17 @@ const form = ({
   </div>
 );
 
-form.propTypes = {
+Form.propTypes = {
   buttons: PropTypes.node.isRequired,
   inputs: PropTypes.node.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   preFormMessage: PropTypes.node,
   postFormMessage: PropTypes.node,
 };
 
-form.defaultProps = {
+Form.defaultProps = {
   preFormMessage: null,
   postFormMessage: null,
 };
 
-export default form;
+export default Form;

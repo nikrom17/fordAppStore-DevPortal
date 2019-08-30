@@ -8,7 +8,7 @@ import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import SampleDataMessage from '../../components/sampleDataMessage/sampleDataMessage';
 import * as actions from '../../store/actions/index';
-import { checkValidity } from '../../shared/utility';
+// import { checkValidity } from '../../shared/utility';
 import { login, signup } from './formConfig';
 
 class Auth extends Component {
@@ -24,33 +24,37 @@ class Auth extends Component {
     };
   }
 
-  inputChangedHandler = (event, inputId) => {
+  validateValue = (event, inputId) => {
     const { controls, validation } = this.state;
     const updatedControls = {
       byId: {
         ...controls.byId,
         [inputId]: {
           value: event.target.value,
-          valid: checkValidity(event.target.value, validation.byId[inputId]),
+          // valid: checkValidity(event.target.value, validation.byId[inputId]),
+          valid: true,
           touched: true,
         },
       },
     };
     this.setState({ controls: updatedControls });
-  }
+  };
 
   submitHandler = (event) => {
+    if (event) event.preventDefault();
+    // eslint-disable-next-line no-console
+    console.log(event.target.password.value);
+    console.log(event.target.email.value);
     const { devName, onAuth } = this.props;
     const { controls, isSignup } = this.state;
     const email = controls.byId.email.value;
     const password = controls.byId.password.value;
-    event.preventDefault();
     onAuth({ email }, password, isSignup);
-  }
+  };
 
   switchAuthModeHandler = () => {
     this.setState((prevState) => ({ isSignup: !prevState.isSignup }));
-  }
+  };
 
   render() {
     const {
@@ -58,7 +62,6 @@ class Auth extends Component {
     } = this.props;
     const { isSignup } = this.state;
     const config = isSignup ? signup.config : login.config;
-    const controls = isSignup ? signup.controls : login.controls;
     const type = isSignup ? signup.type : login.type;
     const validation = isSignup ? signup.validation : login.validation;
     const inputIds = isSignup ? signup.allIds : login.allIds;
@@ -73,7 +76,6 @@ class Auth extends Component {
       ),
       (
         <Button
-          clicked={this.submitHandler}
           key="submit"
           title={isSignup ? 'Create New Account' : 'Login'}
           type="submit"
@@ -88,11 +90,12 @@ class Auth extends Component {
           <RenderForm
             buttons={buttonArray}
             config={config}
-            controls={controls}
             inputIds={inputIds}
             type={type}
             validation={validation}
-            onChange={this.inputChangedHandler}
+            // validateValue={this.validateValue}
+            // onChange={this.inputChangedHandler}
+            onSubmit={this.submitHandler}
             preFormMessage={isSignup ? null : <SampleDataMessage />}
           />
         )}

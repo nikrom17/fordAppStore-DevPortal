@@ -4,12 +4,11 @@ import TextInputRender from './inputs/textInputs/textInputRender';
 import classes from './inputRender.module.scss';
 
 const input = ({
-  config, controls, inputId, onChange, type,
+  config, inputId, onChange, type, validateValue,
 }) => {
   const {
     headerText, options, alt, src,
   } = config;
-  const { value } = controls;
   let inputElement = null;
   const header = headerText ? <p className={classes.header}>{headerText}</p> : null;
   const inputClasses = [classes.InputElement];
@@ -25,9 +24,9 @@ const input = ({
         <TextInputRender
           className={inputClasses.join(' ')}
           config={config}
-          controls={controls}
           inputId={inputId}
           onChange={onChange}
+          validateValue={validateValue}
         />
       );
       break;
@@ -36,7 +35,6 @@ const input = ({
         <input
           className={inputClasses.join(' ')}
           onChange={onChange}
-          value={value.value}
         />
       );
       break;
@@ -45,7 +43,6 @@ const input = ({
         <textarea
           className={inputClasses.join(' ')}
           onChange={onChange}
-          value={value}
         />
       );
       break;
@@ -54,7 +51,6 @@ const input = ({
         <select
           className={inputClasses.join(' ')}
           onChange={onChange}
-          value={value}
         >
           {options.map((option) => (
             <option value={option.value} key={option.value}>
@@ -78,7 +74,6 @@ const input = ({
         <input
           className={inputClasses.join(' ')}
           onChange={onChange}
-          value={value}
         />
       );
   }

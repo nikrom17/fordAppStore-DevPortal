@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const textInputRender = ({
-  config, controls, className, inputId, onChange,
+const TextInputRender = ({
+  config, className, inputId, validateValue,
 }) => {
+  const [value, setValue] = useState('');
+  const handleChange = (event) => {
+    setValue(event.target.value);
+    // validateValue(event);
+  };
   const { type, placeholder } = config;
-  const { value } = controls;
   let input;
   console.log(value);
   switch (type) {
@@ -15,10 +19,11 @@ const textInputRender = ({
     case ('text'):
       input = (
         <input
+          name={inputId}
           className={className}
           placeholder={placeholder}
           type={type}
-          onChange={(event) => onChange(event, inputId)}
+          onChange={(event) => handleChange(event)}
           value={value}
         />
       );
@@ -26,7 +31,7 @@ const textInputRender = ({
     default:
       input = null;
   }
-  return input;
+  return (input);
 };
 
-export default textInputRender;
+export default TextInputRender;
