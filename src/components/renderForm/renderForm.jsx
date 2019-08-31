@@ -6,7 +6,7 @@ import Input from '../UI/inputRender/inputRender';
 
 const RenderForm = ({
   buttons, onChange, onSubmit, preFormMessage, postFormMessage, config,
-  inputIds, type, validation, validateValue,
+  inputIds, type, validation,
 }) => {
   const inputs = inputIds.map((inputId) => (
     <Input
@@ -16,7 +16,6 @@ const RenderForm = ({
       onChange={onChange}
       type={type.byId[inputId]}
       validation={validation.byId[inputId]}
-      validateValue={validateValue}
     />
   ));
   return (

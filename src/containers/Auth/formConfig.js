@@ -11,20 +11,6 @@ export const login = {
       },
     },
   },
-  controls: {
-    byId: {
-      email: {
-        touched: false,
-        valid: false,
-        value: '',
-      },
-      password: {
-        touched: false,
-        valid: false,
-        value: '',
-      },
-    },
-  },
   validation: {
     byId: {
       email: {
@@ -72,40 +58,6 @@ export const signup = {
       confirmPassword: {
         type: 'password',
         placeholder: 'Confirm password',
-      },
-    },
-  },
-  controls: {
-    byId: {
-      developerName: {
-        touched: false,
-        valid: false,
-        value: '',
-      },
-      email: {
-        touched: false,
-        valid: false,
-        value: '',
-      },
-      phone: {
-        touched: false,
-        valid: false,
-        value: '',
-      },
-      website: {
-        touched: false,
-        valid: false,
-        value: '',
-      },
-      password: {
-        touched: false,
-        valid: false,
-        value: '',
-      },
-      confirmPassword: {
-        touched: false,
-        valid: false,
-        value: '',
       },
     },
   },

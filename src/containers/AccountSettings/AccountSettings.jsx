@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import RenderForm from '../../components/renderForm/renderForm';
 import Button from '../../components/UI/Button/Button';
-import { updateObject, checkValidity } from '../../shared/utility';
+import { updateObject, validateValue } from '../../shared/utility';
 import * as actions from '../../store/actions/index';
 import accountSettingsForm from './formConfig';
 
@@ -23,7 +23,7 @@ class AccountSettings extends Component {
     const { settingsForm } = this.state;
     onInputChangedHandler(event, inputIdentifier);
     const updatedFormElement = updateObject(settingsForm[inputIdentifier], {
-      valid: checkValidity(event.target.value, settingsForm[inputIdentifier].validation),
+      valid: validateValue(event.target.value, settingsForm[inputIdentifier].validation),
       touched: true,
     });
     const updatedOrderForm = updateObject(settingsForm, {

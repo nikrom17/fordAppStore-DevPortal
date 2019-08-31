@@ -1,52 +1,52 @@
-.Input {
-    width: 100%;
-    padding: 10px 5px;
-    box-sizing: border-box;
-    border-bottom: 1px solid lightgray;
+.input {
+  width: 100%;
+  padding: 10px 5px;
+  box-sizing: border-box;
+  border-bottom: 1px solid lightgray;
 }
 
-.Label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 8px;
-    width:100%;
+.label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+  width: 100%;
 }
 
-.InputElement {
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    outline: none;
-    display: block;
-    width: 100%;
-    border: none;
-    background: transparent;
-    margin-bottom: 30px;
-    margin:8px auto;
-    font: 16px Arial, Helvetica, sans-serif;
+.inputElement {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  display: block;
+  width: 100%;
+  border: none;
+  background: transparent;
+  margin-bottom: 30px;
+  margin: 8px auto;
+  font: 16px Arial, Helvetica, sans-serif;
 }
 
-.Textarea {
-    height: 200px;
+.textarea {
+  height: 200px;
 }
 
-.Image {
-    max-height: 200px;
-    height: 100%;
-    width: auto;
+.image {
+  max-height: 200px;
+  height: 100%;
+  width: auto;
 }
 
-.InputElement:focus {
-    outline:none;
+.inputElement:focus {
+  outline: none;
 }
 
-.Invalid {
-    border: 1px solid red;
+.invalid {
+  border: 1px solid red;
 }
 
-.Header {
-    font-weight: bold;
-    color: rgb(124, 122, 122);
-    font-size: small;
-    margin: 5px 0
+.header {
+  font-weight: bold;
+  color: rgb(124, 122, 122);
+  font-size: small;
+  margin: 5px 0;
 }

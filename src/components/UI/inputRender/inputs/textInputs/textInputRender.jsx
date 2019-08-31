@@ -1,13 +1,28 @@
 import React, { useState } from 'react';
+import { validateValue } from '../../../../../shared/utility';
+
+import classes from '../../inputRender.module.scss';
 
 const TextInputRender = ({
-  config, className, inputId, validateValue,
+  config, inputClasses, inputId,
 }) => {
   const [value, setValue] = useState('');
+  const [isValid, setIsValid] = useState(false);
+  const [isEdited, setIsEdited] = useState(false);
+
   const handleChange = (event) => {
     setValue(event.target.value);
-    // validateValue(event);
+    if (isEdited) {
+      setIsValid(validateValue(event));
+    }
   };
+
+  const handleOnBlur = () => {
+    setIsEdited(true);
+    setIsValid(validateValue(value));
+  };
+
+  const appliedClasses = isEdited && !isValid ? [...inputClasses, classes.invalid] : inputClasses;
   const { type, placeholder } = config;
   let input;
   console.log(value);
@@ -19,8 +34,9 @@ const TextInputRender = ({
     case ('text'):
       input = (
         <input
+          onBlur={handleOnBlur}
           name={inputId}
-          className={className}
+          className={appliedClasses.join(' ')}
           placeholder={placeholder}
           type={type}
           onChange={(event) => handleChange(event)}

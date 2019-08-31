@@ -7,7 +7,7 @@ import Form from '../../components/UI/Form/Form';
 import Input from '../../components/UI/inputRender/inputRender';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import { updateObject, checkValidity, parseQueryString } from '../../shared/utility';
+import { updateObject, validateValue, parseQueryString } from '../../shared/utility';
 import { publishAppForm, editAppDetailsForm } from './formConfig';
 import * as actions from '../../store/actions/index';
 
@@ -74,7 +74,7 @@ class AppDetails extends Component {
       ? onFileInputChangedHandlerAD(event, inputIdentifier)
       : onInputChangedHandlerAD(event, inputIdentifier);
     const updatedFormElement = updateObject([formName][inputIdentifier], {
-      valid: checkValidity(event.target.value, [formName][inputIdentifier].validation),
+      valid: validateValue(event.target.value, [formName][inputIdentifier].validation),
       touched: true,
     });
     const updatedOrderForm = updateObject([formName], {

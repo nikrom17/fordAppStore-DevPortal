@@ -8,7 +8,6 @@ import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import SampleDataMessage from '../../components/sampleDataMessage/sampleDataMessage';
 import * as actions from '../../store/actions/index';
-// import { checkValidity } from '../../shared/utility';
 import { login, signup } from './formConfig';
 
 class Auth extends Component {
@@ -24,21 +23,20 @@ class Auth extends Component {
     };
   }
 
-  validateValue = (event, inputId) => {
-    const { controls, validation } = this.state;
-    const updatedControls = {
-      byId: {
-        ...controls.byId,
-        [inputId]: {
-          value: event.target.value,
-          // valid: checkValidity(event.target.value, validation.byId[inputId]),
-          valid: true,
-          touched: true,
-        },
-      },
-    };
-    this.setState({ controls: updatedControls });
-  };
+  // validateValue = (event, inputId) => {
+  //   const { controls, validation } = this.state;
+  //   const updatedControls = {
+  //     byId: {
+  //       ...controls.byId,
+  //       [inputId]: {
+  //         valid: validateValue(event.target.value, validation.byId[inputId]),
+  //         valid: true,
+  //         touched: true,
+  //       },
+  //     },
+  //   };
+  //   this.setState({ controls: updatedControls });
+  // };
 
   submitHandler = (event) => {
     if (event) event.preventDefault();
@@ -93,8 +91,6 @@ class Auth extends Component {
             inputIds={inputIds}
             type={type}
             validation={validation}
-            // validateValue={this.validateValue}
-            // onChange={this.inputChangedHandler}
             onSubmit={this.submitHandler}
             preFormMessage={isSignup ? null : <SampleDataMessage />}
           />
@@ -106,11 +102,7 @@ class Auth extends Component {
 
 Auth.propTypes = {
   devName: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  website: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
   onAuth: PropTypes.func.isRequired,
-  password: PropTypes.string.isRequired,
   error: PropTypes.objectOf(PropTypes.string),
   loading: PropTypes.bool.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
@@ -126,12 +118,6 @@ const mapStateToProps = (state) => ({
   error: state.auth.error,
   isAuthenticated: state.auth.token !== null,
   authRedirectPath: state.auth.authRedirectPath,
-  devName: state.settings.developerName,
-  email: state.settings.email,
-  website: state.settings.website,
-  phone: state.settings.phone,
-  password: state.settings.password,
-  confirmPassword: state.settings.confirmPassword,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -150,7 +136,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Auth);
 //   const updatedControls = updateObject(controls, {
 //     [inputIdentifier]: updateObject(form[formName][inputIdentifier], {
 //       value: event.target.value,
-//       valid: checkValidity(event.target.value, form[formName][inputIdentifier].validation),
+//       valid: validateValue(event.target.value, form[formName][inputIdentifier].validation),
 //       touched: true,
 //     }),
 //   });

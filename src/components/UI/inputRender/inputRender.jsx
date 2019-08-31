@@ -4,29 +4,28 @@ import TextInputRender from './inputs/textInputs/textInputRender';
 import classes from './inputRender.module.scss';
 
 const input = ({
-  config, inputId, onChange, type, validateValue,
+  config, inputId, onChange, type,
 }) => {
   const {
     headerText, options, alt, src,
   } = config;
   let inputElement = null;
   const header = headerText ? <p className={classes.header}>{headerText}</p> : null;
-  const inputClasses = [classes.InputElement];
+  const inputClasses = [classes.invalid, classes.inputElement];
   if (inputId === 'img') {
-    inputClasses.push(classes.Image);
+    inputClasses.push(classes.image);
   } else if (inputId === 'textarea') {
-    inputClasses.push(classes.Textarea);
+    inputClasses.push(classes.textarea);
   }
 
   switch (type) {
     case ('input'):
       inputElement = (
         <TextInputRender
-          className={inputClasses.join(' ')}
+          inputClasses={inputClasses}
           config={config}
           inputId={inputId}
           onChange={onChange}
-          validateValue={validateValue}
         />
       );
       break;
