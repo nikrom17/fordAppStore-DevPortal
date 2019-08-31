@@ -35,7 +35,7 @@ export const login = {
 export const signup = {
   config: {
     byId: {
-      developerName: {
+      devName: {
         type: 'text',
         placeholder: 'Developer name',
       },
@@ -63,7 +63,7 @@ export const signup = {
   },
   validation: {
     byId: {
-      developerName: {
+      devName: {
         required: true,
         isEmail: false,
       },
@@ -93,7 +93,7 @@ export const signup = {
   },
   type: {
     byId: {
-      developerName: 'input',
+      devName: 'input',
       email: 'input',
       phone: 'input',
       website: 'input',
@@ -101,5 +101,5 @@ export const signup = {
       confirmPassword: 'input',
     },
   },
-  allIds: ['developerName', 'email', 'phone', 'website', 'password', 'confirmPassword'],
+  allIds: ['devName', 'email', 'phone', 'website', 'password', 'confirmPassword'],
 };

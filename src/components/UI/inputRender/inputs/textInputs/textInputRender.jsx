@@ -1,31 +1,32 @@
 import React, { useState } from 'react';
 import { validateValue } from '../../../../../shared/utility';
 
-import classes from '../../inputRender.module.scss';
+import classes from './textInputRender.module.scss';
 
 const TextInputRender = ({
-  config, inputClasses, inputId,
+  config, inputId, validation, setFormValid,
 }) => {
   const [value, setValue] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [isEdited, setIsEdited] = useState(false);
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
+  const handleChange = (newValue) => {
+    setValue(newValue);
     if (isEdited) {
-      setIsValid(validateValue(event));
+      setIsValid(validateValue(newValue, validation));
+      setFormValid(inputId, isValid);
     }
   };
 
   const handleOnBlur = () => {
     setIsEdited(true);
-    setIsValid(validateValue(value));
+    setIsValid(validateValue(value, validation));
+    setFormValid(inputId, isValid);
   };
 
-  const appliedClasses = isEdited && !isValid ? [...inputClasses, classes.invalid] : inputClasses;
+  const appliedClasses = isEdited && !isValid
+    ? [classes.input, classes.invalid] : [classes.input];
   const { type, placeholder } = config;
   let input;
-  console.log(value);
   switch (type) {
     case ('password'):
     case ('email'):
@@ -39,7 +40,7 @@ const TextInputRender = ({
           className={appliedClasses.join(' ')}
           placeholder={placeholder}
           type={type}
-          onChange={(event) => handleChange(event)}
+          onChange={(event) => handleChange(event.target.value)}
           value={value}
         />
       );

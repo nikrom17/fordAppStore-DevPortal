@@ -18,7 +18,7 @@ const button = ({
 );
 
 button.propTypes = {
-  clicked: PropTypes.func.isRequired,
+  clicked: PropTypes.func,
   disabled: PropTypes.bool,
   noMargin: PropTypes.bool,
   title: PropTypes.string.isRequired,
@@ -26,6 +26,7 @@ button.propTypes = {
 };
 
 button.defaultProps = {
+  clicked: () => {},
   disabled: false,
   noMargin: false,
 };

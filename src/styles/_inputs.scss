@@ -1,0 +1,47 @@
+@mixin input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid lightgray;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  display: block;
+  font: 16px Arial, Helvetica, sans-serif;
+  margin-bottom: 30px;
+  margin: 8px auto;
+  outline: none;
+  padding: 10px 5px;
+  width: 100%;
+  &:focus {
+    outline: none;
+  }
+}
+
+@mixin label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+@mixin textarea {
+  height: 200px;
+}
+
+@mixin image {
+  max-height: 200px;
+  height: 100%;
+  width: auto;
+}
+
+@mixin invalid {
+  border-bottom: 2px solid red;
+  color: red;
+}
+
+@mixin header {
+  font-weight: bold;
+  color: rgb(124, 122, 122);
+  font-size: small;
+  margin: 5px 0;
+}

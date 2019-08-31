@@ -47,3 +47,17 @@ export const getDate = () => {
   const today = new Date();
   return `${today.getDate()}/${today.getMonth()}/${today.getFullYear()}`;
 };
+
+export const isFormValid = (target) => {
+  let isValid = true;
+  let keys = Object.keys(target);
+  // eslint-disable-next-line no-restricted-globals
+  keys = keys.filter((key) => (!isNaN(Number(key))));
+  console.log(keys);
+  keys.forEach((key) => {
+    console.log(Object.keys(target[key]));
+    console.log(target[key].value);
+    isValid = !!target[key].valid === 'true';
+  });
+  return true;
+};
