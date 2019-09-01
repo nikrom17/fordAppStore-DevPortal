@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TextInputRender from './inputs/textInputs/textInputRender';
+import Textarea from './inputs/textarea/textarea';
 // import classes from './inputRender.module.scss';
 
 const Input = ({
@@ -27,14 +28,22 @@ const Input = ({
     case ('file'):
       inputElement = (
         <input
+          config={config}
+          inputId={inputId}
           onChange={onChange}
+          validation={validation}
+          stateValue={stateValue}
         />
       );
       break;
     case ('textarea'):
       inputElement = (
-        <textarea
+        <Textarea
+          config={config}
+          inputId={inputId}
           onChange={onChange}
+          validation={validation}
+          stateValue={stateValue}
         />
       );
       break;

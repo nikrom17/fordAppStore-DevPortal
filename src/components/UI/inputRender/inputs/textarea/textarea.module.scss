@@ -1,0 +1,10 @@
+@import "../../../../../styles/inputs";
+
+.input {
+  @include input;
+  height: 200px;
+}
+
+.invalid {
+  @include invalid;
+}

@@ -2,125 +2,82 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Form from '../../components/UI/Form/Form';
-import Input from '../../components/UI/inputRender/inputRender';
+import Form from '../../components/renderForm/renderForm';
 import Button from '../../components/UI/Button/Button';
-import { updateObject, validateValue, getDate } from '../../shared/utility';
+import { getDate } from '../../shared/utility';
 import createAppForm from './formConfig';
 import * as actions from '../../store/actions/index';
+import RenderForm from '../../components/renderForm/renderForm';
 
 class CreateApp extends Component {
   constructor() {
     super();
     this.state = {
-      createAppForm,
       formIsValid: false,
     };
   }
 
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  }
 
-  handleSubmit = async (event) => {
-    const { token, userId } = this.props;
+  handleSubmit = (event) => {
+    const {
+      token, userId, devName, onCreateApp, history,
+    } = this.props;
     event.preventDefault();
-
+    const {
+      title, category, description, iconFile, bannerFile, sourceFile,
+    } = event.target;
     const appInfo = {
-      appName: this.props.title,
-      category: this.props.category,
-      description: this.props.description,
+      appName: title,
+      category,
+      description,
       status: 'draft',
       lastUpdate: getDate(),
       avgRating: '-',
       activeInstalls: '0',
-      devName: this.props.devName,
-      iconFileName: this.props.appIconFile.fileObject.name,
-      bannerFileName: this.props.appBannerFile.fileObject.name,
-      sourceFileName: this.props.appSourceFile.fileObject.name,
-      userId: this.props.userId,
+      devName,
+      iconFileName: iconFile.fileObject.name,
+      bannerFileName: bannerFile.fileObject.name,
+      sourceFileName: sourceFile.fileObject.name,
+      userId,
     };
     const imagesToUpload = {
-      banner: this.props.appBannerFile.fileObject,
-      icon: this.props.appIconFile.fileObject,
+      banner: bannerFile.fileObject,
+      icon: iconFile.fileObject,
     };
     const files = {
-      source: this.props.appSourceFile.fileObject,
+      source: sourceFile.fileObject,
       images: imagesToUpload,
     };
     const auth = {
       token,
       userId,
     };
-    this.props.onCreateApp(appInfo, files, auth, this.props.history);
-  }
-
-  inputChangedHandler = (event, inputIdentifier) => {
-    event.target.files
-      ? this.props.onFileInputChangedHandler(event, inputIdentifier)
-      : this.props.onInputChangedHandler(event, inputIdentifier);
-
-    const updatedFormElement = updateObject(this.state.createAppForm[inputIdentifier], {
-      valid: validateValue(event.target.value, this.state.createAppForm[inputIdentifier].validation),
-      touched: true,
-    });
-    const updatedOrderForm = updateObject(this.state.createAppForm, {
-      [inputIdentifier]: updatedFormElement,
-    });
-
-    let formIsValid = true;
-    for (const inputIdentifier in updatedOrderForm) {
-      formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
-    }
-    this.setState({ createAppForm });
-    this.setState({ createAppForm: updatedOrderForm, formIsValid });
+    onCreateApp(appInfo, files, auth, history);
   }
 
   render() {
-    const { createAppForm, formIsValid } = this.state;
-    const formElementsArray = [];
-    const formKeys = Object.keys(createAppForm);
-
-    formKeys.map((key) => (
-      formElementsArray.push({
-        id: key,
-        config: createAppForm[key],
-      })
-    ));
-    const form = (
-      <Form>
-        {formElementsArray.map((formElement) => {
-          const value = formElement.config.elementConfig.type === 'file'
-            ? this.props[formElement.id].value
-            : this.props[formElement.id];
-          return (
-            <Input
-              key={formElement.id}
-              header={formElement.config.elementConfig.header}
-              elementType={formElement.config.elementType}
-              elementConfig={formElement.config.elementConfig}
-              value={value}
-              invalid={!formElement.config.valid}
-              shouldValidate={formElement.config.validation}
-              touched={formElement.config.touched}
-              changed={(event) => this.inputChangedHandler(event, formElement.id)}
-            />
-          );
-        })}
-        <Button
-          clicked={this.handleSubmit}
-          disabled={!formIsValid}
-          title="Create App"
-          type="submit"
-        />
-      </Form>
-    );
+    const { isFormValid } = this.state;
+    const {
+      config, allIds, type, validation,
+    } = createAppForm;
+    const button = [(
+      <Button
+        clicked={this.handleSubmit}
+        disabled={!isFormValid}
+        title="Create App"
+        type="submit"
+      />
+    )];
     return (
-      <>
-        {form}
-      </>
+      <RenderForm
+        buttons={button}
+        config={config}
+        inputIds={allIds}
+        type={type}
+        validation={validation}
+        onSubmit={this.handleSubmit}
+        preFormMessage={<p>Upload New App</p>}
+      />
     );
   }
 }

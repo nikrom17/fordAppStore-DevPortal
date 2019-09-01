@@ -33,12 +33,12 @@ const TextInputRender = ({
     case ('text'):
       input = (
         <input
-          onBlur={handleOnBlur}
-          name={inputId}
           className={appliedClasses.join(' ')}
+          name={inputId}
+          onBlur={handleOnBlur}
+          onChange={(event) => handleChange(event.target.value)}
           placeholder={placeholder}
           type={type}
-          onChange={(event) => handleChange(event.target.value)}
           value={value}
         />
       );
