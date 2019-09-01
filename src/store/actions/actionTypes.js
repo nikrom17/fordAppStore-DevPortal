@@ -1,11 +1,11 @@
-//auth
+// auth
 export const AUTH_START = 'AUTH_START';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAILED = 'AUTH_FAILED';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const INPUT_CHANGED_HANDLER_AUTH = 'INPUT_CHANGED_HANDLER_AUTH';
 
-//Create App
+// Create App
 export const INPUT_CHANGED_HANDLER = 'INPUT_CHANGED_HANDLER';
 export const FILE_INPUT_CHANGED_HANDLER = 'FILE_INPUT_CHANGED_HANDLER';
 
@@ -15,11 +15,10 @@ export const CREATE_APP_FAILED = 'CREATE_APP_FAILED';
 export const SET_FILE_OBJECT = 'SET_FILE_OBJECT';
 export const RESET_NEW_APP = 'RESET_NEW_APP';
 
-// account settings 
+// account settings
 export const FETCH_ACCOUNT_SETTINGS_SUCCESS = 'FETCH_ACCOUNT_SETTINGS_SUCCESS';
-export const INPUT_CHANGED_HANDLER_SETTINGS = 'INPUT_CHANGED_HANDLER_';
 
-//App List
+// App List
 export const FETCH_APP_START = 'FETCH_APP_START';
 export const FETCH_APP_SUCCESS = 'FETCH_APP_SUCCESS';
 export const FETCH_APP_FAILED = 'FETCH_APP_FAILED';

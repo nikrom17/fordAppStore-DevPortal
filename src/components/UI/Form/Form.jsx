@@ -8,7 +8,7 @@ const Form = ({
 }) => (
   <div className={classes.Form}>
     {preFormMessage}
-    <form onSubmit={onSubmit}>
+    <form onSubmit={(event) => onSubmit(event)}>
       {inputs}
       {buttons}
     </form>

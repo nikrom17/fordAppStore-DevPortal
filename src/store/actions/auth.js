@@ -51,7 +51,7 @@ export const auth = (userInfo, password, isSignup) => (dispatch) => {
       localStorage.setItem('userId', response.data.localId);
       dispatch(checkAuthTimeout(response.data.expiresIn));
       if (isSignup) {
-        dispatch(setAccountSettings(userInfo, response));
+        dispatch(setAccountSettings(userInfo, response.data));
       } else {
         dispatch(authSuccess(response.data.idToken, response.data.localId));
         dispatch(fetchAccountSettings(response.data.idToken, response.data.localId));

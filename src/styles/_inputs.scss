@@ -37,6 +37,9 @@
 @mixin invalid {
   border-bottom: 2px solid red;
   color: red;
+  &::placeholder {
+    color: red;
+  }
 }
 
 @mixin header {

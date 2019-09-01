@@ -20,22 +20,24 @@ class Auth extends Component {
     };
   }
 
-  submitHandler = (event) => {
+  submitHandler = (event, validation) => {
     event.preventDefault();
-    if (isFormValid(event.target)) {
+    if (isFormValid(event.target, validation)) {
       const {
         devName, email, phone, website,
-        password, confirmPassword,
+        password,
       } = event.target;
       const { isSignup } = this.state;
       const { onAuth } = this.props;
-      onAuth({ email }, password, isSignup);
+      // if (isSignup) {
+      onAuth({
+        email, phone, website, devName,
+      }, password, isSignup);
+      // } else {
+      // onAuth({ email }, password, isSignup);
+      // }
     }
   };
-
-  setFormValid = (isValid) => {
-    this.setState({ isFormValid: isValid });
-  }
 
   switchAuthModeHandler = () => {
     this.setState((prevState) => ({ isSignup: !prevState.isSignup }));

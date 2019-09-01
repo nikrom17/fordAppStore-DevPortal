@@ -4,23 +4,21 @@ import { validateValue } from '../../../../../shared/utility';
 import classes from './textInputRender.module.scss';
 
 const TextInputRender = ({
-  config, inputId, validation, setFormValid,
+  config, inputId, stateValue, validation,
 }) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(stateValue || '');
   const [isValid, setIsValid] = useState(false);
   const [isEdited, setIsEdited] = useState(false);
   const handleChange = (newValue) => {
     setValue(newValue);
     if (isEdited) {
       setIsValid(validateValue(newValue, validation));
-      setFormValid(inputId, isValid);
     }
   };
 
   const handleOnBlur = () => {
     setIsEdited(true);
     setIsValid(validateValue(value, validation));
-    setFormValid(inputId, isValid);
   };
 
   const appliedClasses = isEdited && !isValid

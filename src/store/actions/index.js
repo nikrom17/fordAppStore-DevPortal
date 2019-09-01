@@ -6,7 +6,6 @@ export {
 } from './auth';
 
 export {
-  inputChangedHandlerSettings,
 } from './accountSettings';
 
 export {

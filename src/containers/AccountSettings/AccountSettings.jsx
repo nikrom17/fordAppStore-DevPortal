@@ -1,70 +1,39 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import RenderForm from '../../components/renderForm/renderForm';
-import Button from '../../components/UI/Button/Button';
-import { updateObject, validateValue } from '../../shared/utility';
-import * as actions from '../../store/actions/index';
-import accountSettingsForm from './formConfig';
+import accountInfoForm from './formConfig';
 
 
-class AccountSettings extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      settingsForm: accountSettingsForm,
-      formIsValid: false,
-    };
-  }
-
-  inputChangedHandler = (event, inputIdentifier) => {
-    const { onInputChangedHandler } = this.props;
-    const { settingsForm } = this.state;
-    onInputChangedHandler(event, inputIdentifier);
-    const updatedFormElement = updateObject(settingsForm[inputIdentifier], {
-      valid: validateValue(event.target.value, settingsForm[inputIdentifier].validation),
-      touched: true,
-    });
-    const updatedOrderForm = updateObject(settingsForm, {
-      [inputIdentifier]: updatedFormElement,
-    });
-
-    let formIsValid = true;
-    const array = Object.keys(updatedOrderForm);
-    formIsValid = array.reduce(() => (updatedOrderForm[inputIdentifier].valid && formIsValid));
-    this.setState({ settingsForm: updatedOrderForm, formIsValid });
-  }
-
-  render() {
-    const { settingsForm, formIsValid } = this.state;
-    return (
-      <div>
-        <RenderForm
-          inputConfig={settingsForm}
-        />
-      </div>
-    );
-  }
-}
+const AccountSettings = ({ accountInfo }) => {
+  console.log('Account Settings Rendered');
+  const {
+    allIds, config, type, validation,
+  } = accountInfoForm;
+  return (
+    <div>
+      <RenderForm
+        config={config}
+        inputIds={allIds}
+        type={type}
+        validation={validation}
+        preFormMessage={<p>Account Info</p>}
+        stateValues={accountInfo}
+        readonly
+      />
+    </div>
+  );
+};
 
 AccountSettings.propTypes = {
-  onInputChangedHandler: PropTypes.func.isRequired,
+  accountInfo: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  ).isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.token !== null,
-  developerName: state.settings.developerName,
-  email: state.settings.email,
-  website: state.settings.website,
-  phone: state.settings.phone,
-
+  accountInfo: state.settings,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onInputChangedHandler: (event, inputIdentifier) => dispatch(
-    actions.inputChangedHandlerSettings(event, inputIdentifier),
-  ),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AccountSettings);
+export default connect(mapStateToProps)(AccountSettings);

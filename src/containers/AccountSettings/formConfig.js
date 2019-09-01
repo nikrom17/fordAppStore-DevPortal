@@ -1,61 +1,53 @@
-const accountSettingsForm = {
-  developerName: {
-    type: 'input',
-    config: {
-      type: 'text',
-      headerText: 'Developer Name',
-      placeholder: 'Developer Name',
+export const accountInfo = {
+  config: {
+    byId: {
+      devName: {
+        type: 'text',
+        placeholder: 'Developer name',
+      },
+      email: {
+        type: 'email',
+        placeholder: 'E-Mail address',
+      },
+      phone: {
+        type: 'phone',
+        placeholder: 'Phone number',
+      },
+      website: {
+        type: 'url',
+        placeholder: 'Website',
+      },
     },
-    validation: {
-      required: true,
-      isEmail: false,
-    },
-    valid: true,
-    touched: false,
   },
-  email: {
-    type: 'input',
-    config: {
-      type: 'text',
-      headerText: 'Email Address',
-      placeholder: 'Email Address',
-      minLength: 6,
+  validation: {
+    byId: {
+      devName: {
+        required: true,
+        isEmail: false,
+      },
+      email: {
+        required: true,
+        isEmail: true,
+      },
+      phone: {
+        required: true,
+        isEmail: false,
+      },
+      website: {
+        required: true,
+        isEmail: false,
+      },
     },
-    validation: {
-      required: true,
-      isEmail: true,
-    },
-    valid: true,
-    touched: false,
   },
-  website: {
-    type: 'input',
-    config: {
-      type: 'url',
-      headerText: 'Website',
-      placeholder: 'Website',
+  type: {
+    byId: {
+      devName: 'input',
+      email: 'input',
+      phone: 'input',
+      website: 'input',
     },
-    validation: {
-      required: true,
-      isEmail: false,
-    },
-    valid: true,
-    touched: false,
   },
-  phone: {
-    type: 'input',
-    config: {
-      type: 'tel',
-      headerText: 'Phone Number',
-      placeholder: 'Phone Number',
-    },
-    validation: {
-      required: true,
-      isEmail: false,
-    },
-    valid: true,
-    touched: false,
-  },
+  allIds: ['devName', 'email', 'phone', 'website'],
 };
 
-export default accountSettingsForm;
+export default accountInfo;

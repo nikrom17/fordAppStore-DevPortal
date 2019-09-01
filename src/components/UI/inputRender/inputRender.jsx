@@ -4,7 +4,7 @@ import TextInputRender from './inputs/textInputs/textInputRender';
 // import classes from './inputRender.module.scss';
 
 const Input = ({
-  config, inputId, onChange, type, validation,
+  config, inputId, onChange, type, validation, stateValue,
 }) => {
   const {
     headerText, options, alt, src,
@@ -20,6 +20,7 @@ const Input = ({
           inputId={inputId}
           onChange={onChange}
           validation={validation}
+          stateValue={stateValue}
         />
       );
       break;
