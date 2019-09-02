@@ -1,16 +1,16 @@
 @mixin input {
   background: transparent;
   border: none;
+  border-radius: 0px;
   border-bottom: 2px solid lightgray;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   display: block;
   font: 16px Arial, Helvetica, sans-serif;
-  margin-bottom: 30px;
-  margin: 8px auto;
+  margin: 30px 0 4px 0;
   outline: none;
-  padding: 10px 5px;
+  padding: 10px 0;
   width: 100%;
   &:focus {
     outline: none;

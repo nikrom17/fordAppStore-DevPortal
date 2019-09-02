@@ -1,0 +1,9 @@
+@import "../../../../../styles/inputs";
+
+.input {
+  @include input;
+}
+
+.invalid {
+  @include invalid;
+}

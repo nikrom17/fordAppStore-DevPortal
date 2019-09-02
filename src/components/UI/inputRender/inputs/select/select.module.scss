@@ -1,0 +1,10 @@
+@import "../../../../../styles/inputs";
+
+.input {
+  @include input;
+  -webkit-appearance: none;
+}
+
+.invalid {
+  @include invalid;
+}

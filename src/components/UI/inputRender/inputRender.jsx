@@ -2,7 +2,9 @@ import React from 'react';
 
 import TextInputRender from './inputs/textInputs/textInputRender';
 import Textarea from './inputs/textarea/textarea';
-// import classes from './inputRender.module.scss';
+import File from './inputs/file/file';
+import Select from './inputs/select/select';
+import classes from './inputRender.module.scss';
 
 const Input = ({
   config, inputId, onChange, type, validation, stateValue,
@@ -11,7 +13,7 @@ const Input = ({
     headerText, options, alt, src,
   } = config;
   let inputElement = null;
-  const header = headerText ? <p>{headerText}</p> : null;
+  const header = headerText ? <p className={classes.header}>{headerText}</p> : null;
 
   switch (type) {
     case ('input'):
@@ -27,7 +29,7 @@ const Input = ({
       break;
     case ('file'):
       inputElement = (
-        <input
+        <File
           config={config}
           inputId={inputId}
           onChange={onChange}
@@ -49,15 +51,13 @@ const Input = ({
       break;
     case ('select'):
       inputElement = (
-        <select
+        <Select
+          config={config}
+          inputId={inputId}
           onChange={onChange}
-        >
-          {options.map((option) => (
-            <option value={option.value} key={option.value}>
-              {option.displayValue}
-            </option>
-          ))}
-        </select>
+          validation={validation}
+          stateValue={stateValue}
+        />
       );
       break;
     case ('img'):
@@ -69,17 +69,12 @@ const Input = ({
       );
       break;
     default:
-      inputElement = (
-        <input
-          onChange={onChange}
-        />
-      );
   }
 
   return (
     <div>
-      {header}
       {inputElement}
+      {header}
     </div>
   );
 };
