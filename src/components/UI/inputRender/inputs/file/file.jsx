@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { validateValue } from '../../../../../shared/utility';
+import FileImagePreview from './fileImagePreview';
 import classes from './file.module.scss';
 
 const File = ({
@@ -9,11 +10,13 @@ const File = ({
   const [value, setValue] = useState(stateValue || '');
   const [isValid, setIsValid] = useState(false);
   const [isEdited, setIsEdited] = useState(false);
+  const [imgURL, setImageURL] = useState('');
 
-  const handleChange = (newValue) => {
+  const handleChange = (newValue, url) => {
     setValue(newValue);
     if (isEdited) {
       setIsValid(validateValue(newValue, validation));
+      setImageURL(URL.createObjectURL(url));
     }
   };
 
@@ -25,14 +28,17 @@ const File = ({
   const appliedClasses = isEdited && !isValid
     ? [classes.input, classes.invalid] : [classes.input];
   return (
-    <input
-      className={appliedClasses.join(' ')}
-      type="file"
-      name={inputId}
-      onBlur={handleOnBlur}
-      onChange={(event) => handleChange(event.target.value)}
-      value={value}
-    />
+    <>
+      {config.type === 'image' && value ? <FileImagePreview src={imgURL} alt={value} /> : null}
+      <input
+        className={appliedClasses.join(' ')}
+        type="file"
+        name={inputId}
+        onBlur={handleOnBlur}
+        onChange={(event) => handleChange(event.target.value, event.target.files[0])}
+        value={value}
+      />
+    </>
   );
 };
 

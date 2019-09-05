@@ -34,7 +34,7 @@ export const checkAuthTimeout = (expirationDate) => (dispatch) => {
 };
 
 export const auth = (userInfo, password, isSignup) => (dispatch) => {
-  // dispatch(authStart());
+  dispatch(authStart());
   const authData = {
     email: userInfo.email.value,
     password: password.value,
@@ -56,7 +56,8 @@ export const auth = (userInfo, password, isSignup) => (dispatch) => {
         dispatch(authSuccess(response.data.idToken, response.data.localId));
         dispatch(fetchAccountSettings(response.data.idToken, response.data.localId));
       }
-      // authRef.signInWithEmailAndPassword(userInfo.email.value, password.value);
+      authRef.signInWithEmailAndPassword(userInfo.email.value, password.value);
+      console.log(response);
     })
     .catch((error) => {
       console.log(error.response.data.error.message);

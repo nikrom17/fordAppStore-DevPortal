@@ -22,6 +22,7 @@ class Auth extends Component {
 
   submitHandler = (event, validation) => {
     event.preventDefault();
+    console.log('submitHandler');
     if (isFormValid(event.target, validation)) {
       const {
         devName, email, phone, website,

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Form from '../../components/renderForm/renderForm';
 import Button from '../../components/UI/Button/Button';
-import { getDate } from '../../shared/utility';
+import { getDate, parseQueryString } from '../../shared/utility';
 import createAppForm from './formConfig';
 import * as actions from '../../store/actions/index';
 import RenderForm from '../../components/renderForm/renderForm';
@@ -14,7 +14,18 @@ class CreateApp extends Component {
     super();
     this.state = {
       formIsValid: false,
+      appIndex: null,
     };
+  }
+
+  async componentDidMount() {
+    const { location, apps, onLoadAppDetails } = this.props;
+    if (location.pathname !== '/createApp') {
+      const { appId } = parseQueryString(location.search);
+      await onLoadAppDetails(apps[appId]);
+      this.downloadUrlsHandler(appId);
+      this.setState({ appIndex: appId });
+    }
   }
 
 
@@ -55,6 +66,16 @@ class CreateApp extends Component {
     onCreateApp(appInfo, files, auth, history);
   }
 
+  downloadUrlsHandler(appId) {
+    const { apps, userId, onUpdateDownloadUrls } = this.props;
+    console.log(appId);
+    const urls = {
+      appIconFile: `/${userId}/${apps[appId].id}/images/icon/${apps[appId].iconFileName}`,
+      appBannerFile: `/${userId}/${apps[appId].id}/images/banner/${apps[appId].bannerFileName}`,
+    };
+    onUpdateDownloadUrls(urls);
+  }
+
   render() {
     const { isFormValid } = this.state;
     const {
@@ -88,6 +109,7 @@ CreateApp.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  apps: state.apps.apps,
   token: state.auth.token,
   userId: state.auth.userId,
   devName: state.settings.developerName,
@@ -110,6 +132,8 @@ const mapDispatchToProps = (dispatch) => ({
   onFileInputChangedHandler: (value, fileObject, inputIdentifier) => dispatch(
     actions.fileInputChangedHandler(value, fileObject, inputIdentifier),
   ),
+  onLoadAppDetails: (appDetails) => dispatch(actions.loadAppDetails(appDetails)),
+  onUpdateDownloadUrls: (urls) => dispatch(actions.updateDownloadUrls(urls)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateApp);

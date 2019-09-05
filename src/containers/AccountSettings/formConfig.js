@@ -4,18 +4,22 @@ export const accountInfo = {
       devName: {
         type: 'text',
         placeholder: 'Developer name',
+        headerText: 'Developer name',
       },
       email: {
         type: 'email',
-        placeholder: 'E-Mail address',
+        placeholder: 'E-Mail Address',
+        headerText: 'E-mail address',
       },
       phone: {
         type: 'phone',
         placeholder: 'Phone number',
+        headerText: 'Phone number',
       },
       website: {
         type: 'url',
         placeholder: 'Website',
+        headerText: 'Website',
       },
     },
   },

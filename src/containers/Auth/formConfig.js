@@ -4,10 +4,12 @@ export const login = {
       email: {
         type: 'email',
         placeholder: 'E-Mail Address',
+        headerText: 'E-mail Address',
       },
       password: {
         type: 'password',
         placeholder: 'Password',
+        headerText: 'Password',
       },
     },
   },
@@ -38,26 +40,32 @@ export const signup = {
       devName: {
         type: 'text',
         placeholder: 'Developer name',
+        headerText: 'Developer name',
       },
       email: {
         type: 'email',
         placeholder: 'E-Mail address',
+        headerText: 'E-Mail address',
       },
       phone: {
         type: 'phone',
         placeholder: 'Phone number',
+        headerText: 'Phone number',
       },
       website: {
         type: 'url',
         placeholder: 'Website',
+        headerText: 'Website',
       },
       password: {
         type: 'password',
         placeholder: 'Password',
+        headerText: 'Password',
       },
       confirmPassword: {
         type: 'password',
         placeholder: 'Confirm password',
+        headerText: 'Confirm password',
       },
     },
   },

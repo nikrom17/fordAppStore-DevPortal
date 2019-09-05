@@ -12,8 +12,7 @@ import Logout from './containers/Auth/Logout/Logout';
 import AppList from './containers/AppList/AppList';
 import AccountSettings from './containers/AccountSettings/AccountSettings';
 import Auth from './containers/Auth/Auth';
-import AppDetails from './containers/AppDetails/AppDetails';
-import CreateApp from './containers/CreateApp/CreateApp';
+import AppForm from './containers/appForm/appForm';
 import * as actions from './store/actions/index';
 
 
@@ -35,8 +34,8 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path="/logout" component={Logout} />
-          <Route path="/appDetails" component={AppDetails} />
-          <Route path="/createApp" component={CreateApp} />
+          <Route path="/appDetails" component={AppForm} />
+          <Route path="/createApp" component={AppForm} />
           <Route path="/accountDetails" component={AccountSettings} />
           <Route path="/" exact component={AppList} />
           <Redirect to="/" />

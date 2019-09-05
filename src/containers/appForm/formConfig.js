@@ -4,10 +4,12 @@ const createAppForm = {
       title: {
         type: 'text',
         placeholder: 'Title',
+        headerText: 'Title',
       },
       description: {
         type: 'textarea',
         placeholder: 'Description',
+        headerText: 'Description',
         minLength: 6,
       },
       category: {
@@ -30,15 +32,14 @@ const createAppForm = {
         ],
       },
       sourceFile: {
-        type: 'file',
         headerText: 'Upload App File',
       },
       bannerFile: {
-        type: 'file',
+        type: 'image',
         headerText: 'Upload App Banner Image',
       },
       iconFile: {
-        type: 'file',
+        type: 'image',
         headerText: 'Upload App Icon Image',
       },
     },
