@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import AppTable from './appTable/appTable';
-import Spinner from 'app/shared/spinner/spinner';
-import Button from 'app/shared/button/button';
-import styles from './appList.module.scss';
-import Modal from 'app/shared/modal/modal'; 
-import NoApps from './noAppsMessage/noAppsMessage';
 import * as actions from 'redux/actions/index';
+import Button from 'app/shared/button/button';
+import Modal from 'app/shared/modal/modal';
+import Spinner from 'app/shared/spinner/spinner';
+import AppTable from './appTable/appTable';
+import NoApps from './noAppsMessage/noAppsMessage';
+import styles from './appList.module.scss';
 
 class AppList extends Component {
   componentDidMount() {
