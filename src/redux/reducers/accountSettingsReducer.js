@@ -14,7 +14,6 @@ const fetchAccountSettingsSuccess = (state, action) => (
   {
     ...state,
     byId: {
-      ...state.byId,
       devName: action.userInfo.devName,
       email: action.userInfo.email,
       website: action.userInfo.website,
