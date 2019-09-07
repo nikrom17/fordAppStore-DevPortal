@@ -12,9 +12,9 @@ const Select = ({
 
   const handleChange = (newValue) => {
     setValue(newValue);
-    // if (isEdited) {
-    //   setIsValid(validateValue(newValue, validation));
-    // }
+    if (isEdited) {
+      setIsValid(validateValue(newValue, validation));
+    }
   };
 
   const handleOnBlur = () => {
@@ -28,6 +28,7 @@ const Select = ({
   return (
     <select
       className={appliedClasses.join(' ')}
+      onBlur={handleOnBlur}
       onChange={handleChange}
     >
       {options.map((option) => (

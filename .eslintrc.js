@@ -10,6 +10,7 @@ module.exports = {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
+  
   parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
@@ -22,5 +23,12 @@ module.exports = {
     'react',
   ],
   rules: {
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    },
   },
 };

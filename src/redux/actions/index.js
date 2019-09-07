@@ -9,10 +9,7 @@ export {
 } from 'redux/actions/accountSettingsActions';
 
 export {
-  inputChangedHandler,
   createApp,
-  //   uploadImageFiles,
-  fileInputChangedHandler,
   resetNewApp,
 } from 'redux/actions/createAppActions';
 export {

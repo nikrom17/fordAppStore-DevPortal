@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import RenderForm from 'app/shared/form/renderForm/renderForm';
 import Button from 'app/shared/button/button';
 import { getDate, parseQueryString } from 'utils/utility';
-import createAppForm from './formConfig';
 import * as actions from 'redux/actions/index';
+import createAppForm from './formConfig';
 
 class CreateApp extends Component {
   constructor() {
@@ -122,14 +122,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onInputChangedHandler: (event, inputIdentifier) => dispatch(
-    actions.inputChangedHandler(event, inputIdentifier),
-  ),
   onCreateApp: (appData, files, token, history) => dispatch(
     actions.createApp(appData, files, token, history),
-  ),
-  onFileInputChangedHandler: (value, fileObject, inputIdentifier) => dispatch(
-    actions.fileInputChangedHandler(value, fileObject, inputIdentifier),
   ),
   onLoadAppDetails: (appDetails) => dispatch(actions.loadAppDetails(appDetails)),
   onUpdateDownloadUrls: (urls) => dispatch(actions.updateDownloadUrls(urls)),

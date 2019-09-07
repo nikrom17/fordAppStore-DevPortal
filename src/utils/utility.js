@@ -48,13 +48,4 @@ export const getDate = () => {
   return `${today.getDate()}/${today.getMonth()}/${today.getFullYear()}`;
 };
 
-export const isFormValid = (target, validation) => {
-  let isValid = true;
-  let keys = Object.keys(target);
-  // eslint-disable-next-line no-restricted-globals
-  keys = keys.filter((key) => (!isNaN(Number(key))));
-  keys.forEach((key) => {
-    isValid = !!target[key].valid === 'true';
-  });
-  return true;
-};
+export const isFormValid = (target, validation) => true; // todo add custom validation

@@ -9,9 +9,7 @@ import styles from './inputRender.module.scss';
 const Input = ({
   config, inputId, onChange, type, validation, stateValue,
 }) => {
-  const {
-    headerText, options, alt, src,
-  } = config;
+  const { headerText } = config;
   let inputElement = null;
   const header = headerText ? <p className={styles.header}>{headerText}</p> : null;
 
@@ -57,14 +55,6 @@ const Input = ({
           onChange={onChange}
           validation={validation}
           stateValue={stateValue}
-        />
-      );
-      break;
-    case ('img'):
-      inputElement = (
-        <img
-          src={src}
-          alt={alt}
         />
       );
       break;

@@ -1,20 +1,20 @@
 import * as axiosInstance from 'api/axios-instances';
 import * as actionTypes from './actionTypes';
-import { authSuccess, authFailed } from './authActions';
 
 export const setAccountSettings = (userInfo, data) => {
-  userInfo = {
+  const userInfoPayload = {
     ...userInfo,
     userId: data.localId,
   };
   return (dispatch) => {
-    axiosInstance.instanceData.post(`/users.json?auth=${data.idToken}`, userInfo)
+    axiosInstance.instanceData.post(`/users.json?auth=${data.idToken}`, userInfoPayload)
       .then((response) => {
-        dispatch(authSuccess(response.data.idToken, response.data.localId));
+        // eslint-disable-next-line no-console
+        console.log(response); // todo create success action for posting account settings
       })
       .catch((error) => {
+        // eslint-disable-next-line no-console
         console.log('settings failed');
-        dispatch(authFailed(error));
       });
   };
 };
@@ -38,6 +38,6 @@ export const fetchAccountSettings = (token, userId) => (dispatch) => {
       dispatch(fetchAccountSettingsSuccess(accountSettings));
     })
     .catch((error) => {
-      // dispatch(fetchACcountSettingsFailed(error));
+      console.log(error);
     });
 };

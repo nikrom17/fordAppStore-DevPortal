@@ -1,18 +1,11 @@
-import firebase from 'firebase/app';
-import 'firebase/storage';
-import 'firebase/auth';
-import 'firebase/database';
+import { auth, initializeApp, storage, ref, database } from 'firebase/app';
 
 import config from './config';
 
 // Initialize Firebase
-firebase.initializeApp(config);
+initializeApp(config);
 
-export const storage = firebase.storage();
-export const authRef = firebase.auth();
-export const storageRef = storage.ref();
-export const databaseRef = firebase.database().ref();
-
-export {
-  firebase as default,
-};
+export const storage = storage();
+export const authRef = auth();
+export const storageRef = ref();
+export const databaseRef = database().ref();

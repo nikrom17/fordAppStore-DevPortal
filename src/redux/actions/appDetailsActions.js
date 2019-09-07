@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import { storageRef, databaseRef } from 'firebase';
+import { storageRef, databaseRef } from 'firebase/app';
 
 export const inputChangedHandlerAD = (event, inputIdentifier) => ({
   type: actionTypes.INPUT_CHANGED_HANDLER_AD,
@@ -25,11 +25,11 @@ export const resetAppDetails = () => ({
 });
 
 export const updateDownloadUrls = (urls) => (dispatch) => {
-  for (const url in urls) {
+  urls.map((url) => (
     storageRef.child(urls[url]).getDownloadURL()
       .then((downloadUrl) => dispatch(setDownloadUrl(downloadUrl, url)))
-      .catch((error) => console.log(error));
-  }
+      .catch((error) => console.log(error))
+  ));
 };
 
 export const loadAppDetails = (appDetails) => ({
