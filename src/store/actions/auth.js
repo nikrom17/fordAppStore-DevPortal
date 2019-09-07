@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 import { setAccountSettings, fetchAccountSettings } from './accountSettings';
-import * as axiosInstance from '../../axios-instances';
+import * as axiosInstance from '../../api/axios-instances';
 import { authRef } from '../../Firebase';
 
 export const authStart = () => ({

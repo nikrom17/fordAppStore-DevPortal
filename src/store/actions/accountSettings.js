@@ -1,4 +1,4 @@
-import * as axiosInstance from '../../axios-instances';
+import * as axiosInstance from '../../api/axios-instances';
 import * as actionTypes from './actionTypes';
 import { authSuccess, authFailed } from './auth';
 

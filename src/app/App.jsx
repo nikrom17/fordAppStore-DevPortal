@@ -13,7 +13,7 @@ import AppList from './containers/AppList/AppList';
 import AccountSettings from './containers/AccountSettings/AccountSettings';
 import Auth from './containers/Auth/Auth';
 import AppForm from './containers/appForm/appForm';
-import * as actions from './store/actions/index';
+import * as actions from '../store/actions/index';
 
 
 class App extends Component {

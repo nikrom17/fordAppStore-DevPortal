@@ -1,36 +1,27 @@
 import * as actionTypes from './actionTypes';
-import * as axiosInstances from '../../axios-instances';
+import * as axiosInstances from '../../api/axios-instances';
 import { storageRef } from '../../Firebase';
 
 
-export const resetAppState = () => {
-    return {
+export const resetAppState = () => ({
         type: actionTypes.RESET_APP_STATE
-    };
-};
+    });
 
-export const fetchAppsStart = () => {
-    return {
+export const fetchAppsStart = () => ({
         type: actionTypes.FETCH_APP_START
-    };
-};
+    });
 
-export const fetchAppsSuccess = (fetchedApps) => {
-    return {
+export const fetchAppsSuccess = (fetchedApps) => ({
         type: actionTypes.FETCH_APP_SUCCESS,
         apps: fetchedApps
-    };
-};
+    });
 
-export const fetchAppsFailed = (error) => {
-    return {
+export const fetchAppsFailed = (error) => ({
         type: actionTypes.FETCH_APP_FAILED,
         error: error
-    };
-};
+    });
 
-export const fetchApps = (token, userId) => {
-    return dispatch => {
+export const fetchApps = (token, userId) => dispatch => {
         dispatch(fetchAppsStart());
         const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
         axiosInstances.instanceData.get('/apps.json' + queryParams)
@@ -48,36 +39,26 @@ export const fetchApps = (token, userId) => {
                 dispatch(fetchAppsFailed(error));
             });
     };
-};
 
-export const deleteAppStart = () => {
-    return {
+export const deleteAppStart = () => ({
         type: actionTypes.DELETE_APP_START
-    };
-};
+    });
 
-export const deleteAppForbidden = () => {
-    return {
+export const deleteAppForbidden = () => ({
         type: actionTypes.DELETE_APP_FORBIDDEN
-    };
-};
+    });
 
-export const deleteAppSuccess = (fetchedApps) => {
-    return {
+export const deleteAppSuccess = (fetchedApps) => ({
         type: actionTypes.DELETE_APP_SUCCESS,
         apps: fetchedApps
-    };
-};
+    });
 
-export const deleteAppFailed = (error) => {
-    return {
+export const deleteAppFailed = (error) => ({
         type: actionTypes.DELETE_APP_FAILED,
         error: error
-    };
-};
+    });
 
-export const deleteApp = (token, userId, appId, apps) => {
-    return dispatch => {
+export const deleteApp = (token, userId, appId, apps) => dispatch => {
         if (userId !== 'iXahxNphVAdchMePQVnuGDr9jjq1') {
             dispatch(deleteAppStart());
             axiosInstances.instanceData.delete('/apps/' + appId + '.json?auth=' + token)
@@ -104,5 +85,4 @@ export const deleteApp = (token, userId, appId, apps) => {
         else {
             dispatch(deleteAppForbidden());
         }
-    }
-};
+    };
