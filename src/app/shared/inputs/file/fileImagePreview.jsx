@@ -1,5 +1,5 @@
-import React from 'app/shared/inputs/file/react';
-import PropTypes from 'app/shared/inputs/file/prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './fileImagePreview.module.scss';
 
 const FileImagePreview = ({ alt, src }) => (

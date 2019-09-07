@@ -1,14 +1,14 @@
-import React, { Component } from 'app/pages/containers/appList/app/pages/containers/AppList/react';
-import { connect } from 'app/pages/containers/appList/app/pages/containers/AppList/react-redux';
-import PropTypes from 'app/pages/containers/appList/app/pages/containers/AppList/prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import AppTable from '../AppTable/AppTable';
-import Spinner from '../UI/Spinner/Spinner';
-import Button from '../UI/Button/Button';
-import styles from './AppList.module.scss';
-import Modal from 'app/pages/containers/appList/Modal/Modal';
-import NoApps from 'app/pages/containers/appList/noAppsMessage/noAppsMessage';
-import * as actions from 'app/pages/containers/appList/actions/index';
+import AppTable from './appTable/appTable';
+import Spinner from 'app/shared/spinner/spinner';
+import Button from 'app/shared/button/button';
+import styles from './appList.module.scss';
+import Modal from 'app/shared/modal/modal'; 
+import NoApps from './noAppsMessage/noAppsMessage';
+import * as actions from 'redux/actions/index';
 
 class AppList extends Component {
   componentDidMount() {

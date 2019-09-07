@@ -1,5 +1,5 @@
-import React, { useState } from 'app/shared/inputs/textInputs/react';
-import { validateValue } from '../../../../../shared/utility';
+import React, { useState } from 'react';
+import { validateValue } from 'utils/utility';
 
 import styles from './textInputRender.module.scss';
 

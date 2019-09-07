@@ -1,14 +1,14 @@
-import React, { Component } from 'app/pages/containers/auth/react';
-import { connect } from 'app/pages/containers/auth/react-redux';
-import { Redirect } from 'app/pages/containers/auth/react-router-dom';
-import PropTypes from 'app/pages/containers/auth/prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import RenderForm from 'app/pages/containers/auth/renderForm/renderForm';
-import Button from 'app/pages/containers/auth/Button/Button';
-import Spinner from 'app/pages/containers/auth/Spinner/Spinner';
-import SampleDataMessage from 'app/pages/containers/auth/sampleDataMessage/sampleDataMessage';
-import * as actions from 'app/pages/containers/auth/app/pages/containers/appList/actions/index';
-import { isFormValid } from 'app/pages/containers/auth/utils/utility';
+import RenderForm from 'app/shared/form/renderForm/renderForm';
+import Button from 'app/shared/button/button';
+import Spinner from 'app/shared/spinner/spinner';
+import SampleDataMessage from './sampleDataMessage/sampleDataMessage';
+import * as actions from 'redux/actions/index';
+import { isFormValid } from 'utils/utility';
 import { login, signup } from './formConfig';
 
 class Auth extends Component {

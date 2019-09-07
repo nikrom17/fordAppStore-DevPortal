@@ -1,6 +1,6 @@
-import React, { useState } from 'app/shared/inputs/file/react';
+import React, { useState } from 'react';
 
-import { validateValue } from '../../../../../shared/utility';
+import { validateValue } from 'utils/utility';
 import FileImagePreview from './fileImagePreview';
 import styles from './file.module.scss';
 

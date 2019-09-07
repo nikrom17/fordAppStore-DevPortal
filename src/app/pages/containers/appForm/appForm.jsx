@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Form from 'app/pages/containers/auth/renderForm/renderForm';
-import Button from 'app/pages/containers/auth/button/button';
+import RenderForm from 'app/shared/form/renderForm/renderForm';
+import Button from 'app/shared/button/button';
 import { getDate, parseQueryString } from 'utils/utility';
 import createAppForm from './formConfig';
-import * as actions from 'app/redux/actions/index';
-import RenderForm from 'app/pages/containers/auth/renderForm/renderForm';
+import * as actions from 'redux/actions/index';
 
 class CreateApp extends Component {
   constructor() {

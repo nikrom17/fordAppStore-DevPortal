@@ -1,9 +1,9 @@
-import React, { Component } from 'app/pages/containers/logout/app/pages/containers/Logout/react';
-import { Redirect } from 'app/pages/containers/logout/app/pages/containers/Logout/react-router-dom';
-import { connect } from 'app/pages/containers/logout/app/pages/containers/Logout/react-redux';
-import PropTypes from 'app/pages/containers/logout/app/pages/containers/Logout/prop-types';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import * as actions from '../../../store/actions/index';
+import * as actions from 'redux/actions/index';
 
 class Logout extends Component {
   componentDidMount() {

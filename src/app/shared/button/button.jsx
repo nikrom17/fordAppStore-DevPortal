@@ -1,10 +1,9 @@
-/* eslint-disable react/button-has-type */
-import React from 'app/shared/button/app/shared/Button/react';
-import PropTypes from 'app/shared/button/app/shared/Button/prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import styles from './Button.module.scss';
+import styles from './button.module.scss';
 
-const button = ({
+const Button = ({
   disabled, clicked, noMargin, title, type,
 }) => (
   <button
@@ -17,7 +16,7 @@ const button = ({
   </button>
 );
 
-button.propTypes = {
+Button.propTypes = {
   clicked: PropTypes.func,
   disabled: PropTypes.bool,
   noMargin: PropTypes.bool,
@@ -25,10 +24,10 @@ button.propTypes = {
   type: PropTypes.string.isRequired,
 };
 
-button.defaultProps = {
+Button.defaultProps = {
   clicked: () => {},
   disabled: false,
   noMargin: false,
 };
 
-export default button;
+export default Button;

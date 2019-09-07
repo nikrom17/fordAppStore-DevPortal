@@ -1,4 +1,4 @@
-import * as actionTypes from 'redux/action/actionTypes.action';
+import * as actionTypes from 'redux/actions/actionTypes';
 import { updateObject } from 'utils/utility';
 
 const initialState = {

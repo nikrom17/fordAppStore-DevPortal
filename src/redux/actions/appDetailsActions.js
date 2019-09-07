@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import { storageRef, databaseRef } from '../../Firebase';
+import { storageRef, databaseRef } from 'firebase';
 
 export const inputChangedHandlerAD = (event, inputIdentifier) => ({
   type: actionTypes.INPUT_CHANGED_HANDLER_AD,

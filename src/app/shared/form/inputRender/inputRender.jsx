@@ -1,9 +1,9 @@
-import React from 'app/shared/Form/inputRender/react';
+import React from 'react';
 
-import TextInputRender from './inputs/textInputs/textInputRender';
-import Textarea from './inputs/textarea/textarea';
-import File from './inputs/file/file';
-import Select from './inputs/select/select';
+import TextInputRender from 'app/shared/inputs/textInputs/textInputRender';
+import Textarea from 'app/shared/inputs/textarea/textarea';
+import File from 'app/shared/inputs/file/file';
+import Select from 'app/shared/inputs/select/select';
 import styles from './inputRender.module.scss';
 
 const Input = ({

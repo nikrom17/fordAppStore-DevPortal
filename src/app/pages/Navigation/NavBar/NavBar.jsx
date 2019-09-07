@@ -1,10 +1,10 @@
-import React from 'app/pages/navigation/NavBar/app/pages/Navigation/navBar/react';
+import React from 'react';
 
-import NavigationItems from './navigationList/navigationList';
+import NavigationList from './navigationList/navigationList';
 
 const toolbar = () => (
   <nav>
-    <NavigationItems />
+    <NavigationList />
   </nav>
 );
 

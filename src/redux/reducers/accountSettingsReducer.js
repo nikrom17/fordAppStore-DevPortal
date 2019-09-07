@@ -1,4 +1,4 @@
-import * as actionTypes from '../action/actionTypes.action';
+import * as actionTypes from 'redux/actions/actionTypes';
 
 const initialState = {
   byId: {

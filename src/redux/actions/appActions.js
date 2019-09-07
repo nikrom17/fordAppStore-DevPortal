@@ -1,6 +1,6 @@
-import * as actionTypes from './actionTypesAction';
-import * as axiosInstances from '../../api/axios-instances';
-import { storageRef } from '../../Firebase';
+import * as actionTypes from './actionTypes';
+import * as axiosInstances from 'api/axios-instances';
+import { storageRef } from 'firebase';
 
 
 export const resetAppState = () => ({

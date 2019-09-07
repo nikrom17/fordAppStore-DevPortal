@@ -1,17 +1,17 @@
-import React from 'app/shared/IconButton/react';
-import PropTypes from 'app/shared/IconButton/prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './iconButton.module.scss';
 
 
-const iconButton = ({ iconComponent }) => (
+const IconButton = ({ iconComponent }) => (
   <button type="button" className={styles.button}>
     {iconComponent}
   </button>
 );
 
-iconButton.propTypes = {
+IconButton.propTypes = {
   iconComponent: PropTypes.node.isRequired,
 };
 
-export default iconButton;
+export default IconButton;

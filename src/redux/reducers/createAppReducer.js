@@ -1,5 +1,5 @@
- import * as actionTypes from 'redux/action/actionTypes.action';
- import { updateObject } from 'utils/utilityutility';
+ import * as actionTypes from 'redux/actions/actionTypes';
+ import { updateObject } from 'utils/utility';
 
  const initialState = {
     loading: false,

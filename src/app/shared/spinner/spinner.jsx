@@ -1,8 +1,8 @@
-import React from 'app/shared/spinner/app/shared/Spinner/react';
-import styles from './Spinner.module.scss';
+import React from 'react';
+import styles from './spinner.module.scss';
 
-const spinner = () => (
+const Spinner = () => (
   <div className={styles.Loader} />
 );
 
-export default spinner;
+export default Spinner;

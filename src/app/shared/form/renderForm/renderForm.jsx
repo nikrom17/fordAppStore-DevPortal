@@ -1,7 +1,7 @@
-import React from 'app/shared/Form/renderForm/react';
-import PropTypes from 'app/shared/Form/renderForm/prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import Input from '../UI/inputRender/inputRender';
+import Input from 'app/shared/form/inputRender/inputRender';
 import styles from './renderForm.module.scss';
 
 const RenderForm = ({

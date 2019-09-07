@@ -1,7 +1,6 @@
-import React, { Component } from 'app/shared/modal/app/shared/Modal/react';
-import styles from './Modal.css';
-import Aux from '../../../hoc/Aux/Aux';
-import Backdrop from '../backdrop/backdrop';
+import React, { Component } from 'react';
+import styles from './modal.module.scss';
+import Backdrop from 'app/shared/backdrop/backdrop';
 
 class Modal extends Component {
   shouldComponentUpdate (nextProps, nextState) {
@@ -10,7 +9,7 @@ class Modal extends Component {
 
   render () {
     return (
-      <Aux>
+      <>
         <Backdrop
           show={this.props.show}
           clicked={this.props.modalClosed}/>
@@ -23,7 +22,7 @@ class Modal extends Component {
           }} >
           {this.props.children}
         </div>
-      </Aux>
+      </>
     );
   }
 }

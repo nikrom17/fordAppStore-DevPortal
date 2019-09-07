@@ -7,8 +7,8 @@ import PropTypes from 'prop-types';
 
 import Header from 'app/pages/header/header';
 import NavBar from 'app/pages/navigation/navBar/navBar';
-import Logout from 'app/pages/containers/auth/Logout/Logout';
-import AppList from 'app/pages/containers/appList/AppList';
+import Logout from 'app/pages/containers/logout/logout';
+import AppList from 'app/pages/containers/appList/appList';
 import AccountSettings from 'app/pages/containers/accountSettings/accountSettings';
 import Auth from 'app/pages/containers/auth/auth';
 import AppForm from 'app/pages/containers/appForm/appForm';

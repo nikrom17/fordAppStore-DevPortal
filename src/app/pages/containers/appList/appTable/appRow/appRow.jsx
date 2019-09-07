@@ -1,8 +1,8 @@
-import React from 'app/pages/containers/appList/appTable/AppRow/app/pages/containers/appList/AppTable/AppRow/app/pages/containers/AppList/AppTable/AppRow/react';
-import PropTypes from 'app/pages/containers/appList/appTable/AppRow/app/pages/containers/appList/AppTable/AppRow/app/pages/containers/AppList/AppTable/AppRow/prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './appRow.module.scss';
-import IconButton from '../IconButton/iconButton';
+import IconButton from 'app/shared/iconButton/iconButton';
 
 const AppRow = ({
   appDetails, clickAppDetails, clickDelete, icon,

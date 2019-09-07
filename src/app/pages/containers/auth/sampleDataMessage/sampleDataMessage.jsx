@@ -1,4 +1,4 @@
-import React from 'app/pages/containers/auth/sampleDataMessage/app/pages/containers/Auth/sampleDataMessage/react';
+import React from 'react';
 
 const sampleDataMessage = () => (
   <>

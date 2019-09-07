@@ -1,5 +1,5 @@
 import * as axiosInstance from 'api/axios-instances';
-import * as actionTypes from './actionTypesAction';
+import * as actionTypes from './actionTypes';
 import { authSuccess, authFailed } from './authActions';
 
 export const setAccountSettings = (userInfo, data) => {

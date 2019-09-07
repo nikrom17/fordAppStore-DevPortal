@@ -1,6 +1,6 @@
-import React, { useState } from 'app/shared/inputs/textarea/react';
+import React, { useState } from 'react';
 
-import { validateValue } from '../../../../../shared/utility';
+import { validateValue } from 'utils/utility';
 import styles from './textarea.module.scss';
 
 const Textarea = ({

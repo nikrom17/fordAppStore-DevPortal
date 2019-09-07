@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
-import * as axios from '../../api/axios-instances';
-import { storageRef } from '../../Firebase';
+import * as axios from 'api/axios-instances';
+import { storageRef } from 'firebase';
 
 export const inputChangedHandler = (event, inputIdentifier) => ({
         loading: false,

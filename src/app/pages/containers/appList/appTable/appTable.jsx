@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React from 'app/pages/containers/appList/AppTable/app/pages/containers/AppList/AppTable/react';
-import { FontAwesomeIcon } from 'app/pages/containers/appList/AppTable/app/pages/containers/AppList/AppTable/@fortawesome/react-fontawesome';
-import { library } from 'app/pages/containers/appList/AppTable/app/pages/containers/AppList/AppTable/@fortawesome/fontawesome-svg-core';
-import { faTrash } from 'app/pages/containers/appList/AppTable/app/pages/containers/AppList/AppTable/@fortawesome/free-solid-svg-icons';
-import PropTypes from 'app/pages/containers/appList/AppTable/app/pages/containers/AppList/AppTable/prop-types';
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 
-import AppRow from '../AppRow/AppRow';
-import styles from './AppTable.module.scss';
+import AppRow from './appRow/appRow';
+import styles from './appTable.module.scss';
 
 library.add(faTrash);
 

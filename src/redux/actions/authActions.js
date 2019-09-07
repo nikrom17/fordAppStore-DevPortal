@@ -1,7 +1,7 @@
-import * as actionTypes from './actionTypesAction';
+import * as actionTypes from './actionTypes';
 import { setAccountSettings, fetchAccountSettings } from './accountSettingsActions';
-import * as axiosInstance from '../../api/axios-instances';
-import { authRef } from '../../Firebase';
+import * as axiosInstance from 'api/axios-instances';
+import { authRef } from 'firebase';
 
 export const authStart = () => ({
   type: actionTypes.AUTH_START,

@@ -9,12 +9,12 @@ import thunk from 'redux-thunk';
 
 import 'index.scss';
 import App from 'app/app';
-import registerServiceWorker from 'src/registerServiceWorker';
-import authReducer from 'src/redux/reducers/authReducer';
-import createAppReducer from 'src/redux/reducers/createAppReducer';
-import accountSettingsReducer from 'src/redux/reducers/accountSettingsReducer';
-import appReducer from 'src/redux/reducers/appReducer';
-import appDetailsReducer from 'src/redux/reducers/appDetailsReducer';
+import registerServiceWorker from 'serviceWorker/registerServiceWorker';
+import authReducer from 'redux/reducers/authReducer';
+import createAppReducer from 'redux/reducers/createAppReducer';
+import accountSettingsReducer from 'redux/reducers/accountSettingsReducer';
+import appReducer from 'redux/reducers/appReducer';
+import appDetailsReducer from 'redux/reducers/appDetailsReducer';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import RenderForm from 'renderForm/renderForm';
+import RenderForm from 'app/shared/form/renderForm/renderForm';
 import accountInfoForm from './formConfig';
 
 

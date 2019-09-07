@@ -3,10 +3,10 @@ export {
   logout,
   setAuthRedirectPath,
   authCheckState,
-} from 'src/redux/actions/authActions';
+} from 'redux/actions/authActions';
 
 export {
-} from 'src/redux/actions/actions/accountSettingsActions';
+} from 'redux/actions/accountSettingsActions';
 
 export {
   inputChangedHandler,
@@ -14,12 +14,12 @@ export {
   //   uploadImageFiles,
   fileInputChangedHandler,
   resetNewApp,
-} from 'src/redux/actions/createAppActions';
+} from 'redux/actions/createAppActions';
 export {
   fetchApps,
   deleteApp,
   resetAppState,
-} from 'src/redux/actions/appActions';
+} from 'redux/actions/appActions';
 export {
   loadAppDetails,
   updateDownloadUrls,
@@ -27,4 +27,4 @@ export {
   fileInputChangedHandlerAD,
   updateFile,
   resetAppDetails,
-} from 'src/redux/actions/appDetailsActions';
+} from 'redux/actions/appDetailsActions';

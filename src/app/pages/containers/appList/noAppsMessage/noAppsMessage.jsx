@@ -1,8 +1,8 @@
-import React from 'app/pages/containers/appList/noAppsMessage/app/pages/containers/AppList/noAppsMessage/react';
+import React from 'react';
 
 import styles from './noAppsMessage.module.scss';
 
-const noAppsMessage = () => (
+const NoAppsMessage = () => (
   <div className={styles.noApps}>
     <p>
       You do not have any applications yet
@@ -13,4 +13,4 @@ const noAppsMessage = () => (
   </div>
 );
 
-export default noAppsMessage;
+export default NoAppsMessage;
