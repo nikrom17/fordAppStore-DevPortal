@@ -8,7 +8,7 @@ import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import SampleDataMessage from '../../components/sampleDataMessage/sampleDataMessage';
 import * as actions from '../../store/actions/index';
-import { isFormValid } from '../../../utils/utility';
+import { isFormValid } from '../../shared/utility';
 import { login, signup } from './formConfig';
 
 class Auth extends Component {

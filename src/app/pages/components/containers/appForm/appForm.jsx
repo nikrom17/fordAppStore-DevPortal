@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Form from '../../components/renderForm/renderForm';
 import Button from '../../components/UI/Button/Button';
-import { getDate, parseQueryString } from '../../../utils/utility';
+import { getDate, parseQueryString } from '../../shared/utility';
 import createAppForm from './formConfig';
 import * as actions from '../../store/actions/index';
 import RenderForm from '../../components/renderForm/renderForm';

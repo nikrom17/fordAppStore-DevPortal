@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import classes from './App.module.scss';
-import Header from './hoc/Header/Header';
-import NavBar from './components/Navigation/NavBar/NavBar';
+import Header from './pages/Header/Header';
+import NavBar from './pages/Navigation/NavBar/NavBar';
 import Logout from './containers/Auth/Logout/Logout';
 import AppList from './containers/AppList/AppList';
 import AccountSettings from './containers/AccountSettings/AccountSettings';
