@@ -1,9 +1,9 @@
-import React from 'react';
-import classes from './Header.module.scss';
+import React from 'app/pages/header/react';
+import styles from './Header.module.scss';
 
 const Header = () => (
-  <header className={classes.header}>
-    <div className={classes.title}>
+  <header className={styles.header}>
+    <div className={styles.title}>
       <span><strong>FordPass</strong></span>
       <span>Developer Portal</span>
     </div>

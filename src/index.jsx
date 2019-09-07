@@ -7,14 +7,14 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 
-import './index.scss';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import authReducer from './store/reducers/auth';
-import createAppReducer from './store/reducers/createApp';
-import accountSettingsReducer from './store/reducers/accountSettings';
-import appReducer from './store/reducers/app';
-import appDetailsReducer from './store/reducers/appDetails';
+import 'index.scss';
+import App from 'app/app';
+import registerServiceWorker from 'src/registerServiceWorker';
+import authReducer from 'src/redux/reducers/authReducer';
+import createAppReducer from 'src/redux/reducers/createAppReducer';
+import accountSettingsReducer from 'src/redux/reducers/accountSettingsReducer';
+import appReducer from 'src/redux/reducers/appReducer';
+import appDetailsReducer from 'src/redux/reducers/appDetailsReducer';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 

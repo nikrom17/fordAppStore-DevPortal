@@ -5,15 +5,15 @@ import {
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import classes from './App.module.scss';
-import Header from './pages/Header/Header';
-import NavBar from './pages/Navigation/NavBar/NavBar';
-import Logout from './containers/Auth/Logout/Logout';
-import AppList from './containers/AppList/AppList';
-import AccountSettings from './containers/AccountSettings/AccountSettings';
-import Auth from './containers/Auth/Auth';
-import AppForm from './containers/appForm/appForm';
-import * as actions from '../store/actions/index';
+import Header from 'app/pages/header/header';
+import NavBar from 'app/pages/navigation/navBar/navBar';
+import Logout from 'app/pages/containers/auth/Logout/Logout';
+import AppList from 'app/pages/containers/appList/AppList';
+import AccountSettings from 'app/pages/containers/accountSettings/accountSettings';
+import Auth from 'app/pages/containers/auth/auth';
+import AppForm from 'app/pages/containers/appForm/appForm';
+import * as actions from 'redux/actions/index';
+import styles from './app.module.scss';
 
 
 class App extends Component {
@@ -46,9 +46,9 @@ class App extends Component {
     return (
       <>
         <Header />
-        <main className={classes.main}>
+        <main className={styles.main}>
           <NavBar />
-          <div className={classes.contentWrapper}>
+          <div className={styles.contentWrapper}>
             {routes}
           </div>
         </main>

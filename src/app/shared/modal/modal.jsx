@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'app/shared/modal/app/shared/Modal/react';
 import styles from './Modal.css';
 import Aux from '../../../hoc/Aux/Aux';
-import Backdrop from '../../backdrop/backdrop';
+import Backdrop from '../backdrop/backdrop';
 
 class Modal extends Component {
   shouldComponentUpdate (nextProps, nextState) {

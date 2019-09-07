@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'app/pages/navigation/NavBar/app/pages/Navigation/navBar/react';
 
-import NavigationItems from '../NavigationItems/NavigationItems';
+import NavigationItems from './navigationList/navigationList';
 
 const toolbar = () => (
   <nav>

@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'app/pages/header/Logo/react';
 
 import fordLogo from '../../assets/images/ford_logo.svg';
-import classes from './Logo.module.scss';
+import styles from './Logo.module.scss';
 
 const logo = () => (
-  <div className={classes.Logo}>
+  <div className={styles.Logo}>
     <img src={fordLogo} alt="Ford Logo" />
   </div>
 );
