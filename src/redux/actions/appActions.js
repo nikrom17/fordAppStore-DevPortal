@@ -2,45 +2,7 @@ import * as axiosInstances from 'api/axios-instances';
 import { storageRef } from 'firebase/app';
 import * as actionTypes from './actionTypes';
 
-
-export const resetAppState = () => ({
-  type: actionTypes.RESET_APP_STATE,
-});
-
-export const fetchAppsStart = () => ({
-  type: actionTypes.FETCH_APP_START,
-});
-
-export const fetchAppsSuccess = (fetchedApps) => ({
-  type: actionTypes.FETCH_APP_SUCCESS,
-  apps: fetchedApps,
-});
-
-export const fetchAppsFailed = (error) => ({
-  type: actionTypes.FETCH_APP_FAILED,
-  error,
-});
-
-export const fetchApps = (token, userId) => (dispatch) => {
-  dispatch(fetchAppsStart());
-  const queryParams = `?auth=${token }&orderBy="userId"&equalTo="${userId }"`;
-  axiosInstances.instanceData.get(`/apps.json${queryParams}`)
-    .then((response) => {
-      const fetchedApps = [];
-      console.log(response.data);
-      for (const key in response.data) {
-        fetchedApps.push({
-          ...response.data[key],
-          id: key,
-        });
-      }
-      dispatch(fetchAppsSuccess(fetchedApps));
-    })
-    .catch((error) => {
-      dispatch(fetchAppsFailed(error));
-    });
-};
-
+// ----- SIMPLE ACTIONS ----- //
 export const deleteAppStart = () => ({
   type: actionTypes.DELETE_APP_START,
 });
@@ -59,21 +21,52 @@ export const deleteAppFailed = (error) => ({
   error,
 });
 
-export const deleteApp = (token, userId, appId, apps) => (dispatch) => {
+export const fetchAppsStart = () => ({
+  type: actionTypes.FETCH_APP_START,
+});
+
+export const fetchAppsSuccess = (fetchedApps) => ({
+  type: actionTypes.FETCH_APP_SUCCESS,
+  apps: fetchedApps,
+});
+
+export const fetchAppsFailed = (error) => ({
+  type: actionTypes.FETCH_APP_FAILED,
+  error,
+});
+
+export const resetAppState = () => ({
+  type: actionTypes.RESET_APP_STATE,
+});
+
+
+// ----- COMPLEX ACTIONS ----- //
+export const fetchApps = (token, userId) => async (dispatch) => {
+  dispatch(fetchAppsStart());
+  const queryParams = `?auth=${token}&orderBy="userId"&equalTo="${userId}"`;
+  try {
+    const { data } = await axiosInstances.instanceData.get(`/apps.json${queryParams}`);
+    const fetchedApps = Object.values(data);
+    dispatch(fetchAppsSuccess(fetchedApps));
+  } catch (error) {
+    dispatch(fetchAppsFailed(error));
+  }
+};
+
+export const deleteApp = (token, userId, appId, apps) => async (dispatch) => {
   if (userId !== 'iXahxNphVAdchMePQVnuGDr9jjq1') {
     dispatch(deleteAppStart());
-    axiosInstances.instanceData.delete(`/apps/${appId}.json?auth=${token}`)
-      .then((response) => {
-        dispatch(fetchApps(token, userId));
-      })
-      .catch((error) => {
-        dispatch(deleteAppFailed(error));
-      });
-    const imageTypes = ['banner', 'icon'];
-    imageTypes.map((imageType) => (
-      storageRef.child(`${userId}/${appId}/images/${imageType}/${apps[imageType]}`).delete()
-    ));
-    storageRef.child(`${userId}/${appId}/source/${apps.source}`).delete();
+    try {
+      await axiosInstances.instanceData.delete(`/apps/${appId}.json?auth=${token}`);
+      const imageTypes = ['banner', 'icon'];
+      imageTypes.map((imageType) => (
+        storageRef.child(`${userId}/${appId}/images/${imageType}/${apps[imageType]}`).delete()
+      ));
+      storageRef.child(`${userId}/${appId}/source/${apps.source}`).delete();
+      dispatch(deleteAppSuccess(appId));
+    } catch (error) {
+      dispatch(deleteAppFailed(error));
+    }
   } else {
     dispatch(deleteAppForbidden());
   }

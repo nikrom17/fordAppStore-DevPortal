@@ -26,6 +26,21 @@ export const createAppFailed = (error) => ({
   loading: false,
 });
 
+export const uploadFiles = (appData, files, auth, history, appId) => async (dispatch) => {
+  const { images } = files;
+  const { source } = files;
+  try {
+    const image = Object.keys(images); // todo this var name should be imageKeys
+    // todo the line below needs to loop through the images object
+    await storageRef.child(`${auth.userId}/${appId}/images/${image}/${images[image].name}`).put(images[image]);
+    await storageRef.child(`${auth.userId}/${appId}/source/${source.name}`).put(source);
+    dispatch(createAppSuccess());
+    history.push('/');
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const createApp = (appData, files, auth, history) => (dispatch) => {
   dispatch(createAppStart());
   axios.instanceData.post(`/apps.json?auth=${auth.token}`, appData)
@@ -35,26 +50,4 @@ export const createApp = (appData, files, auth, history) => (dispatch) => {
     .catch((error) => {
       dispatch(createAppFailed(error));
     });
-};
-
-
-export const uploadFiles = (appData, files, auth, history, appId) => {
-  const { images } = files;
-  const { source } = files;
-  return (dispatch) => {
-    for (const image in images) {
-      storageRef.child(`${auth.userId}/${appId}/images/${image}/${images[image].name}`).put(images[image])
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-    storageRef.child(`${auth.userId}/${appId}/source/${source.name}`).put(source)
-      .then((response) => {
-        dispatch(createAppSuccess());
-        history.push('/');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 };
