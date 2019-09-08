@@ -1,8 +1,8 @@
 export {
-  auth,
+  login,
   logout,
-  setAuthRedirectPath,
-  authCheckState,
+  setLoginRedirectPath,
+  loginCheckState,
 } from 'redux/actions/authActions';
 
 export {

@@ -1,20 +1,19 @@
-import { authRef } from 'firebase/app';
+import firebase from 'firebase/fireClass';
 
-import * as axiosInstance from 'api/axios-instances';
-import { setAccountSettings, fetchAccountSettings } from './accountSettingsActions';
+import { fetchAccountSettings } from './accountSettingsActions';
 import * as actionTypes from './actionTypes';
 
-export const authStart = () => ({
+export const loginStart = () => ({
   type: actionTypes.AUTH_START,
 });
 
-export const authSuccess = (idToken, userId) => ({
+export const loginSuccess = (idToken, userId) => ({
   type: actionTypes.AUTH_SUCCESS,
   idToken,
   userId,
 });
 
-export const authFailed = (error) => ({
+export const loginFailed = (error) => ({
   type: actionTypes.AUTH_FAILED,
   error,
 });
@@ -34,44 +33,12 @@ export const checkAuthTimeout = (expirationDate) => (dispatch) => {
   }, expirationDate * 1000);
 };
 
-export const auth = (userInfo, password, isSignup) => (dispatch) => {
-  dispatch(authStart());
-  const authData = {
-    email: userInfo.email.value,
-    password: password.value,
-    returnSecureToken: true,
-  };
-  const url = isSignup
-    ? 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyDughZWs2UYSt-CEZUXtY9HUVch2NZxOU8'
-    : 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyDughZWs2UYSt-CEZUXtY9HUVch2NZxOU8';
-  axiosInstance.instanceData.post(url, authData)
-    .then((response) => {
-      const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
-      localStorage.setItem('token', response.data.idToken);
-      localStorage.setItem('expirationDate', expirationDate);
-      localStorage.setItem('userId', response.data.localId);
-      dispatch(checkAuthTimeout(response.data.expiresIn));
-      if (isSignup) {
-        dispatch(setAccountSettings(userInfo, response.data));
-      } else {
-        dispatch(authSuccess(response.data.idToken, response.data.localId));
-        dispatch(fetchAccountSettings(response.data.idToken, response.data.localId));
-      }
-      authRef.signInWithEmailAndPassword(userInfo.email.value, password.value);
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error.response.data.error.message);
-      dispatch(authFailed(error.response.data.error));
-    });
-};
-
-export const setAuthRedirectPath = (path) => ({
+export const setLoginRedirectPath = (path) => ({
   type: actionTypes.SET_AUTH_REDIRECT_PATH,
   path,
 });
 
-export const authCheckState = () => (dispatch) => {
+export const loginCheckState = () => (dispatch) => {
   const token = localStorage.getItem('token');
   if (!token) {
     dispatch(logout());
@@ -79,11 +46,29 @@ export const authCheckState = () => (dispatch) => {
     const expirationDate = new Date(localStorage.getItem('expirationDate'));
     if (expirationDate > new Date()) {
       const userId = localStorage.getItem('userId');
-      dispatch(authSuccess(token, userId));
+      dispatch(loginSuccess(token, userId));
       dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000));
       dispatch(fetchAccountSettings(token, userId));
     } else {
       dispatch(logout());
     }
+  }
+};
+
+export const login = (
+  email, password, { devName, phone, website }, isSignup,
+) => async (dispatch) => {
+  dispatch(loginStart());
+  try {
+    const response = isSignup
+      ? await firebase.register(
+        email.value, password.value, devName.value, phone.value, website.value,
+      )
+      : await firebase.login(email.value, password.value);
+    dispatch(loginSuccess());
+    dispatch(fetchAccountSettings(response.data.idToken, response.data.localId));
+  } catch (error) {
+    console.log(error);
+    dispatch(loginFailed(error));
   }
 };

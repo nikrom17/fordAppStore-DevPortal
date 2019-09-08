@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 import RenderForm from 'app/shared/form/renderForm/renderForm';
 import Button from 'app/shared/button/button';
 import Spinner from 'app/shared/spinner/spinner';
-import SampleDataMessage from './sampleDataMessage/sampleDataMessage';
 import * as actions from 'redux/actions/index';
 import { isFormValid } from 'utils/utility';
 import { login, signup } from './formConfig';
+import SampleDataMessage from './sampleDataMessage/sampleDataMessage';
 
 class Auth extends Component {
   constructor(props) {
@@ -22,21 +22,13 @@ class Auth extends Component {
 
   submitHandler = (event, validation) => {
     event.preventDefault();
-    console.log('submitHandler');
     if (isFormValid(event.target, validation)) {
       const {
-        devName, email, phone, website,
-        password,
+        devName, email, phone, password, website,
       } = event.target;
       const { isSignup } = this.state;
-      const { onAuth } = this.props;
-      // if (isSignup) {
-      onAuth({
-        email, phone, website, devName,
-      }, password, isSignup);
-      // } else {
-      // onAuth({ email }, password, isSignup);
-      // }
+      const { onLogin } = this.props;
+      onLogin(email, password, { devName, phone, website }, isSignup);
     }
   };
 
@@ -96,7 +88,7 @@ Auth.propTypes = {
   error: PropTypes.objectOf(PropTypes.string),
   loading: PropTypes.bool.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
-  onAuth: PropTypes.func.isRequired,
+  onLogin: PropTypes.func.isRequired,
 };
 
 Auth.defaultProps = {
@@ -104,15 +96,15 @@ Auth.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
-  authRedirectPath: state.auth.authRedirectPath,
+  loginRedirectPath: state.auth.loginRedirectPath,
   error: state.auth.error,
   isAuthenticated: !!state.auth.token,
   loading: state.auth.loading,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onAuth: (userInfo, password, isSignup) => dispatch(actions.auth(userInfo, password, isSignup)),
-  onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/')),
-});
+const mapDispatchToProps = {
+  onLogin: actions.login,
+  setLoginRedirectPath: actions.setLoginRedirectPath('/'),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);

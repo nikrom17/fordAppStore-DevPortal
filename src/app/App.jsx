@@ -67,7 +67,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onTryAutoSignup: () => dispatch(actions.authCheckState()),
+  onTryAutoSignup: () => dispatch(actions.loginCheckState()),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

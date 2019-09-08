@@ -2,8 +2,6 @@ import * as actionTypes from 'redux/actions/actionTypes';
 import { updateObject } from 'utils/utility';
 
 const initialState = {
-  token: null,
-  userId: null,
   error: null,
   loading: false,
   authRedirectPath: '/',
