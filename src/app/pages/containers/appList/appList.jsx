@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -10,57 +10,53 @@ import AppTable from './appTable/appTable';
 import NoApps from './noAppsMessage/noAppsMessage';
 import styles from './appList.module.scss';
 
-class AppList extends Component {
-  componentDidMount() {
-    const {
-      onfetchApps, onResetNewApp, token, userId,
-    } = this.props;
-    onfetchApps(token, userId);
-    onResetNewApp();
-  }
-
-  render() {
-    const {
-      apps, forbiddenModal, onDeleteApp, token, userId, loading, history,
-    } = this.props;
-    const modalText = (
-      <Modal
-        show={forbiddenModal}
-        modalClosed={() => onDeleteApp(token, userId, null, null)}
-      >
-        <p>Deleting Apps is not allowed when logged in as a test user!</p>
-      </Modal>
-    );
-    const forbiddenDelete = forbiddenModal ? modalText : null;
-    const appList = apps.length ? (
-      <AppTable
-        apps={apps}
-        token={token}
-        userId={userId}
-        deleteApp={onDeleteApp}
-        history={history}
+const AppList = (props) => {
+  // componentDidMount() {
+  //   const {
+  //     onfetchApps, onResetNewApp, token, userId,
+  //   } = this.props;
+  //   onfetchApps(token, userId);
+  //   onResetNewApp();
+  // }
+  const {
+    apps, forbiddenModal, onDeleteApp, loading, history,
+  } = props;
+  const modalText = (
+    <Modal
+      show={forbiddenModal}
+      modalClosed={() => onDeleteApp()} // todo what func should be called?
+    >
+      <p>Deleting Apps is not allowed when logged in as a test user!</p>
+    </Modal>
+  );
+  const forbiddenDelete = forbiddenModal ? modalText : null;
+  const appList = apps.length ? (
+    <AppTable
+      apps={apps}
+      userId="cheese"
+      deleteApp={onDeleteApp}
+      history={history}
+    />
+  ) : <NoApps />;
+  return (
+    <div className={styles.wrapper}>
+      {forbiddenDelete}
+      <Button
+        clicked={() => history.push('/createApp')}
+        title="Create Application"
+        type="button"
+        noMargin
       />
-    ) : <NoApps />;
-    return (
-      <div className={styles.wrapper}>
-        {forbiddenDelete}
-        <Button
-          clicked={() => history.push('/createApp')}
-          title="Create Application"
-          type="button"
-          noMargin
-        />
-        {loading ? <Spinner /> : appList}
-      </div>
-    );
-  }
-}
+      {loading ? <Spinner /> : appList}
+    </div>
+  );
+};
 
 AppList.propTypes = {
-  onfetchApps: PropTypes.func.isRequired,
+  // onfetchApps: PropTypes.func.isRequired,
   onResetNewApp: PropTypes.func.isRequired,
-  token: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
+  // token: PropTypes.string.isRequired,
+  // userId: PropTypes.string.isRequired,
   apps: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
   forbiddenModal: PropTypes.node.isRequired,
   onDeleteApp: PropTypes.func.isRequired,

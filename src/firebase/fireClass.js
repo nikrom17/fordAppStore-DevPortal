@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/storage';
-import 'firebase/database';
+import 'firebase/firestore';
 
 import config from './config';
 
@@ -9,7 +9,7 @@ class Firebase {
   constructor() {
     firebase.initializeApp(config);
     this.auth = firebase.auth();
-    this.db = firebase.database();
+    this.db = firebase.firestore();
     this.storage = firebase.storage();
   }
 
@@ -24,7 +24,21 @@ class Firebase {
   async register(email, password, devName, phone, website) {
     await this.auth.createUserWithEmailAndPassword(email, password);
     const userId = this.auth.currentUser.uid;
-    return this.db.ref(`users/${userId}`).set({
+    return this.db.collection('users').add({
+      email,
+      password,
+      devName,
+      phone,
+      website,
+      userId,
+    });
+  }
+
+  // helper function for moving data into firestore from real-time db
+  async addUserData(email, password, devName, phone, website) {
+    await this.auth.signInWithEmailAndPassword(email, password);
+    const userId = this.auth.currentUser.uid;
+    return this.db.collection('users').add({
       email,
       password,
       devName,
