@@ -48,11 +48,11 @@ const setFileObject = (state, action) => {
 };
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.CREATE_APP_START:
+    case actionTypes.UPLOAD_NEW_APP_START:
       return createAppStart(state);
-    case actionTypes.CREATE_APP_SUCCESS:
+    case actionTypes.UPLOAD_NEW_APP_SUCCESS:
       return createAppSuccess(state);
-    case actionTypes.CREATE_APP_FAILED:
+    case actionTypes.UPLOAD_NEW_APP_FAILED:
       return createAppFailed(state);
     case actionTypes.SET_FILE_OBJECT:
       return setFileObject(state, action);

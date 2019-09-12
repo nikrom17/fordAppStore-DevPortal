@@ -8,32 +8,30 @@ import * as actions from 'redux/actions/index';
 import createAppForm from './formConfig';
 
 class CreateApp extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       formIsValid: false,
       appIndex: null,
     };
   }
 
-  async componentDidMount() {
-    const { location, apps, onLoadAppDetails } = this.props;
-    if (location.pathname !== '/createApp') {
-      const { appId } = parseQueryString(location.search);
-      await onLoadAppDetails(apps[appId]);
-      this.downloadUrlsHandler(appId);
-      this.setState({ appIndex: appId });
-    }
-  }
+  // async componentDidMount() {
+  //   const { location, apps, onLoadAppDetails } = this.props;
+  //   if (location.pathname !== '/createApp') {
+  //     const { appId } = parseQueryString(location.search);
+  //     await onLoadAppDetails(apps[appId]);
+  //     this.downloadUrlsHandler(appId);
+  //     this.setState({ appIndex: appId });
+  //   }
+  // }
 
 
   handleSubmit = (event) => {
-    const {
-      devName, onCreateApp, history,
-    } = this.props;
+    const { uploadNewApp } = this.props;
     event.preventDefault();
     const {
-      title, category, description, iconFile, bannerFile, sourceFile,
+      title, category, description, icon, banner, source,
     } = event.target;
     const appInfo = {
       appName: title,
@@ -43,30 +41,9 @@ class CreateApp extends Component {
       lastUpdate: getDate(),
       avgRating: '-',
       activeInstalls: '0',
-      devName,
-      iconFileName: iconFile.fileObject.name,
-      bannerFileName: bannerFile.fileObject.name,
-      sourceFileName: sourceFile.fileObject.name,
     };
-    const imagesToUpload = {
-      banner: bannerFile.fileObject,
-      icon: iconFile.fileObject,
-    };
-    const files = {
-      source: sourceFile.fileObject,
-      images: imagesToUpload,
-    };
-    onCreateApp(appInfo, files, history);
-  }
-
-  downloadUrlsHandler(appId) {
-    const { apps, onUpdateDownloadUrls } = this.props;
-    console.log(appId);
-    const urls = {
-      appIconFile: `/${apps[appId].id}/images/icon/${apps[appId].iconFileName}`,
-      appBannerFile: `${apps[appId].id}/images/banner/${apps[appId].bannerFileName}`,
-    };
-    onUpdateDownloadUrls(urls);
+    const files = { icon, banner, source };
+    uploadNewApp(appInfo, files);
   }
 
   render() {
@@ -76,6 +53,7 @@ class CreateApp extends Component {
     } = createAppForm;
     const button = [(
       <Button
+        key="createApp"
         clicked={this.handleSubmit}
         disabled={!isFormValid}
         title="Create App"
@@ -98,7 +76,6 @@ class CreateApp extends Component {
 
 const mapStateToProps = (state) => ({
   apps: state.apps.apps,
-  devName: state.settings.developerName,
   appSourceFile: state.createApp.appSourceFile,
   appBannerFile: state.createApp.appBannerFile,
   appIconFile: state.createApp.appIconFile,
@@ -109,8 +86,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onCreateApp: (appData, files, token, history) => dispatch(
-    actions.createApp(appData, files, token, history),
+  uploadNewApp: (appData, files) => dispatch(
+    actions.uploadNewApp(appData, files),
   ),
   onLoadAppDetails: (appDetails) => dispatch(actions.loadAppDetails(appDetails)),
   onUpdateDownloadUrls: (urls) => dispatch(actions.updateDownloadUrls(urls)),

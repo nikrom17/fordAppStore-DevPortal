@@ -55,7 +55,7 @@ class Auth extends Component {
       ),
       (
         <HyperlinkButton
-          clicked={this.switchAuthModeHandler}
+          onClick={this.switchAuthModeHandler}
           key="switchForms"
           title={isSignup ? 'Already have an account?' : 'Create an account'}
         />

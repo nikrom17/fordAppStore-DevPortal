@@ -8,7 +8,7 @@ export {
 } from 'redux/actions/accountSettingsActions';
 
 export {
-  createApp,
+  uploadNewApp,
   resetNewApp,
 } from 'redux/actions/createAppActions';
 export {

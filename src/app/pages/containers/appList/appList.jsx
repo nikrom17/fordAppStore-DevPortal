@@ -15,15 +15,15 @@ const AppList = (props) => {
   const {
     apps, forbiddenModal, onDeleteApp, loading, history,
   } = props;
-  const modalText = (
-    <Modal
-      show={forbiddenModal}
-      modalClosed={() => onDeleteApp()} // todo what func should be called?
-    >
-      <p>Deleting Apps is not allowed when logged in as a test user!</p>
-    </Modal>
-  );
-  const forbiddenDelete = forbiddenModal ? modalText : null;
+  // const modalText = (
+  //   <Modal
+  //     show={forbiddenModal}
+  //     modalClosed={() => onDeleteApp()} // todo what func should be called?
+  //   >
+  //     <p>Deleting Apps is not allowed when logged in as a test user!</p>
+  //   </Modal>
+  // );
+  // const forbiddenDelete = forbiddenModal ? modalText : null;
   const appList = apps.length ? (
     <AppTable
       apps={apps}
@@ -34,7 +34,7 @@ const AppList = (props) => {
   ) : <NoApps onClick={() => history.push('/createApp')} />;
   return (
     <div className={styles.wrapper}>
-      {forbiddenDelete}
+      {/* {forbiddenDelete} */}
       <Button
         clicked={() => history.push('/createApp')}
         title="Create Application"

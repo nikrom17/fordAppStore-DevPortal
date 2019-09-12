@@ -31,14 +31,14 @@ const createAppForm = {
           { value: 'Weather', displayValue: 'Weather' },
         ],
       },
-      sourceFile: {
+      source: {
         headerText: 'Upload App File',
       },
-      bannerFile: {
+      banner: {
         type: 'image',
         headerText: 'Upload App Banner Image',
       },
-      iconFile: {
+      icon: {
         type: 'image',
         headerText: 'Upload App Icon Image',
       },
@@ -49,9 +49,9 @@ const createAppForm = {
       title: 'input',
       description: 'textarea',
       category: 'select',
-      sourceFile: 'file',
-      bannerFile: 'file',
-      iconFile: 'file',
+      source: 'file',
+      banner: 'file',
+      icon: 'file',
     },
   },
   validation: {
@@ -68,21 +68,21 @@ const createAppForm = {
         required: true,
         isEmail: false,
       },
-      sourceFile: {
+      source: {
         required: true,
         isEmail: false,
       },
-      bannerFile: {
+      banner: {
         required: true,
         isEmail: false,
       },
-      iconFile: {
+      icon: {
         required: true,
         isEmail: false,
       },
     },
   },
-  allIds: ['title', 'description', 'category', 'sourceFile', 'bannerFile', 'iconFile'],
+  allIds: ['title', 'description', 'category', 'source', 'banner', 'icon'],
 };
 
 export default createAppForm;

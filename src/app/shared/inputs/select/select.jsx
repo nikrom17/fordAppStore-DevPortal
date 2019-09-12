@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { validateValue } from 'utils/utility';
 import styles from './select.module.scss';
 
 const Select = ({
-  config, inputId, stateValue, validation,
+  config, stateValue, validation,
 }) => {
   const [value, setValue] = useState(stateValue || '');
   const [isValid, setIsValid] = useState(false);
@@ -29,7 +30,7 @@ const Select = ({
     <select
       className={appliedClasses.join(' ')}
       onBlur={handleOnBlur}
-      onChange={handleChange}
+      onChange={(event) => handleChange(event.target.value)}
     >
       {options.map((option) => (
         <option value={option.value} key={option.value}>
@@ -38,6 +39,20 @@ const Select = ({
       ))}
     </select>
   );
+};
+
+Select.propTypes = {
+  config: PropTypes.objectOf(PropTypes.oneOfType(
+    [PropTypes.string, PropTypes.array],
+  )).isRequired,
+  stateValue: PropTypes.string,
+  validation: PropTypes.objectOf(PropTypes.oneOfType(
+    [PropTypes.bool, PropTypes.string],
+  )).isRequired,
+};
+
+Select.defaultProps = {
+  stateValue: null,
 };
 
 export default Select;

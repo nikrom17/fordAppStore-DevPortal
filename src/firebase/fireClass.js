@@ -26,6 +26,21 @@ class Firebase {
     return this.db.collection('users').where('userId', '==', uid);
   }
 
+  newAppFirestore(appData) {
+    return this.db.collection('apps').add(appData);
+  }
+
+  newAppStorage(appId, files) {
+    const { uid } = this.auth.currentUser;
+    const { icon, banner, source } = files;
+    const storageRefImg = this.storage.ref(`${uid}/${appId}/images/`);
+    const storageRefSource = this.storage.ref(`${uid}/${appId}/source/`);
+
+    storageRefImg.put(icon);
+    storageRefImg.put(banner);
+    storageRefSource.puts(source);
+  }
+
   async register(email, password, devName, phone, website) {
     await this.auth.createUserWithEmailAndPassword(email, password);
     const userId = this.auth.currentUser.uid;
