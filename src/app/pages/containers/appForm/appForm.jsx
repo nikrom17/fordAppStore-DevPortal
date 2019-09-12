@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import RenderForm from 'app/shared/form/renderForm/renderForm';
 import Button from 'app/shared/button/button';
@@ -30,7 +29,7 @@ class CreateApp extends Component {
 
   handleSubmit = (event) => {
     const {
-      token, userId, devName, onCreateApp, history,
+      devName, onCreateApp, history,
     } = this.props;
     event.preventDefault();
     const {
@@ -48,7 +47,6 @@ class CreateApp extends Component {
       iconFileName: iconFile.fileObject.name,
       bannerFileName: bannerFile.fileObject.name,
       sourceFileName: sourceFile.fileObject.name,
-      userId,
     };
     const imagesToUpload = {
       banner: bannerFile.fileObject,
@@ -58,19 +56,15 @@ class CreateApp extends Component {
       source: sourceFile.fileObject,
       images: imagesToUpload,
     };
-    const auth = {
-      token,
-      userId,
-    };
-    onCreateApp(appInfo, files, auth, history);
+    onCreateApp(appInfo, files, history);
   }
 
   downloadUrlsHandler(appId) {
-    const { apps, userId, onUpdateDownloadUrls } = this.props;
+    const { apps, onUpdateDownloadUrls } = this.props;
     console.log(appId);
     const urls = {
-      appIconFile: `/${userId}/${apps[appId].id}/images/icon/${apps[appId].iconFileName}`,
-      appBannerFile: `/${userId}/${apps[appId].id}/images/banner/${apps[appId].bannerFileName}`,
+      appIconFile: `/${apps[appId].id}/images/icon/${apps[appId].iconFileName}`,
+      appBannerFile: `${apps[appId].id}/images/banner/${apps[appId].bannerFileName}`,
     };
     onUpdateDownloadUrls(urls);
   }
@@ -101,11 +95,6 @@ class CreateApp extends Component {
     );
   }
 }
-
-CreateApp.propTypes = {
-  token: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
-};
 
 const mapStateToProps = (state) => ({
   apps: state.apps.apps,

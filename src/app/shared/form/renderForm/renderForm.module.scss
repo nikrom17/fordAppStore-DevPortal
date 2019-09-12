@@ -1,23 +1,14 @@
-.Form {
+.form {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
   font-family: "Open Sans Condensed", arial, sans;
   padding: 10px 30px;
   background: #ffffff;
-  height: auto;
-  margin: 20px auto;
   min-width: 500px;
   border: 1px solid lightgray;
+  border-radius: 3px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
   -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
   -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
-}
-
-.Form textarea {
-  resize: none;
-  overflow: hidden;
-}
-
-.DropDown {
-  margin-top: 20px;
-  margin-left: 10%;
-  width: 80%;
 }

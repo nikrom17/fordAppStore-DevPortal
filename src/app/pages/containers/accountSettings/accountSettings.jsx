@@ -23,17 +23,15 @@ const AccountSettings = () => {
   return (
     loading ? null
       : (
-        <div>
-          <RenderForm
-            config={config}
-            inputIds={allIds}
-            type={type}
-            validation={validation}
-            preFormMessage={<p>Account Info</p>}
-            stateValues={accountSettings}
-            readonly
-          />
-        </div>
+        <RenderForm
+          config={config}
+          inputIds={allIds}
+          type={type}
+          validation={validation}
+          preFormMessage={<p>Account Info</p>}
+          stateValues={accountSettings}
+          readonly
+        />
       )
   );
 };

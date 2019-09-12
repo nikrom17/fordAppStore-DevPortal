@@ -19,7 +19,7 @@ const RenderForm = ({
     />
   ));
   return (
-    <div className={styles.Form}>
+    <div className={styles.form}>
       {preFormMessage}
       <form onSubmit={(event) => onSubmit(event, validation)}>
         {inputs}

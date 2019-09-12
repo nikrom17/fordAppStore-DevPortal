@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import RenderForm from 'app/shared/form/renderForm/renderForm';
@@ -38,9 +37,7 @@ class Auth extends Component {
 
   render() {
     console.log('Auth page rendered');
-    const {
-      authRedirectPath, error, loading, isAuthenticated,
-    } = this.props;
+    const { error, loading } = this.props;
     const { isSignup } = this.state;
     const config = isSignup ? signup.config : login.config;
     const type = isSignup ? signup.type : login.type;
@@ -64,8 +61,7 @@ class Auth extends Component {
       ),
     ];
     return (
-      <div>
-        {/* {isAuthenticated ? <Redirect to={authRedirectPath} /> : null} */}
+      <>
         {loading ? <Spinner /> : null}
         <RenderForm
           buttons={buttonArray}
@@ -78,7 +74,7 @@ class Auth extends Component {
           preFormMessage={isSignup ? null : <SampleDataMessage />}
           postFormMessage={error ? <p>{error.message}</p> : null}
         />
-      </div>
+      </>
     );
   }
 }
@@ -86,7 +82,6 @@ class Auth extends Component {
 Auth.propTypes = {
   error: PropTypes.objectOf(PropTypes.string),
   loading: PropTypes.bool.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
   onLogin: PropTypes.func.isRequired,
 };
 

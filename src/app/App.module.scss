@@ -4,6 +4,9 @@
 }
 
 .contentWrapper {
-  flex: 1;
+  display: flex;
   overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
