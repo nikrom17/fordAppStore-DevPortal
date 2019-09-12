@@ -32,7 +32,7 @@ const Textarea = ({
       onBlur={handleOnBlur}
       onChange={(event) => handleChange(event.target.value)}
       placeholder={placeholder}
-      value={value}
+      value={value || stateValue}
     />
   );
 };

@@ -13,20 +13,27 @@ const NewApp = ({ location, uploadNewApp }) => {
   const [isNewApp, setIsNewApp] = useState(false);
   const [apps, loading] = useCollectionDataOnce(firebase.appList());
   let app;
-  if (location.pathname === '/createApp') {
-    setIsNewApp(true);
-  } else {
-    const { appId } = parseQueryString(location.search);
-    app = apps[appId];
+  if (!loading) {
+    if (location.pathname === '/createApp') {
+      setIsNewApp(true);
+    } else {
+      const { appId } = parseQueryString(location.search);
+      app = {
+        byId: {
+          ...apps[appId],
+        },
+      };
+      console.log(app);
+    }
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const {
-      title, category, description, icon, banner, source,
+      appName, category, description, icon, banner, source,
     } = event.target;
     const appInfo = {
-      appName: title.value,
+      appName: appName.value,
       category: category.value,
       description: description.value,
       status: 'draft',
@@ -46,7 +53,14 @@ const NewApp = ({ location, uploadNewApp }) => {
   const {
     config, allIds, type, validation,
   } = createAppForm;
-  const button = [(
+  const newAppButton = [(
+    <Button
+      key="createApp"
+      title="Create App"
+      type="submit"
+    />
+  )];
+  const appButtons = [(
     <Button
       key="createApp"
       title="Create App"
@@ -55,13 +69,15 @@ const NewApp = ({ location, uploadNewApp }) => {
   )];
   return (
     <RenderForm
-      buttons={button}
+      buttons={isNewApp ? newAppButton : appButtons}
+      canEdit={isNewApp}
       config={config}
       inputIds={allIds}
       type={type}
       validation={validation}
       onSubmit={handleSubmit}
-      preFormMessage={<p>Upload New App</p>}
+      stateValues={app}
+      preFormMessage={isNewApp ? <p>Upload New App</p> : null}
     />
   );
 };

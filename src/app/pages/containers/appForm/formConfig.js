@@ -1,10 +1,10 @@
 const createAppForm = {
   config: {
     byId: {
-      title: {
+      appName: {
         type: 'text',
-        placeholder: 'Title',
-        headerText: 'Title',
+        placeholder: 'App name',
+        headerText: 'App name',
       },
       description: {
         type: 'textarea',
@@ -46,7 +46,7 @@ const createAppForm = {
   },
   type: {
     byId: {
-      title: 'input',
+      appName: 'input',
       description: 'textarea',
       category: 'select',
       source: 'file',
@@ -56,7 +56,7 @@ const createAppForm = {
   },
   validation: {
     byId: {
-      title: {
+      appName: {
         required: true,
         isEmail: false,
       },
@@ -82,7 +82,7 @@ const createAppForm = {
       },
     },
   },
-  allIds: ['title', 'description', 'category', 'source', 'banner', 'icon'],
+  allIds: ['appName', 'description', 'category', 'source', 'banner', 'icon'],
 };
 
 export default createAppForm;
