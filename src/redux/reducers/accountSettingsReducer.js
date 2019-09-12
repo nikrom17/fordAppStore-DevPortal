@@ -10,8 +10,9 @@ const initialState = {
   allIds: ['devName', 'email', 'website', 'phone'],
 };
 
-const fetchAccountSettingsSuccess = (state, action) => (
-  {
+const setAccountSettingsSuccess = (state, action) => {
+  console.log(action);
+  return {
     ...state,
     byId: {
       devName: action.userInfo.devName,
@@ -19,13 +20,14 @@ const fetchAccountSettingsSuccess = (state, action) => (
       website: action.userInfo.website,
       phone: action.userInfo.phone,
     },
-  });
+  };
+};
 
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.FETCH_ACCOUNT_SETTINGS_SUCCESS:
-      return fetchAccountSettingsSuccess(state, action);
+    case actionTypes.SET_ACCOUNT_SETTINGS_SUCCESS:
+      return setAccountSettingsSuccess(state, action);
     default:
       return state;
   }

@@ -65,7 +65,7 @@ class Auth extends Component {
     ];
     return (
       <div>
-        {isAuthenticated ? <Redirect to={authRedirectPath} /> : null}
+        {/* {isAuthenticated ? <Redirect to={authRedirectPath} /> : null} */}
         {loading ? <Spinner /> : null}
         <RenderForm
           buttons={buttonArray}
@@ -84,7 +84,6 @@ class Auth extends Component {
 }
 
 Auth.propTypes = {
-  authRedirectPath: PropTypes.string.isRequired,
   error: PropTypes.objectOf(PropTypes.string),
   loading: PropTypes.bool.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
@@ -96,7 +95,6 @@ Auth.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
-  loginRedirectPath: state.auth.loginRedirectPath,
   error: state.auth.error,
   isAuthenticated: !!state.auth.token,
   loading: state.auth.loading,
@@ -104,7 +102,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   onLogin: actions.login,
-  setLoginRedirectPath: actions.setLoginRedirectPath('/'),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);

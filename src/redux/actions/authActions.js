@@ -1,14 +1,13 @@
 import firebase from 'firebase/fireClass';
-
-import { fetchAccountSettings } from './accountSettingsActions';
 import * as actionTypes from './actionTypes';
 
 export const loginStart = () => ({
   type: actionTypes.AUTH_START,
 });
 
-export const loginSuccess = () => ({
+export const loginSuccess = (response) => ({
   type: actionTypes.AUTH_SUCCESS,
+  response,
 });
 
 export const loginFailed = (error) => ({
@@ -35,8 +34,7 @@ export const login = (
         email.value, password.value, devName.value, phone.value, website.value,
       )
       : await firebase.login(email.value, password.value);
-    dispatch(fetchAccountSettings());
-    dispatch(loginSuccess());
+    dispatch(loginSuccess(response));
   } catch (error) {
     console.log(error);
     dispatch(loginFailed(error));

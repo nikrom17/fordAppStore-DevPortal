@@ -109,8 +109,6 @@ CreateApp.propTypes = {
 
 const mapStateToProps = (state) => ({
   apps: state.apps.apps,
-  token: state.auth.token,
-  userId: state.auth.userId,
   devName: state.settings.developerName,
   appSourceFile: state.createApp.appSourceFile,
   appBannerFile: state.createApp.appBannerFile,

@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Route, Switch, withRouter, Redirect,
 } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from 'firebase/fireClass';
 
@@ -13,12 +12,13 @@ import AppList from 'app/pages/containers/appList/appList';
 import AccountSettings from 'app/pages/containers/accountSettings/accountSettings';
 import Auth from 'app/pages/containers/auth/auth';
 import AppForm from 'app/pages/containers/appForm/appForm';
+import Spinner from 'app/shared/spinner/spinner';
 import styles from './app.module.scss';
 
 
 const App = () => {
-  const [user, initialising, error] = useAuthState(firebase.auth);
-  console.log(user, initialising, error);
+  const [user, initializing, error] = useAuthState(firebase.auth);
+  console.log(user, initializing, error);
   let routes = (
     <Switch>
       <Route path="/auth" component={Auth} />
@@ -44,17 +44,11 @@ const App = () => {
       <main className={styles.main}>
         <NavBar />
         <div className={styles.contentWrapper}>
-          {routes}
+          {initializing ? <Spinner /> : routes}
         </div>
       </main>
     </>
   );
-};
-
-
-App.propTypes = {
-  onTryAutoSignup: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 export default withRouter(App);

@@ -21,6 +21,11 @@ class Firebase {
     return this.auth.signOut();
   }
 
+  accountSettings() {
+    const { uid } = this.auth.currentUser;
+    return this.db.collection('users').where('userId', '==', uid);
+  }
+
   async register(email, password, devName, phone, website) {
     await this.auth.createUserWithEmailAndPassword(email, password);
     const userId = this.auth.currentUser.uid;
