@@ -17,8 +17,8 @@ import styles from './app.module.scss';
 
 
 const App = () => {
-  const [user, initializing, error] = useAuthState(firebase.auth);
-  console.log(user, initializing, error);
+  console.log('App Renders');
+  const [user, initializing] = useAuthState(firebase.auth);
   let routes = (
     <Switch>
       <Route path="/auth" component={Auth} />

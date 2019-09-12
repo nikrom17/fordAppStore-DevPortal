@@ -11,13 +11,6 @@ import NoApps from './noAppsMessage/noAppsMessage';
 import styles from './appList.module.scss';
 
 const AppList = (props) => {
-  // componentDidMount() {
-  //   const {
-  //     onfetchApps, onResetNewApp, token, userId,
-  //   } = this.props;
-  //   onfetchApps(token, userId);
-  //   onResetNewApp();
-  // }
   const {
     apps, forbiddenModal, onDeleteApp, loading, history,
   } = props;
@@ -57,7 +50,7 @@ AppList.propTypes = {
   forbiddenModal: PropTypes.node.isRequired,
   onDeleteApp: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  history: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
+  history: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = (state) => ({
