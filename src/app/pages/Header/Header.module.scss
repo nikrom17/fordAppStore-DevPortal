@@ -1,3 +1,7 @@
+.bold {
+  font-weight: 600;
+  margin: 0 8px 0 75px;
+}
 .header {
   height: 56px; // TODO make this a sass variable
   width: 100%;
@@ -10,8 +14,4 @@
   font-family: Arial;
   color: #c6c6c6;
   margin: auto;
-}
-
-.title span {
-  margin: 0 5px;
 }
