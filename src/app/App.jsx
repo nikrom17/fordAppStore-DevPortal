@@ -42,7 +42,7 @@ const App = () => {
     <>
       <Header />
       <main className={styles.main}>
-        <NavBar />
+        {user ? <NavBar /> : null}
         <div className={styles.contentWrapper}>
           {initializing ? <Spinner /> : routes}
         </div>
