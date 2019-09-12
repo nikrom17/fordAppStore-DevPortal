@@ -1,12 +1,11 @@
 .main {
-  height: calc(100% - 56px);
   display: flex;
+  height: calc(100% - 56px);
 }
 
 .contentWrapper {
   display: flex;
-  overflow-y: auto;
-  align-items: center;
   justify-content: center;
+  overflow-y: auto;
   width: 100%;
 }

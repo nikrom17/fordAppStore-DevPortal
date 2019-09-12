@@ -53,10 +53,6 @@ const AppList = (props) => {
 };
 
 AppList.propTypes = {
-  // onfetchApps: PropTypes.func.isRequired,
-  onResetNewApp: PropTypes.func.isRequired,
-  // token: PropTypes.string.isRequired,
-  // userId: PropTypes.string.isRequired,
   apps: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
   forbiddenModal: PropTypes.node.isRequired,
   onDeleteApp: PropTypes.func.isRequired,

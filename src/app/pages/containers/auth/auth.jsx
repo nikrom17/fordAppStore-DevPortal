@@ -7,6 +7,7 @@ import Button from 'app/shared/button/button';
 import Spinner from 'app/shared/spinner/spinner';
 import * as actions from 'redux/actions/index';
 import { isFormValid } from 'utils/utility';
+import classes from './auth.module.scss';
 import { login, signup } from './formConfig';
 import SampleDataMessage from './sampleDataMessage/sampleDataMessage';
 
@@ -61,7 +62,7 @@ class Auth extends Component {
       ),
     ];
     return (
-      <>
+      <div className={classes.centered}>
         {loading ? <Spinner /> : null}
         <RenderForm
           buttons={buttonArray}
@@ -74,7 +75,7 @@ class Auth extends Component {
           preFormMessage={isSignup ? null : <SampleDataMessage />}
           postFormMessage={error ? <p>{error.message}</p> : null}
         />
-      </>
+      </div>
     );
   }
 }
