@@ -1,5 +1,7 @@
 @mixin input {
+  font-size: 16px;
   background: transparent;
+  color: #333;
   border: none;
   border-radius: 0px;
   border-bottom: 2px solid lightgray;
@@ -7,7 +9,6 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   display: block;
-  font: 16px Arial, Helvetica, sans-serif;
   margin: 30px 0 4px 0;
   outline: none;
   padding: 10px 0;

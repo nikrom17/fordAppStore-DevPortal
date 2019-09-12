@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 
 import RenderForm from 'app/shared/form/renderForm/renderForm';
 import Button from 'app/shared/button/button';
+import HyperlinkButton from 'app/shared/hyperlinkButton/hyperlinkButton';
 import Spinner from 'app/shared/spinner/spinner';
 import * as actions from 'redux/actions/index';
 import { isFormValid } from 'utils/utility';
-import classes from './auth.module.scss';
 import { login, signup } from './formConfig';
-import SampleDataMessage from './sampleDataMessage/sampleDataMessage';
+import LoginFormHeader from './loginFormHeader/loginFormHeader';
+import classes from './auth.module.scss';
 
 class Auth extends Component {
   constructor(props) {
@@ -47,17 +48,16 @@ class Auth extends Component {
     const buttonArray = [
       (
         <Button
-          clicked={this.switchAuthModeHandler}
-          key="switchForms"
-          title={`Switch to ${isSignup ? 'Login' : 'Sign-Up'}`}
-          type="button"
-        />
-      ),
-      (
-        <Button
           key="submit"
           title={isSignup ? 'Create New Account' : 'Login'}
           type="submit"
+        />
+      ),
+      (
+        <HyperlinkButton
+          clicked={this.switchAuthModeHandler}
+          key="switchForms"
+          title={isSignup ? 'Already have an account?' : 'Create an account'}
         />
       ),
     ];
@@ -72,9 +72,14 @@ class Auth extends Component {
           validation={validation}
           onSubmit={this.submitHandler}
           setFormValid={this.setFormValid}
-          preFormMessage={isSignup ? null : <SampleDataMessage />}
+          preFormMessage={<LoginFormHeader isSignup={isSignup} />}
           postFormMessage={error ? <p>{error.message}</p> : null}
         />
+        <div className={classes.sampleData}>
+          <p>To view a project with sample data, use the following credentials to login</p>
+          <p>E-Mail: test@test.com </p>
+          <p>Password: testing123</p>
+        </div>
       </div>
     );
   }

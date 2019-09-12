@@ -3,7 +3,6 @@
   display: inline-block;
   cursor: pointer;
   color: #ffffff;
-  font-family: "Open Sans Condensed", sans-serif;
   font-size: 14px;
   padding: 8px 18px;
   text-decoration: none;
@@ -20,6 +19,6 @@
   cursor: not-allowed;
 }
 
-button:hover {
+.button:hover {
   background-color: #2a6bac;
 }

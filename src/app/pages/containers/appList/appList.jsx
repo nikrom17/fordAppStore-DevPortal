@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import ReactRouterPropTypes from 'react-router-prop-types';
 
 import * as actions from 'redux/actions/index';
 import Button from 'app/shared/button/button';
@@ -30,7 +31,7 @@ const AppList = (props) => {
       deleteApp={onDeleteApp}
       history={history}
     />
-  ) : <NoApps />;
+  ) : <NoApps onClick={() => history.push('/createApp')} />;
   return (
     <div className={styles.wrapper}>
       {forbiddenDelete}
@@ -50,7 +51,7 @@ AppList.propTypes = {
   forbiddenModal: PropTypes.node.isRequired,
   onDeleteApp: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  history: PropTypes.objectOf(PropTypes.object).isRequired,
+  history: ReactRouterPropTypes.history.isRequired,
 };
 
 const mapStateToProps = (state) => ({
