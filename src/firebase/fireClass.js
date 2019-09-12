@@ -26,19 +26,25 @@ class Firebase {
     return this.db.collection('users').where('userId', '==', uid);
   }
 
+  appList() {
+    const { uid } = this.auth.currentUser;
+    return this.db.collection('apps').where('uid', '==', uid);
+  }
+
   newAppFirestore(appData) {
     return this.db.collection('apps').add(appData);
   }
 
-  newAppStorage(appId, files) {
+  async newAppStorage(files, appId) {
     const { uid } = this.auth.currentUser;
     const { icon, banner, source } = files;
-    const storageRefImg = this.storage.ref(`${uid}/${appId}/images/`);
-    const storageRefSource = this.storage.ref(`${uid}/${appId}/source/`);
+    const storageRefIcon = this.storage.ref(`${uid}/${appId}/images/icon/${icon.name}`);
+    const storageRefBanner = this.storage.ref(`${uid}/${appId}/images/banner/${banner.name}`);
+    const storageRefSource = this.storage.ref(`${uid}/${appId}/source/${source.name}`);
 
-    storageRefImg.put(icon);
-    storageRefImg.put(banner);
-    storageRefSource.puts(source);
+    await console.log(storageRefIcon.put(icon));
+    await console.log(storageRefBanner.put(banner));
+    await console.log(storageRefSource.put(source));
   }
 
   async register(email, password, devName, phone, website) {

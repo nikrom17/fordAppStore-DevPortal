@@ -5,7 +5,7 @@ import { validateValue } from 'utils/utility';
 import styles from './select.module.scss';
 
 const Select = ({
-  config, stateValue, validation,
+  config, inputId, stateValue, validation,
 }) => {
   const [value, setValue] = useState(stateValue || '');
   const [isValid, setIsValid] = useState(false);
@@ -29,6 +29,7 @@ const Select = ({
   return (
     <select
       className={appliedClasses.join(' ')}
+      name={inputId}
       onBlur={handleOnBlur}
       onChange={(event) => handleChange(event.target.value)}
     >
@@ -45,6 +46,7 @@ Select.propTypes = {
   config: PropTypes.objectOf(PropTypes.oneOfType(
     [PropTypes.string, PropTypes.array],
   )).isRequired,
+  inputId: PropTypes.string.isRequired,
   stateValue: PropTypes.string,
   validation: PropTypes.objectOf(PropTypes.oneOfType(
     [PropTypes.bool, PropTypes.string],

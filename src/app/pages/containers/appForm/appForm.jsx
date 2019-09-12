@@ -1,78 +1,70 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useCollectionDataOnce } from 'react-firebase-hooks/firestore';
 
 import RenderForm from 'app/shared/form/renderForm/renderForm';
 import Button from 'app/shared/button/button';
 import { getDate, parseQueryString } from 'utils/utility';
 import * as actions from 'redux/actions/index';
+import firebase from 'firebase/fireClass';
 import createAppForm from './formConfig';
 
-class CreateApp extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      formIsValid: false,
-      appIndex: null,
-    };
+const NewApp = ({ location, uploadNewApp }) => {
+  const [isNewApp, setIsNewApp] = useState(false);
+  const [apps, loading] = useCollectionDataOnce(firebase.appList());
+  let app;
+  if (location.pathname === '/createApp') {
+    setIsNewApp(true);
+  } else {
+    const { appId } = parseQueryString(location.search);
+    app = apps[appId];
   }
 
-  // async componentDidMount() {
-  //   const { location, apps, onLoadAppDetails } = this.props;
-  //   if (location.pathname !== '/createApp') {
-  //     const { appId } = parseQueryString(location.search);
-  //     await onLoadAppDetails(apps[appId]);
-  //     this.downloadUrlsHandler(appId);
-  //     this.setState({ appIndex: appId });
-  //   }
-  // }
-
-
-  handleSubmit = (event) => {
-    const { uploadNewApp } = this.props;
+  const handleSubmit = (event) => {
     event.preventDefault();
     const {
       title, category, description, icon, banner, source,
     } = event.target;
     const appInfo = {
-      appName: title,
-      category,
-      description,
+      appName: title.value,
+      category: category.value,
+      description: description.value,
       status: 'draft',
       lastUpdate: getDate(),
       avgRating: '-',
       activeInstalls: '0',
+      uid: firebase.auth.currentUser.uid,
     };
-    const files = { icon, banner, source };
-    uploadNewApp(appInfo, files);
-  }
+    const files = { icon: icon.files[0], banner: banner.files[0], source: source.files[0] };
+    if (isNewApp) {
+      uploadNewApp(appInfo, files);
+    } else {
+      uploadNewApp(appInfo, files); // do I need a different function?
+    }
+  };
 
-  render() {
-    const { isFormValid } = this.state;
-    const {
-      config, allIds, type, validation,
-    } = createAppForm;
-    const button = [(
-      <Button
-        key="createApp"
-        clicked={this.handleSubmit}
-        disabled={!isFormValid}
-        title="Create App"
-        type="submit"
-      />
-    )];
-    return (
-      <RenderForm
-        buttons={button}
-        config={config}
-        inputIds={allIds}
-        type={type}
-        validation={validation}
-        onSubmit={this.handleSubmit}
-        preFormMessage={<p>Upload New App</p>}
-      />
-    );
-  }
-}
+  const {
+    config, allIds, type, validation,
+  } = createAppForm;
+  const button = [(
+    <Button
+      key="createApp"
+      title="Create App"
+      type="submit"
+    />
+  )];
+  return (
+    <RenderForm
+      buttons={button}
+      config={config}
+      inputIds={allIds}
+      type={type}
+      validation={validation}
+      onSubmit={handleSubmit}
+      preFormMessage={<p>Upload New App</p>}
+    />
+  );
+};
 
 const mapStateToProps = (state) => ({
   apps: state.apps.apps,
@@ -93,4 +85,4 @@ const mapDispatchToProps = (dispatch) => ({
   onUpdateDownloadUrls: (urls) => dispatch(actions.updateDownloadUrls(urls)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateApp);
+export default connect(mapStateToProps, mapDispatchToProps)(NewApp);

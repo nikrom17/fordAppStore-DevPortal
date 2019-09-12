@@ -29,12 +29,15 @@ export const createAppFailed = (error) => ({
 });
 
 export const uploadNewApp = (appData, files) => async (dispatch) => {
+  console.log(appData, files);
   dispatch(uploadNewAppStart());
   try {
     const firestoreResponse = await Firebase.newAppFirestore(appData);
-    const StorageResponse = await Firebase.newAppStorage(files);
-    dispatch(uploadNewAppSuccess(firestoreResponse, StorageResponse));
+    await Firebase.newAppStorage(files, firestoreResponse.id);
+    console.log(firestoreResponse);
+    dispatch(uploadNewAppSuccess(firestoreResponse));
   } catch (error) {
-    dispatch(createAppFailed(error));
+    console.log(error);
+    // dispatch(createAppFailed(error));
   }
 };
