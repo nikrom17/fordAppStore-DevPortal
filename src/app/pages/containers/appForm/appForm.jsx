@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import RenderForm from 'app/shared/form/renderForm/renderForm';
 import Button from 'app/shared/button/button';
-import { getDate, parseQueryString } from 'utils/utility';
+import { getDate } from 'utils/utility';
 import * as actions from 'redux/actions/index';
 import firebase from 'firebase/fireClass';
 import createAppForm from './formConfig';
@@ -14,12 +14,8 @@ const NewApp = ({ location, uploadNewApp, apps }) => {
   if (!isNewApp && location.pathname === '/createApp') {
     setIsNewApp(true);
   } else {
-    const { appId } = parseQueryString(location.search);
-    app = {
-      byId: {
-        ...apps[appId],
-      },
-    };
+    app = location.state.app;
+    console.log(app);
   }
 
 

@@ -8,6 +8,7 @@ const RenderForm = ({
   buttons, onSubmit, preFormMessage, postFormMessage, config,
   inputIds, type, validation, stateValues,
 }) => {
+  console.log(stateValues);
   const inputs = inputIds.map((inputId) => (
     <Input
       config={config.byId[inputId]}
@@ -15,7 +16,7 @@ const RenderForm = ({
       key={inputId}
       type={type.byId[inputId]}
       validation={validation.byId[inputId]}
-      stateValue={stateValues ? stateValues.byId[inputId] : null}
+      stateValue={stateValues ? stateValues[inputId] : null}
     />
   ));
   return (

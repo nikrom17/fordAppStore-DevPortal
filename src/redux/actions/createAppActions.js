@@ -33,8 +33,8 @@ export const uploadNewApp = (appData, files) => async (dispatch) => {
   dispatch(uploadNewAppStart());
   try {
     const { id } = await Firebase.newAppFirestore(appData);
-    const [source, banner, icon] = await Firebase.newAppStorage(files, id);
-    Firebase.addFilePaths(id, source, banner, icon);
+    const [sourcePath, bannerPath, iconPath] = await Firebase.newAppStorage(files, id);
+    Firebase.addFilePaths(id, sourcePath, bannerPath, iconPath);
     dispatch(uploadNewAppSuccess());
   } catch (error) {
     console.log(error);

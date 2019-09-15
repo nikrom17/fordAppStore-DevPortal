@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useDownloadURL } from 'react-firebase-hooks/storage';
 
+import firebase from 'firebase/fireClass';
 import { validateValue } from 'utils/utility';
 import FileImagePreview from './fileImagePreview';
 import styles from './file.module.scss';
@@ -7,16 +9,20 @@ import styles from './file.module.scss';
 const File = ({
   config, inputId, stateValue, validation,
 }) => {
+  console.log(stateValue);
   const [value, setValue] = useState(stateValue || '');
   const [isValid, setIsValid] = useState(false);
   const [isEdited, setIsEdited] = useState(false);
-  const [imgURL, setImageURL] = useState('');
+  const [filePath, setFilPath] = useState('');
+  const [filePathFirebase, loading, error] = useDownloadURL(
+    firebase.storage.ref('path/to/file'),
+  );
 
   const handleChange = (newValue, url) => {
     setValue(newValue);
     if (isEdited) {
       setIsValid(validateValue(newValue, validation));
-      setImageURL(URL.createObjectURL(url));
+      setFilPath(URL.createObjectURL(url));
     }
   };
 
@@ -29,7 +35,7 @@ const File = ({
     ? [styles.input, styles.invalid] : [styles.input];
   return (
     <>
-      {config.type === 'image' && value ? <FileImagePreview src={imgURL} alt={value} /> : null}
+      {config.type === 'image' && value ? <FileImagePreview src={filePath} alt={value} /> : null}
       <input
         className={appliedClasses.join(' ')}
         type="file"

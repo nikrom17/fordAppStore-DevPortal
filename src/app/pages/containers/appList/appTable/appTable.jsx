@@ -29,7 +29,10 @@ const AppTable = (props) => {
           </tr>
           {apps.map((app, index) => (
             <AppRow
-              clickAppDetails={() => history.push(`/appDetails/?appId=${index}`)}
+              clickAppDetails={() => history.push({
+                pathname: `/appDetails/?appId=${index}`,
+                state: { app },
+              })}
               clickDelete={() => deleteApp(token, userId, app.id, app)}
               appDetails={app}
               icon={trash}

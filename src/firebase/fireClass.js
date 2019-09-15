@@ -36,11 +36,11 @@ class Firebase {
     return this.db.collection('apps').where('uid', '==', uid);
   }
 
-  addFilePaths(appId, sourcePath, bannerPath, iconPath) {
+  addFilePaths(appId, source, banner, icon) {
     return this.db.collection('apps').doc(appId).set({
-      sourcePath,
-      bannerPath,
-      iconPath,
+      source,
+      banner,
+      icon,
     }, { merge: true });
   }
 
