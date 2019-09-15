@@ -36,6 +36,14 @@ class Firebase {
     return this.db.collection('apps').where('uid', '==', uid);
   }
 
+  addFilePaths(appId, sourcePath, bannerPath, iconPath) {
+    return this.db.collection('apps').doc(appId).set({
+      sourcePath,
+      bannerPath,
+      iconPath,
+    }, { merge: true });
+  }
+
   newAppFirestore(appData) {
     return this.db.collection('apps').add(appData);
   }
@@ -49,7 +57,8 @@ class Firebase {
     const sourceURL = await storageRefSource.put(source);
     const bannerURL = await storageRefBanner.put(banner);
     const iconURL = await storageRefIcon.put(icon);
-    return [sourceURL, bannerURL, iconURL];
+    console.log(sourceURL);
+    return [sourceURL.ref.location.path, bannerURL.ref.location.path, iconURL.ref.location.path];
   }
 
   async register(email, password, devName, phone, website) {

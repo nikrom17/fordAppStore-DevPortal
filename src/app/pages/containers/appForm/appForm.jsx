@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { useCollectionDataOnce } from 'react-firebase-hooks/firestore';
 
 import RenderForm from 'app/shared/form/renderForm/renderForm';
 import Button from 'app/shared/button/button';
@@ -9,23 +8,20 @@ import * as actions from 'redux/actions/index';
 import firebase from 'firebase/fireClass';
 import createAppForm from './formConfig';
 
-const NewApp = ({ location, uploadNewApp }) => {
+const NewApp = ({ location, uploadNewApp, apps }) => {
   const [isNewApp, setIsNewApp] = useState(false);
-  const [apps, loading] = useCollectionDataOnce(firebase.appList());
   let app;
-  if (!loading) {
-    if (location.pathname === '/createApp') {
-      setIsNewApp(true);
-    } else {
-      const { appId } = parseQueryString(location.search);
-      app = {
-        byId: {
-          ...apps[appId],
-        },
-      };
-      console.log(app);
-    }
+  if (!isNewApp && location.pathname === '/createApp') {
+    setIsNewApp(true);
+  } else {
+    const { appId } = parseQueryString(location.search);
+    app = {
+      byId: {
+        ...apps[appId],
+      },
+    };
   }
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
