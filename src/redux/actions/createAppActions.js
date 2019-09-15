@@ -32,12 +32,14 @@ export const uploadNewApp = (appData, files) => async (dispatch) => {
   console.log(appData, files);
   dispatch(uploadNewAppStart());
   try {
-    const firestoreResponse = await Firebase.newAppFirestore(appData);
-    await Firebase.newAppStorage(files, firestoreResponse.id);
+    const [sourceURL, bannerURL, iconURL] = await Firebase.newAppStorage(files);
+    const firestoreResponse = await Firebase.newAppFirestore({
+      ...appData, sourceURL, bannerURL, iconURL,
+    });
     console.log(firestoreResponse);
     dispatch(uploadNewAppSuccess(firestoreResponse));
   } catch (error) {
     console.log(error);
-    // dispatch(createAppFailed(error));
+    dispatch(createAppFailed(error));
   }
 };

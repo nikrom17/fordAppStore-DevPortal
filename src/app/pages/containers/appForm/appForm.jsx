@@ -77,7 +77,7 @@ const NewApp = ({ location, uploadNewApp }) => {
       validation={validation}
       onSubmit={handleSubmit}
       stateValues={app}
-      preFormMessage={isNewApp ? <p>Upload New App</p> : null}
+      preFormMessage={isNewApp ? <p>Upload New App</p> : <p>App Details</p>}
     />
   );
 };

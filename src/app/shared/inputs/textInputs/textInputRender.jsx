@@ -6,7 +6,7 @@ import styles from './textInputRender.module.scss';
 const TextInputRender = ({
   config, inputId, stateValue, validation,
 }) => {
-  const [value, setValue] = useState(stateValue || '');
+  const [value, setValue] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [isEdited, setIsEdited] = useState(false);
   const handleChange = (newValue) => {
@@ -39,7 +39,7 @@ const TextInputRender = ({
           onChange={(event) => handleChange(event.target.value)}
           placeholder={placeholder}
           type={type}
-          value={value}
+          value={stateValue || value}
         />
       );
       break;
@@ -47,6 +47,10 @@ const TextInputRender = ({
       input = null;
   }
   return (input);
+};
+
+TextInputRender.defaultProps = {
+  stateValue: '',
 };
 
 export default TextInputRender;

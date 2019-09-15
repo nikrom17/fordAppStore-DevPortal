@@ -11,6 +11,11 @@ class Firebase {
     this.auth = firebase.auth();
     this.db = firebase.firestore();
     this.storage = firebase.storage();
+    this.uid = null;
+  }
+
+  setUid() {
+    this.uid = this.auth.currentUser.uid;
   }
 
   login(email, password) {
@@ -41,10 +46,10 @@ class Firebase {
     const storageRefIcon = this.storage.ref(`${uid}/${appId}/images/icon/${icon.name}`);
     const storageRefBanner = this.storage.ref(`${uid}/${appId}/images/banner/${banner.name}`);
     const storageRefSource = this.storage.ref(`${uid}/${appId}/source/${source.name}`);
-
-    await console.log(storageRefIcon.put(icon));
-    await console.log(storageRefBanner.put(banner));
-    await console.log(storageRefSource.put(source));
+    const sourceURL = await storageRefSource.put(source);
+    const bannerURL = await storageRefBanner.put(banner);
+    const iconURL = await storageRefIcon.put(icon);
+    return [sourceURL, bannerURL, iconURL];
   }
 
   async register(email, password, devName, phone, website) {
