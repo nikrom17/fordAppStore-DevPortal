@@ -10,14 +10,15 @@ const File = ({
   config, inputId, stateValue, validation,
 }) => {
   console.log(stateValue);
-  const [value, setValue] = useState(stateValue || '');
+  const [value, setValue] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [isEdited, setIsEdited] = useState(false);
   const [filePath, setFilPath] = useState('');
-  const [filePathFirebase, loading, error] = useDownloadURL(
-    firebase.storage.ref('path/to/file'),
+  const [imageFirebase, loading, error] = useDownloadURL(
+    firebase.storage.ref(stateValue || '/error'),
   );
 
+  console.log(imageFirebase);
   const handleChange = (newValue, url) => {
     setValue(newValue);
     if (isEdited) {
@@ -31,11 +32,16 @@ const File = ({
     setIsValid(validateValue(value, validation));
   };
 
+  const uploadedImage = <FileImagePreview src={filePath} alt={value} />;
+  const imageFromDb = error ? null : <img src={imageFirebase} alt={inputId} />;
+  const displayImage = value ? uploadedImage : imageFromDb;
+
+
   const appliedClasses = isEdited && !isValid
     ? [styles.input, styles.invalid] : [styles.input];
   return (
     <>
-      {config.type === 'image' && value ? <FileImagePreview src={filePath} alt={value} /> : null}
+      {config.type === 'image' ? displayImage : null}
       <input
         className={appliedClasses.join(' ')}
         type="file"

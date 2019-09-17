@@ -13,7 +13,8 @@ const NewApp = ({ location, uploadNewApp, apps }) => {
   let app;
   if (!isNewApp && location.pathname === '/createApp') {
     setIsNewApp(true);
-  } else {
+  }
+  if (location.pathname !== '/createApp') {
     app = location.state.app;
     console.log(app);
   }
