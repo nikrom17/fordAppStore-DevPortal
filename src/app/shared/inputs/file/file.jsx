@@ -13,7 +13,7 @@ const File = ({
   const [isValid, setIsValid] = useState(false);
   const [isEdited, setIsEdited] = useState(false);
   const [filePath, setFilPath] = useState('');
-  const [imageFirebase, loading, error] = useDownloadURL(
+  const [imageFirebase, , error] = useDownloadURL(
     firebase.storage.ref(stateValue || '/error'),
   );
 

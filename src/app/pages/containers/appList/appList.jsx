@@ -6,7 +6,7 @@ import { useCollectionDataOnce } from 'react-firebase-hooks/firestore';
 
 import * as actions from 'redux/actions/index';
 import Button from 'app/shared/button/button';
-import Modal from 'app/shared/modal/modal';
+// import Modal from 'app/shared/modal/modal';
 import Spinner from 'app/shared/spinner/spinner';
 import firebase from 'firebase/fireClass';
 import AppTable from './appTable/appTable';
@@ -15,7 +15,7 @@ import styles from './appList.module.scss';
 
 const AppList = (props) => {
   const [apps, loading] = useCollectionDataOnce(firebase.appList());
-  const { forbiddenModal, history } = props;
+  const { history } = props;
   // const modalText = (
   //   <Modal
   //     show={forbiddenModal}

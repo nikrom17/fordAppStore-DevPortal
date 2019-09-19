@@ -13,7 +13,7 @@ library.add(faTrash);
 
 const AppTable = (props) => {
   const {
-    apps, history, deleteApp, token, userId,
+    apps, history,
   } = props;
   const trash = <FontAwesomeIcon icon="trash" />;
   return (
@@ -34,10 +34,9 @@ const AppTable = (props) => {
                 pathname: `/appDetails/?appId=${index}`,
                 state: { app },
               })}
-              clickDelete={() => deleteApp(token, userId, app.id, app)}
               appDetails={app}
               icon={trash}
-              key={app.id}
+              key={app.appName} // todo find a better way to identify apps
             />
           ))}
         </tbody>
@@ -47,11 +46,8 @@ const AppTable = (props) => {
 };
 
 AppTable.propTypes = {
-  apps: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])).isRequired,
-  history: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
-  deleteApp: PropTypes.func.isRequired,
-  token: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
+  apps: PropTypes.arrayOf(PropTypes.object).isRequired,
+  history: ReactRouterPropTypes.history.isRequired,
 };
 
 export default AppTable;

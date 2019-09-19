@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './appRow.module.scss';
 import IconButton from 'app/shared/iconButton/iconButton';
+import styles from './appRow.module.scss';
 
 const AppRow = ({
-  appDetails, clickAppDetails, clickDelete, icon,
+  appDetails, clickAppDetails, icon,
 }) => (
   <tr className={styles.row} onClick={clickAppDetails}>
     <td>{appDetails.appName}</td>
@@ -13,7 +13,7 @@ const AppRow = ({
     <td>{appDetails.avgRating}</td>
     <td>{appDetails.lastUpdate}</td>
     <td>{appDetails.status}</td>
-    <td><IconButton iconComponent={icon} onClick={clickDelete} /></td>
+    <td><IconButton iconComponent={icon} /></td>
   </tr>
 );
 
@@ -26,7 +26,6 @@ AppRow.propTypes = {
     status: PropTypes.string.isRequired,
   }).isRequired,
   clickAppDetails: PropTypes.func.isRequired,
-  clickDelete: PropTypes.func.isRequired,
   icon: PropTypes.node.isRequired,
 };
 
