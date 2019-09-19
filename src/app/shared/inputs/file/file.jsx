@@ -9,7 +9,6 @@ import styles from './file.module.scss';
 const File = ({
   config, inputId, stateValue, validation,
 }) => {
-  console.log(stateValue);
   const [value, setValue] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [isEdited, setIsEdited] = useState(false);
@@ -18,7 +17,6 @@ const File = ({
     firebase.storage.ref(stateValue || '/error'),
   );
 
-  console.log(imageFirebase);
   const handleChange = (newValue, url) => {
     setValue(newValue);
     if (isEdited) {

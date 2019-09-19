@@ -8,7 +8,6 @@ const RenderForm = ({
   buttons, onSubmit, preFormMessage, postFormMessage, config,
   inputIds, type, validation, stateValues,
 }) => {
-  console.log(stateValues);
   const inputs = inputIds.map((inputId) => (
     <Input
       config={config.byId[inputId]}
@@ -35,7 +34,7 @@ RenderForm.propTypes = {
   buttons: PropTypes.arrayOf(PropTypes.node),
   config: PropTypes.objectOf(PropTypes.object).isRequired,
   stateValues: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+    PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   ),
   inputIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   onSubmit: PropTypes.func,

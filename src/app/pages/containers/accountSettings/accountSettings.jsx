@@ -11,9 +11,7 @@ const AccountSettings = () => {
   let accountSettings;
   if (accountInfo) {
     accountSettings = {
-      byId: {
-        ...accountInfo[0],
-      },
+      ...accountInfo[0],
     };
   }
 

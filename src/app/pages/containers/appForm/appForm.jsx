@@ -16,7 +16,6 @@ const NewApp = ({ location, uploadNewApp, apps }) => {
   }
   if (location.pathname !== '/createApp') {
     app = location.state.app;
-    console.log(app);
   }
 
 
@@ -55,11 +54,17 @@ const NewApp = ({ location, uploadNewApp, apps }) => {
   )];
   const appButtons = [(
     <Button
-      key="createApp"
-      title="Create App"
-      type="submit"
-    />
-  )];
+      key="editApp"
+      title="Edit App"
+      type="button"
+    />),
+  (
+    <Button
+      key="Publish"
+      title="Publish App"
+      type="button"
+    />),
+  ];
   return (
     <RenderForm
       buttons={isNewApp ? newAppButton : appButtons}
@@ -90,8 +95,6 @@ const mapDispatchToProps = (dispatch) => ({
   uploadNewApp: (appData, files) => dispatch(
     actions.uploadNewApp(appData, files),
   ),
-  onLoadAppDetails: (appDetails) => dispatch(actions.loadAppDetails(appDetails)),
-  onUpdateDownloadUrls: (urls) => dispatch(actions.updateDownloadUrls(urls)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewApp);

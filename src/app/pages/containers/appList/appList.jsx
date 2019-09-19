@@ -15,7 +15,7 @@ import styles from './appList.module.scss';
 
 const AppList = (props) => {
   const [apps, loading] = useCollectionDataOnce(firebase.appList());
-  const { forbiddenModal, onDeleteApp, history } = props;
+  const { forbiddenModal, history } = props;
   // const modalText = (
   //   <Modal
   //     show={forbiddenModal}
@@ -29,7 +29,6 @@ const AppList = (props) => {
     <AppTable
       apps={apps}
       userId="cheese"
-      deleteApp={onDeleteApp}
       history={history}
     />
   ) : <NoApps onClick={() => history.push('/createApp')} />;
@@ -49,22 +48,15 @@ const AppList = (props) => {
 
 AppList.propTypes = {
   forbiddenModal: PropTypes.node.isRequired,
-  onDeleteApp: PropTypes.func.isRequired,
   history: ReactRouterPropTypes.history.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.token !== null,
   newApp: state.createApp.newApp,
-  token: state.auth.token,
-  userId: state.auth.userId,
   forbiddenModal: state.apps.forbiddenModal,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onDeleteApp: (token, userId, appId, apps) => dispatch(
-    actions.deleteApp(token, userId, appId, apps),
-  ),
   onResetNewApp: () => dispatch(actions.resetNewApp()),
 });
 
