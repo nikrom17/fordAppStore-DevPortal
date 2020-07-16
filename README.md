@@ -1,3 +1,4 @@
+
 # In Car App Store: Developer Portal
 
 ### Description
@@ -14,7 +15,7 @@ This React.JS app is used to simulate the developer portal of an in-car app stor
    `npm install`
 4. Connect to Firebase:
    create an account and copy your account settings
-   <img src="https://raw.githubusercontent.com/nikrom17/InCar-AppStore-DeveloperPortal/master/public/Screen%20Shot%202018-11-14%20at%205.51.41%20PM.png" alt="firebase" height="300pxpx"/>
+   <img src="https://raw.githubusercontent.com/nikrom17/fordAppStore-DevPortal/master/public/Screen%20Shot%202018-11-14%20at%205.51.41%20PM.png" alt="firebase" height="300pxpx"/>
 
 ## Local Deployment
 
@@ -28,8 +29,8 @@ This React.JS app is used to simulate the developer portal of an in-car app stor
 
 ### Home Page
 
-<img src='https://raw.githubusercontent.com/nikrom17/InCar-AppStore-DeveloperPortal/master/public/appList.png' alt='app list' />
+<img src='https://raw.githubusercontent.com/nikrom17/fordAppStore-DevPortal/master/public/appList.png' alt='app list' />
 
 ### App Details
 
-<img src='https://raw.githubusercontent.com/nikrom17/InCar-AppStore-DeveloperPortal/master/public/appDetails.png' alt='app details' />
+<img src='https://raw.githubusercontent.com/nikrom17/fordAppStore-DevPortal/master/public/appDetails.png' alt='app details' />
